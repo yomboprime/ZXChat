@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<generated_project xmlns="http://www.xilinx.com/XMLSchema" xmlns:xil_pn="http://www.xilinx.com/XMLSchema">
+
+  <!--                                                          -->
+
+  <!--             For tool use only. Do not edit.              -->
+
+  <!--                                                          -->
+
+  <!-- ProjectNavigator created generated project file.         -->
+
+  <!-- For use in tracking generated file and other information -->
+
+  <!-- allowing preservation of process status.                 -->
+
+  <!--                                                          -->
+
+  <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved. -->
+
+  <version xmlns="http://www.xilinx.com/XMLSchema">11.1</version>
+
+  <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="InterfazSpectrum.xise"/>
+
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="InterfazRobotSpectrum.bld"/>
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="InterfazRobotSpectrum.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_GYD" xil_pn:name="InterfazRobotSpectrum.gyd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_JEDEC" xil_pn:name="InterfazRobotSpectrum.jed"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="InterfazRobotSpectrum.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MFD" xil_pn:name="InterfazRobotSpectrum.mfd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGA" xil_pn:name="InterfazRobotSpectrum.nga"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="InterfazRobotSpectrum.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGD" xil_pn:name="InterfazRobotSpectrum.ngd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="InterfazRobotSpectrum.ngr"/>
+    <file xil_pn:fileType="FILE_PAD_MISC" xil_pn:name="InterfazRobotSpectrum.pad"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PNX" xil_pn:name="InterfazRobotSpectrum.pnx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="InterfazRobotSpectrum.prj"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="InterfazRobotSpectrum.rpt"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="InterfazRobotSpectrum.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="InterfazRobotSpectrum.syr"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="InterfazRobotSpectrum.tim"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="InterfazRobotSpectrum.tspec"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_VM6" xil_pn:name="InterfazRobotSpectrum.vm6"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="InterfazRobotSpectrum.xml"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="InterfazRobotSpectrum.xst"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="InterfazRobotSpectrum_build.xml"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="InterfazRobotSpectrum_envsettings.html"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="InterfazRobotSpectrum_html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="InterfazRobotSpectrum_ngdbuild.xrpt"/>
+    <file xil_pn:fileType="FILE_PAD_EXCEL_REPORT" xil_pn:name="InterfazRobotSpectrum_pad.csv"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="InterfazRobotSpectrum_summary.html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="InterfazRobotSpectrum_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xlnx_auto_0_xdb"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1426789713" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1426789713">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1426789713" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-799516329994197561" xil_pn:start_ts="1426789713">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1426792394" xil_pn:in_ck="7192300844958813030" xil_pn:name="TRANEXT_xstsynthesize_CPLD" xil_pn:prop_ck="3973488759537866107" xil_pn:start_ts="1426792375">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.lso"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.ngc"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.ngr"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.prj"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.stx"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.syr"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.xst"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum_xst.xrpt"/>
+      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <outfile xil_pn:name="xst"/>
+    </transform>
+    <transform xil_pn:end_ts="1426791946" xil_pn:in_ck="8517958166995738810" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="6747275228552986388" xil_pn:start_ts="1426791946">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1426792406" xil_pn:in_ck="-816389088757563492" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="7556064224078437310" xil_pn:start_ts="1426792394">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.bld"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.ngd"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum_ngdbuild.xrpt"/>
+      <outfile xil_pn:name="_ngo"/>
+      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    </transform>
+    <transform xil_pn:end_ts="1426792415" xil_pn:in_ck="6295969970397279011" xil_pn:name="TRANEXT_vm6File_xc9500" xil_pn:prop_ck="-3323066189145000330" xil_pn:start_ts="1426792406">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.gyd"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.mfd"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.nga"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.pad"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.pnx"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.rpt"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.tim"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.tspec"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.vm6"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.xml"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum_build.xml"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum_html"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum_pad.csv"/>
+    </transform>
+    <transform xil_pn:end_ts="1426792417" xil_pn:in_ck="6295969970397287875" xil_pn:name="TRANEXT_crtProg_xc9500" xil_pn:prop_ck="-9204593535224376705" xil_pn:start_ts="1426792415">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="InterfazRobotSpectrum.jed"/>
+    </transform>
+    <transform xil_pn:end_ts="1426789758" xil_pn:in_ck="6295969970397287875" xil_pn:name="TRAN_timRpt" xil_pn:prop_ck="111903974446" xil_pn:start_ts="1426789755">
+      <status xil_pn:value="AbortedRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
+    </transform>
+  </transforms>
+
+</generated_project>

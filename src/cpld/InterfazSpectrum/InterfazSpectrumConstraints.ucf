@@ -1,0 +1,40 @@
+#Pxx es el pin fisico xx. los sufijos de vector se ponen nombreVector<i> con i un numero 0, 1, 2, etc
+
+NET "rdUc"  LOC = "P18" ; 
+NET "wrUc"  LOC = "P19" ;
+NET "regUc"  LOC = "P20" ;
+NET "busDatosUc<0>"  LOC = "P14" ;
+NET "busDatosUc<1>"  LOC = "P13" ;
+NET "busDatosUc<2>"  LOC = "P12" ;
+NET "busDatosUc<3>"  LOC = "P11" ;
+NET "busDatosUc<4>"  LOC = "P9" ;
+NET "busDatosUc<5>"  LOC = "P8" ;
+NET "busDatosUc<6>"  LOC = "P7" ;
+NET "busDatosUc<7>"  LOC = "P6" ;
+
+NET "rdSinclair"  LOC = "P42" ; 
+NET "wrSinclair"  LOC = "P43" ;
+NET "iorqSinclair"  LOC = "P44" ;
+NET "addrSinclair<0>"  LOC = "P1" ;
+NET "addrSinclair<1>"  LOC = "P2" ;
+NET "addrSinclair<2>"  LOC = "P4" ;
+NET "busDatosSinclair<0>"  LOC = "P33" ;
+NET "busDatosSinclair<1>"  LOC = "P34" ;
+NET "busDatosSinclair<2>"  LOC = "P35" ;
+NET "busDatosSinclair<3>"  LOC = "P36" ;
+NET "busDatosSinclair<4>"  LOC = "P37" ;
+NET "busDatosSinclair<5>"  LOC = "P38" ;
+NET "busDatosSinclair<6>"  LOC = "P39" ;
+NET "busDatosSinclair<7>"  LOC = "P40" ;
+
+NET "rd1Signal"  LOC = "P22" ; 
+NET "wr1Signal"  LOC = "P24" ; 
+#NET "rd0Signal"  LOC = "P 25" ; 
+NET "wr0Signal"  LOC = "P26" ; 
+
+NET "ledActividadSinclair"  LOC = "P3" ; 
+#NET "ledActividadExterno0"  LOC = "P25" ; 
+#NET "ledActividadExterno1"  LOC = "P29" ; 
+#NET "actividadExterno0"  LOC = "P27" ; 
+#NET "actividadExterno1"  LOC = "P28" ; 
+NET "clkLed"  LOC = "P5" ; 

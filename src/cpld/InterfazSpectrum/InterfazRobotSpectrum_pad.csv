@@ -1,0 +1,73 @@
+Release 8.1i - Fit P.20131013
+Copyright(c) 1995-2003 Xilinx Inc. All rights reserved
+
+ 3-19-2015  8:13PM
+
+NOTE: This file is designed to be imported into a spreadsheet program
+such as Microsoft Excel for viewing, printing and sorting. The comma ','
+character is used as the data field separator.
+This file is also designed to support parsing.
+
+Input file:  InterfazRobotSpectrum.ngd
+output file: InterfazRobotSpectrum_pad.csv
+Part type:   xc9572
+Speed grade: -15
+Package:     pc44
+
+Pinout by Pin Number:
+
+-----,-----,-----,-----,-----,-----,-----,-----,-----,-----,
+Pin Number,Signal Name,Pin Usage,Pin Name,Direction,IO Standard,IO Bank Number,{blank},Slew Rate,Termination,{blank},Voltage,Constraint,
+P1,addrSinclair<0>,I,I/O,INPUT,,,,,,,,,
+P2,addrSinclair<1>,I,I/O,INPUT,,,,,,,,,
+P3,ledActividadSinclair,O,I/O,OUTPUT,,,,,,,,,
+P4,addrSinclair<2>,I,I/O,INPUT,,,,,,,,,
+P5,clkLed,GCK,I/O/GCK1,,,,,,,,,,
+P6,busDatosUc<7>,I/O,I/O/GCK2,BIDIR,,,,,,,,,
+P7,busDatosUc<6>,I/O,I/O/GCK3,BIDIR,,,,,,,,,
+P8,busDatosUc<5>,I/O,I/O,BIDIR,,,,,,,,,
+P9,busDatosUc<4>,I/O,I/O,BIDIR,,,,,,,,,
+P10,GND,,GND,,,,,,,,,,
+P11,busDatosUc<3>,I/O,I/O,BIDIR,,,,,,,,,
+P12,busDatosUc<2>,I/O,I/O,BIDIR,,,,,,,,,
+P13,busDatosUc<1>,I/O,I/O,BIDIR,,,,,,,,,
+P14,busDatosUc<0>,I/O,I/O,BIDIR,,,,,,,,,
+P15,TDI,,TDI,,,,,,,,,,
+P16,TMS,,TMS,,,,,,,,,,
+P17,TCK,,TCK,,,,,,,,,,
+P18,rdUc,I,I/O,INPUT,,,,,,,,,
+P19,wrUc,I,I/O,INPUT,,,,,,,,,
+P20,regUc,I,I/O,INPUT,,,,,,,,,
+P21,VCC,,VCCINT,,,,,,,,,,
+P22,rd1Signal,I/O,I/O,BIDIR,,,,,,,,,
+P23,GND,,GND,,,,,,,,,,
+P24,wr1Signal,I/O,I/O,BIDIR,,,,,,,,,
+P25,PGND,,I/O,,,,,,,,,,
+P26,wr0Signal,O,I/O,OUTPUT,,,,,,,,,
+P27,PGND,,I/O,,,,,,,,,,
+P28,PGND,,I/O,,,,,,,,,,
+P29,PGND,,I/O,,,,,,,,,,
+P30,TDO,,TDO,,,,,,,,,,
+P31,GND,,GND,,,,,,,,,,
+P32,VCC,,VCCIO,,,,,,,,,,
+P33,busDatosSinclair<0>,I/O,I/O,BIDIR,,,,,,,,,
+P34,busDatosSinclair<1>,I/O,I/O,BIDIR,,,,,,,,,
+P35,busDatosSinclair<2>,I/O,I/O,BIDIR,,,,,,,,,
+P36,busDatosSinclair<3>,I/O,I/O,BIDIR,,,,,,,,,
+P37,busDatosSinclair<4>,I/O,I/O,BIDIR,,,,,,,,,
+P38,busDatosSinclair<5>,I/O,I/O,BIDIR,,,,,,,,,
+P39,busDatosSinclair<6>,I/O,I/O/GSR,BIDIR,,,,,,,,,
+P40,busDatosSinclair<7>,I/O,I/O/GTS2,BIDIR,,,,,,,,,
+P41,VCC,,VCCINT,,,,,,,,,,
+P42,rdSinclair,I,I/O/GTS1,INPUT,,,,,,,,,
+P43,wrSinclair,I,I/O,INPUT,,,,,,,,,
+P44,iorqSinclair,I,I/O,INPUT,,,,,,,,,
+
+To preserve the pinout above for future design iterations in
+Project Navigator simply execute the (Lock Pins) process
+located under the (Implement Design) process in a toolbox named
+(Optional Implementation Tools) or invoke PIN2UCF from the
+command line. The location constraints will be written into your
+specified UCF file
+
+

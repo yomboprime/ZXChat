@@ -1,0 +1,59 @@
+Pin Freeze File:  version P.20131013
+
+957244 XC9572-15-PC44
+addrSinclair<0> S:PIN1
+addrSinclair<1> S:PIN2
+addrSinclair<2> S:PIN4
+clkLed S:PIN5
+iorqSinclair S:PIN44
+rdSinclair S:PIN42
+rdUc S:PIN18
+regUc S:PIN20
+wrSinclair S:PIN43
+wrUc S:PIN19
+busDatosSinclair<0> S:PIN33
+busDatosSinclair<1> S:PIN34
+busDatosSinclair<2> S:PIN35
+busDatosSinclair<3> S:PIN36
+busDatosSinclair<4> S:PIN37
+busDatosSinclair<5> S:PIN38
+busDatosSinclair<6> S:PIN39
+busDatosSinclair<7> S:PIN40
+busDatosUc<0> S:PIN14
+busDatosUc<1> S:PIN13
+busDatosUc<2> S:PIN12
+busDatosUc<3> S:PIN11
+busDatosUc<4> S:PIN9
+busDatosUc<5> S:PIN8
+busDatosUc<6> S:PIN7
+busDatosUc<7> S:PIN6
+ledActividadSinclair S:PIN3
+rd1Signal S:PIN22
+wr0Signal S:PIN26
+wr1Signal S:PIN24
+
+
+;The remaining section of the .gyd file is for documentation purposes only.
+;It shows where your internal equations were placed in the last successful fit.
+
+PARTITION FB1_3 contadorLeds<1> contadorLeds<0> $OpTx$$OpTx$FX_DC$9_INV$78 ledActividadSinclair_OBUF
+		 registro1Uc<7> registro1Uc<6> registro1Uc<5> registro1Spectrum<2>
+		 busDatosUc_7_IOBUFE registro0Uc<7> registro0Uc<6> busDatosUc_6_IOBUFE
+		 busDatosUc_5_IOBUFE registro0Spectrum<3> busDatosUc_4_IOBUFE registro0Spectrum<2>
+		
+PARTITION FB2_1 wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT busDatosSinclair_2_IOBUFE registro1Spectrum<0> registro0Spectrum<1>
+		 busDatosSinclair_3_IOBUFE busDatosSinclair_4_IOBUFE EXP0_ busDatosSinclair_5_IOBUFE
+		 busDatosSinclair_6_IOBUFE EXP1_ busDatosSinclair_7_IOBUFE EXP2_
+		 registro0Spectrum<0> rd1Signal_OBUF/rd1Signal_OBUF_SETF rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT
+		 registro1Spectrum<1> EXP3_
+PARTITION FB3_2 busDatosUc_3_IOBUFE
+PARTITION FB3_4 registro1Uc<4> busDatosUc_2_IOBUFE registro1Uc<3> registro1Uc<2>
+		 busDatosUc_1_IOBUFE busDatosUc_0_IOBUFE registro1Uc<1> registro1Uc<0>
+		 registro0Uc<5> registro0Uc<4> registro0Uc<3> registro0Uc<2>
+		 registro0Uc<1> rd1Signal_OBUF registro0Uc<0>
+PARTITION FB4_1 EXP4_ wr1Signal_OBUF
+PARTITION FB4_4 contadorLedSinclair<2> contadorLedSinclair<0> registro1Spectrum<7> registro1Spectrum<6>
+		 wr0Signal_OBUF registro1Spectrum<5> registro1Spectrum<4> registro1Spectrum<3>
+		 registro0Spectrum<7> registro0Spectrum<6> registro0Spectrum<5> busDatosSinclair_0_IOBUFE
+		 registro0Spectrum<4> busDatosSinclair_1_IOBUFE contadorLedSinclair<1>
+

@@ -1,0 +1,977 @@
+<html><body>
+<pre>
+ 
+cpldfit:  version P.20131013                        Xilinx Inc.
+                                  Fitter Report
+Design Name: InterfazRobotSpectrum               Date:  3-19-2015,  8:13PM
+Device Used: XC9572-15-PC44
+Fitting Status: Successful
+
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+62 /72  ( 86%) 215 /360  ( 60%) 96 /144 ( 67%)   39 /72  ( 54%) 30 /34  ( 88%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Signals     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used        Used/Tot    Used/Tot    
+FB1          16/18       27/36       27          40/90       5/ 9
+FB2          14/18       25/36       25          84/90       6/ 9
+FB3          16/18       19/36       19          44/90       5/ 8
+FB4          16/18       25/36       25          47/90       4/ 8
+             -----       -----                   -----       -----     
+             62/72       96/144                 215/360     20/34 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Signal 'clkLed' mapped onto global clock net GCK1.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :    9           9    |  I/O              :    24      28
+Output        :    2           2    |  GCK/IO           :     3       3
+Bidirectional :   18          18    |  GTS/IO           :     2       2
+GCK           :    1           1    |  GSR/IO           :     1       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total     30          30
+
+** Power Data **
+
+There are 62 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+**************************  Errors and Warnings  ***************************
+
+WARNING:Cpld - Unable to retrieve the path to the iSE Project Repository. Will
+   use the default filename of 'InterfazRobotSpectrum.ise'.
+INFO:Cpld - Inferring BUFG constraint for signal 'busDatosUc<6>' based upon the
+   LOC constraint 'P7'. It is recommended that you declare this BUFG
+   explicitedly in your design. Note that for certain device families the output
+   of a BUFG constraint can not drive a gated clock, and the BUFG constraint
+   will be ignored.
+INFO:Cpld - Inferring BUFG constraint for signal 'busDatosUc<7>' based upon the
+   LOC constraint 'P6'. It is recommended that you declare this BUFG
+   explicitedly in your design. Note that for certain device families the output
+   of a BUFG constraint can not drive a gated clock, and the BUFG constraint
+   will be ignored.
+INFO:Cpld - Inferring BUFG constraint for signal 'clkLed' based upon the LOC
+   constraint 'P5'. It is recommended that you declare this BUFG explicitedly in
+   your design. Note that for certain device families the output of a BUFG
+   constraint can not drive a gated clock, and the BUFG constraint will be
+   ignored.
+WARNING:Cpld:1239 - The global clock designation (BUFG) on signal 'N8' is
+   ignored. Most likely the signal is gated and therefore cannot be used as a
+   global control signal.
+WARNING:Cpld:1239 - The global clock designation (BUFG) on signal 'N9' is
+   ignored. Most likely the signal is gated and therefore cannot be used as a
+   global control signal.
+*************************  Summary of Mapped Logic  ************************
+
+** 20 Outputs **
+
+Signal                                    Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                                      Pts   Inps          No.  Type    Use     Mode Rate State
+ledActividadSinclair                      2     4     FB1_6   3    I/O     O       STD  FAST 
+busDatosUc<7>                             5     5     FB1_11  6    GCK/I/O I/O     STD  FAST 
+busDatosUc<6>                             5     5     FB1_14  7    GCK/I/O I/O     STD  FAST 
+busDatosUc<5>                             5     5     FB1_15  8    I/O     I/O     STD  FAST 
+busDatosUc<4>                             5     5     FB1_17  9    I/O     I/O     STD  FAST 
+busDatosSinclair<2>                       8     8     FB2_2   35   I/O     I/O     STD  FAST 
+busDatosSinclair<3>                       8     8     FB2_5   36   I/O     I/O     STD  FAST 
+busDatosSinclair<4>                       8     8     FB2_6   37   I/O     I/O     STD  FAST 
+busDatosSinclair<5>                       8     8     FB2_8   38   I/O     I/O     STD  FAST 
+busDatosSinclair<6>                       8     8     FB2_9   39   GSR/I/O I/O     STD  FAST 
+busDatosSinclair<7>                       8     8     FB2_11  40   GTS/I/O I/O     STD  FAST 
+busDatosUc<3>                             5     5     FB3_2   11   I/O     I/O     STD  FAST 
+busDatosUc<2>                             5     5     FB3_5   12   I/O     I/O     STD  FAST 
+busDatosUc<1>                             5     5     FB3_8   13   I/O     I/O     STD  FAST 
+busDatosUc<0>                             5     5     FB3_9   14   I/O     I/O     STD  FAST 
+rd1Signal                                 2     2     FB3_17  22   I/O     I/O     STD  FAST RESET
+wr1Signal                                 2     2     FB4_2   24   I/O     I/O     STD  FAST RESET
+wr0Signal                                 4     10    FB4_8   26   I/O     O       STD  FAST 
+busDatosSinclair<0>                       8     8     FB4_15  33   I/O     I/O     STD  FAST 
+busDatosSinclair<1>                       8     8     FB4_17  34   I/O     I/O     STD  FAST 
+
+** 42 Buried Nodes **
+
+Signal                                    Total Total Loc     Pwr  Reg Init
+Name                                      Pts   Inps          Mode State
+contadorLeds<1>                           1     1     FB1_3   STD  RESET
+contadorLeds<0>                           0     0     FB1_4   STD  RESET
+$OpTx$$OpTx$FX_DC$9_INV$78                1     2     FB1_5   STD  
+registro1Uc<7>                            2     4     FB1_7   STD  RESET
+registro1Uc<6>                            2     4     FB1_8   STD  RESET
+registro1Uc<5>                            2     4     FB1_9   STD  RESET
+registro1Spectrum<2>                      2     7     FB1_10  STD  RESET
+registro0Uc<7>                            2     4     FB1_12  STD  RESET
+registro0Uc<6>                            2     4     FB1_13  STD  RESET
+registro0Spectrum<3>                      2     7     FB1_16  STD  RESET
+registro0Spectrum<2>                      2     7     FB1_18  STD  RESET
+wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT  11    10    FB2_1   STD  
+registro1Spectrum<0>                      2     7     FB2_3   STD  RESET
+registro0Spectrum<1>                      2     7     FB2_4   STD  RESET
+registro0Spectrum<0>                      2     7     FB2_13  STD  RESET
+rd1Signal_OBUF/rd1Signal_OBUF_SETF        5     10    FB2_14  STD  
+rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT  5     10    FB2_15  STD  
+wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT  7     10    FB2_16  STD  
+registro1Spectrum<1>                      2     7     FB2_17  STD  RESET
+registro1Uc<4>                            2     4     FB3_4   STD  RESET
+registro1Uc<3>                            2     4     FB3_6   STD  RESET
+registro1Uc<2>                            2     4     FB3_7   STD  RESET
+registro1Uc<1>                            2     4     FB3_10  STD  RESET
+registro1Uc<0>                            2     4     FB3_11  STD  RESET
+registro0Uc<5>                            2     4     FB3_12  STD  RESET
+registro0Uc<4>                            2     4     FB3_13  STD  RESET
+registro0Uc<3>                            2     4     FB3_14  STD  RESET
+registro0Uc<2>                            2     4     FB3_15  STD  RESET
+registro0Uc<1>                            2     4     FB3_16  STD  RESET
+registro0Uc<0>                            2     4     FB3_18  STD  RESET
+contadorLedSinclair<2>                    2     7     FB4_4   STD  RESET
+contadorLedSinclair<0>                    2     7     FB4_5   STD  RESET
+registro1Spectrum<7>                      2     7     FB4_6   STD  RESET
+registro1Spectrum<6>                      2     7     FB4_7   STD  RESET
+registro1Spectrum<5>                      2     7     FB4_9   STD  RESET
+registro1Spectrum<4>                      2     7     FB4_10  STD  RESET
+registro1Spectrum<3>                      2     7     FB4_11  STD  RESET
+registro0Spectrum<7>                      2     7     FB4_12  STD  RESET
+registro0Spectrum<6>                      2     7     FB4_13  STD  RESET
+registro0Spectrum<5>                      2     7     FB4_14  STD  RESET
+
+Signal                                    Total Total Loc     Pwr  Reg Init
+Name                                      Pts   Inps          Mode State
+registro0Spectrum<4>                      2     7     FB4_16  STD  RESET
+contadorLedSinclair<1>                    3     7     FB4_18  STD  RESET
+
+** 10 Inputs **
+
+Signal                                    Loc     Pin  Pin     Pin     
+Name                                              No.  Type    Use     
+addrSinclair<0>                           FB1_2   1    I/O     I
+addrSinclair<1>                           FB1_5   2    I/O     I
+addrSinclair<2>                           FB1_8   4    I/O     I
+clkLed                                    FB1_9   5    GCK/I/O GCK
+rdSinclair                                FB2_14  42   GTS/I/O I
+wrSinclair                                FB2_15  43   I/O     I
+iorqSinclair                              FB2_17  44   I/O     I
+rdUc                                      FB3_11  18   I/O     I
+wrUc                                      FB3_14  19   I/O     I
+regUc                                     FB3_15  20   I/O     I
+
+Legend:
+Pin No. - ~ - User Assigned
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X(@)         - Signal used as input (wire-AND input) to the macrocell logic.
+               The number of Signals Used may exceed the number of FB Inputs
+               Used due to wire-ANDing in the switch matrix.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               27/9
+Number of signals used by logic mapping into function block:  27
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB1_1         (b)     
+(unused)              0       0     0   5     FB1_2   1     I/O     I
+contadorLeds<1>       1       0     0   4     FB1_3         (b)     (b)
+contadorLeds<0>       0       0     0   5     FB1_4         (b)     (b)
+$OpTx$$OpTx$FX_DC$9_INV$78
+                      1       0     0   4     FB1_5   2     I/O     I
+ledActividadSinclair
+                      2       0     0   3     FB1_6   3     I/O     O
+registro1Uc<7>        2       0     0   3     FB1_7         (b)     (b)
+registro1Uc<6>        2       0     0   3     FB1_8   4     I/O     I
+registro1Uc<5>        2       0     0   3     FB1_9   5     GCK/I/O GCK
+registro1Spectrum<2>
+                      2       0     0   3     FB1_10        (b)     (b)
+busDatosUc<7>         5       0     0   0     FB1_11  6     GCK/I/O I/O
+registro0Uc<7>        2       0     0   3     FB1_12        (b)     (b)
+registro0Uc<6>        2       0     0   3     FB1_13        (b)     (b)
+busDatosUc<6>         5       0     0   0     FB1_14  7     GCK/I/O I/O
+busDatosUc<5>         5       0     0   0     FB1_15  8     I/O     I/O
+registro0Spectrum<3>
+                      2       0     0   3     FB1_16        (b)     (b)
+busDatosUc<4>         5       0     0   0     FB1_17  9     I/O     I/O
+registro0Spectrum<2>
+                      2       0     0   3     FB1_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: busDatosUc<5>.PIN        10: contadorLedSinclair<1>  19: registro0Spectrum<5> 
+  2: busDatosSinclair<3>.PIN  11: contadorLedSinclair<2>  20: registro0Spectrum<6> 
+  3: busDatosSinclair<2>.PIN  12: contadorLeds<0>.LFBK    21: registro0Spectrum<7> 
+  4: busDatosUc<7>.PIN        13: contadorLeds<1>.LFBK    22: registro1Spectrum<4> 
+  5: busDatosUc<6>.PIN        14: iorqSinclair            23: registro1Spectrum<5> 
+  6: addrSinclair<0>          15: rdSinclair              24: registro1Spectrum<6> 
+  7: addrSinclair<1>          16: rdUc                    25: registro1Spectrum<7> 
+  8: addrSinclair<2>          17: regUc                   26: wrSinclair 
+  9: contadorLedSinclair<0>   18: registro0Spectrum<4>    27: wrUc 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+contadorLeds<1>      ...........X............................ 1       1
+contadorLeds<0>      ........................................ 0       0
+$OpTx$$OpTx$FX_DC$9_INV$78 
+                     ..............X..........X.............. 2       2
+ledActividadSinclair 
+                     ........XXX.X........................... 4       4
+registro1Uc<7>       ...X...........XX.........X............. 4       4
+registro1Uc<6>       ....X..........XX.........X............. 4       4
+registro1Uc<5>       X..............XX.........X............. 4       4
+registro1Spectrum<2> 
+                     ..X..XXX.....XX..........X.............. 7       7
+busDatosUc<7>        ...............XX...X...X.X............. 5       5
+registro0Uc<7>       ...X...........XX.........X............. 4       4
+registro0Uc<6>       ....X..........XX.........X............. 4       4
+busDatosUc<6>        ...............XX..X...X..X............. 5       5
+busDatosUc<5>        ...............XX.X...X...X............. 5       5
+registro0Spectrum<3> 
+                     .X...XXX.....XX..........X.............. 7       7
+busDatosUc<4>        ...............XXX...X....X............. 5       5
+registro0Spectrum<2> 
+                     ..X..XXX.....XX..........X.............. 7       7
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               25/11
+Number of signals used by logic mapping into function block:  25
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT
+                     11       7<- \/1   0     FB2_1         (b)     (b)
+busDatosSinclair<2>   8       3<-   0   0     FB2_2   35    I/O     I/O
+registro1Spectrum<0>
+                      2       0   /\2   1     FB2_3         (b)     (b)
+registro0Spectrum<1>
+                      2       0   \/2   1     FB2_4         (b)     (b)
+busDatosSinclair<3>   8       3<-   0   0     FB2_5   36    I/O     I/O
+busDatosSinclair<4>   8       4<- /\1   0     FB2_6   37    I/O     I/O
+(unused)              0       0   /\4   1     FB2_7         (b)     (b)
+busDatosSinclair<5>   8       3<-   0   0     FB2_8   38    I/O     I/O
+busDatosSinclair<6>   8       6<- /\3   0     FB2_9   39    GSR/I/O I/O
+(unused)              0       0   /\5   0     FB2_10        (b)     (b)
+busDatosSinclair<7>   8       4<- /\1   0     FB2_11  40    GTS/I/O I/O
+(unused)              0       0   /\4   1     FB2_12        (b)     (b)
+registro0Spectrum<0>
+                      2       0   \/2   1     FB2_13        (b)     (b)
+rd1Signal_OBUF/rd1Signal_OBUF_SETF
+                      5       2<- \/2   0     FB2_14  42    GTS/I/O I
+rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT
+                      5       2<- \/2   0     FB2_15  43    I/O     I
+wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT
+                      7       2<-   0   0     FB2_16        (b)     (b)
+registro1Spectrum<1>
+                      2       0   \/2   1     FB2_17  44    I/O     I
+(unused)              0       0   \/5   0     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: busDatosSinclair<1>.PIN  10: regUc             18: registro1Uc<3> 
+  2: busDatosSinclair<0>.PIN  11: registro0Uc<2>    19: registro1Uc<4> 
+  3: addrSinclair<0>          12: registro0Uc<3>    20: registro1Uc<5> 
+  4: addrSinclair<1>          13: registro0Uc<4>    21: registro1Uc<6> 
+  5: addrSinclair<2>          14: registro0Uc<5>    22: registro1Uc<7> 
+  6: iorqSinclair             15: registro0Uc<6>    23: wr1Signal.PIN 
+  7: rd1Signal.PIN            16: registro0Uc<7>    24: wrSinclair 
+  8: rdSinclair               17: registro1Uc<2>    25: wrUc 
+  9: rdUc                    
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT 
+                     ..XXXX.XXX............XXX............... 10      10
+busDatosSinclair<2>  ..XXXX.X..X.....X......X................ 8       8
+registro1Spectrum<0> 
+                     .XXXXX.X...............X................ 7       7
+registro0Spectrum<1> 
+                     X.XXXX.X...............X................ 7       7
+busDatosSinclair<3>  ..XXXX.X...X.....X.....X................ 8       8
+busDatosSinclair<4>  ..XXXX.X....X.....X....X................ 8       8
+busDatosSinclair<5>  ..XXXX.X.....X.....X...X................ 8       8
+busDatosSinclair<6>  ..XXXX.X......X.....X..X................ 8       8
+busDatosSinclair<7>  ..XXXX.X.......X.....X.X................ 8       8
+registro0Spectrum<0> 
+                     .XXXXX.X...............X................ 7       7
+rd1Signal_OBUF/rd1Signal_OBUF_SETF 
+                     ..XXXXXXXX.............XX............... 10      10
+rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT 
+                     ..XXXXXXXX.............XX............... 10      10
+wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT 
+                     ..XXXX.XXX............XXX............... 10      10
+registro1Spectrum<1> 
+                     X.XXXX.X...............X................ 7       7
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               19/17
+Number of signals used by logic mapping into function block:  19
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB3_1         (b)     
+busDatosUc<3>         5       0     0   0     FB3_2   11    I/O     I/O
+(unused)              0       0     0   5     FB3_3         (b)     
+registro1Uc<4>        2       0     0   3     FB3_4         (b)     (b)
+busDatosUc<2>         5       0     0   0     FB3_5   12    I/O     I/O
+registro1Uc<3>        2       0     0   3     FB3_6         (b)     (b)
+registro1Uc<2>        2       0     0   3     FB3_7         (b)     (b)
+busDatosUc<1>         5       0     0   0     FB3_8   13    I/O     I/O
+busDatosUc<0>         5       0     0   0     FB3_9   14    I/O     I/O
+registro1Uc<1>        2       0     0   3     FB3_10        (b)     (b)
+registro1Uc<0>        2       0     0   3     FB3_11  18    I/O     I
+registro0Uc<5>        2       0     0   3     FB3_12        (b)     (b)
+registro0Uc<4>        2       0     0   3     FB3_13        (b)     (b)
+registro0Uc<3>        2       0     0   3     FB3_14  19    I/O     I
+registro0Uc<2>        2       0     0   3     FB3_15  20    I/O     I
+registro0Uc<1>        2       0     0   3     FB3_16        (b)     (b)
+rd1Signal             2       0     0   3     FB3_17  22    I/O     I/O
+registro0Uc<0>        2       0     0   3     FB3_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: busDatosUc<5>.PIN                          8: rd1Signal_OBUF/rd1Signal_OBUF_SETF  14: registro0Spectrum<3> 
+  2: busDatosUc<4>.PIN                          9: rdUc                                15: registro1Spectrum<0> 
+  3: busDatosUc<3>.PIN                         10: regUc                               16: registro1Spectrum<1> 
+  4: busDatosUc<2>.PIN                         11: registro0Spectrum<0>                17: registro1Spectrum<2> 
+  5: busDatosUc<1>.PIN                         12: registro0Spectrum<1>                18: registro1Spectrum<3> 
+  6: busDatosUc<0>.PIN                         13: registro0Spectrum<2>                19: wrUc 
+  7: rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+busDatosUc<3>        ........XX...X...XX..................... 5       5
+registro1Uc<4>       .X......XX........X..................... 4       4
+busDatosUc<2>        ........XX..X...X.X..................... 5       5
+registro1Uc<3>       ..X.....XX........X..................... 4       4
+registro1Uc<2>       ...X....XX........X..................... 4       4
+busDatosUc<1>        ........XX.X...X..X..................... 5       5
+busDatosUc<0>        ........XXX...X...X..................... 5       5
+registro1Uc<1>       ....X...XX........X..................... 4       4
+registro1Uc<0>       .....X..XX........X..................... 4       4
+registro0Uc<5>       X.......XX........X..................... 4       4
+registro0Uc<4>       .X......XX........X..................... 4       4
+registro0Uc<3>       ..X.....XX........X..................... 4       4
+registro0Uc<2>       ...X....XX........X..................... 4       4
+registro0Uc<1>       ....X...XX........X..................... 4       4
+rd1Signal            ......XX................................ 2       2
+registro0Uc<0>       .....X..XX........X..................... 4       4
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               25/11
+Number of signals used by logic mapping into function block:  25
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0   /\1   4     FB4_1         (b)     (b)
+wr1Signal             2       0     0   3     FB4_2   24    I/O     I/O
+(unused)              0       0     0   5     FB4_3         (b)     
+contadorLedSinclair<2>
+                      2       0     0   3     FB4_4         (b)     (b)
+contadorLedSinclair<0>
+                      2       0     0   3     FB4_5   25    I/O     (b)
+registro1Spectrum<7>
+                      2       0     0   3     FB4_6         (b)     (b)
+registro1Spectrum<6>
+                      2       0     0   3     FB4_7         (b)     (b)
+wr0Signal             4       0     0   1     FB4_8   26    I/O     O
+registro1Spectrum<5>
+                      2       0     0   3     FB4_9   27    I/O     (b)
+registro1Spectrum<4>
+                      2       0     0   3     FB4_10        (b)     (b)
+registro1Spectrum<3>
+                      2       0     0   3     FB4_11  28    I/O     (b)
+registro0Spectrum<7>
+                      2       0     0   3     FB4_12        (b)     (b)
+registro0Spectrum<6>
+                      2       0     0   3     FB4_13        (b)     (b)
+registro0Spectrum<5>
+                      2       0   \/1   2     FB4_14  29    I/O     (b)
+busDatosSinclair<0>   8       3<-   0   0     FB4_15  33    I/O     I/O
+registro0Spectrum<4>
+                      2       0   /\2   1     FB4_16        (b)     (b)
+busDatosSinclair<1>   8       3<-   0   0     FB4_17  34    I/O     I/O
+contadorLedSinclair<1>
+                      3       1<- /\3   0     FB4_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: $OpTx$$OpTx$FX_DC$9_INV$78  10: contadorLedSinclair<0>.LFBK  18: registro0Uc<1> 
+  2: busDatosSinclair<7>.PIN     11: contadorLedSinclair<1>.LFBK  19: registro1Uc<0> 
+  3: busDatosSinclair<6>.PIN     12: contadorLedSinclair<2>.LFBK  20: registro1Uc<1> 
+  4: busDatosSinclair<5>.PIN     13: iorqSinclair                 21: wr0Signal_OBUF.LFBK 
+  5: busDatosSinclair<4>.PIN     14: rdSinclair                   22: wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT 
+  6: busDatosSinclair<3>.PIN     15: rdUc                         23: wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT 
+  7: addrSinclair<0>             16: regUc                        24: wrSinclair 
+  8: addrSinclair<1>             17: registro0Uc<0>               25: wrUc 
+  9: addrSinclair<2>            
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+wr1Signal            .....................XX................. 2       2
+contadorLedSinclair<2> 
+                     X......XXXXXX........................... 7       7
+contadorLedSinclair<0> 
+                     X......XXXXXX........................... 7       7
+registro1Spectrum<7> 
+                     .X....XXX...XX.........X................ 7       7
+registro1Spectrum<6> 
+                     ..X...XXX...XX.........X................ 7       7
+wr0Signal            ......XXX...XXXX....X..XX............... 10      10
+registro1Spectrum<5> 
+                     ...X..XXX...XX.........X................ 7       7
+registro1Spectrum<4> 
+                     ....X.XXX...XX.........X................ 7       7
+registro1Spectrum<3> 
+                     .....XXXX...XX.........X................ 7       7
+registro0Spectrum<7> 
+                     .X....XXX...XX.........X................ 7       7
+registro0Spectrum<6> 
+                     ..X...XXX...XX.........X................ 7       7
+registro0Spectrum<5> 
+                     ...X..XXX...XX.........X................ 7       7
+busDatosSinclair<0>  ......XXX...XX..X.X....X................ 8       8
+registro0Spectrum<4> 
+                     ....X.XXX...XX.........X................ 7       7
+busDatosSinclair<1>  ......XXX...XX...X.X...X................ 8       8
+contadorLedSinclair<1> 
+                     X......XXXXXX........................... 7       7
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+
+$OpTx$$OpTx$FX_DC$9_INV$78 <= (rdSinclair AND wrSinclair);
+
+
+
+
+
+
+
+
+
+
+
+
+busDatosSinclair_I(0) <= ((iorqSinclair AND registro1Uc(0))
+	OR (rdSinclair AND registro1Uc(0))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(0))
+	OR (NOT addrSinclair(2) AND registro1Uc(0))
+	OR (addrSinclair(0) AND registro1Uc(0))
+	OR (addrSinclair(1) AND registro1Uc(0))
+	OR (NOT wrSinclair AND registro1Uc(0)));
+busDatosSinclair(0) <= busDatosSinclair_I(0) when busDatosSinclair_OE(0) = '1' else 'Z';
+busDatosSinclair_OE(0) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(1) <= ((rdSinclair AND registro1Uc(1))
+	OR (iorqSinclair AND registro1Uc(1))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(1))
+	OR (NOT addrSinclair(2) AND registro1Uc(1))
+	OR (addrSinclair(0) AND registro1Uc(1))
+	OR (addrSinclair(1) AND registro1Uc(1))
+	OR (NOT wrSinclair AND registro1Uc(1)));
+busDatosSinclair(1) <= busDatosSinclair_I(1) when busDatosSinclair_OE(1) = '1' else 'Z';
+busDatosSinclair_OE(1) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(2) <= ((iorqSinclair AND registro1Uc(2))
+	OR (rdSinclair AND registro1Uc(2))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(2))
+	OR (NOT addrSinclair(2) AND registro1Uc(2))
+	OR (addrSinclair(0) AND registro1Uc(2))
+	OR (addrSinclair(1) AND registro1Uc(2))
+	OR (NOT wrSinclair AND registro1Uc(2)));
+busDatosSinclair(2) <= busDatosSinclair_I(2) when busDatosSinclair_OE(2) = '1' else 'Z';
+busDatosSinclair_OE(2) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(3) <= ((rdSinclair AND registro1Uc(3))
+	OR (iorqSinclair AND registro1Uc(3))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(3))
+	OR (NOT addrSinclair(2) AND registro1Uc(3))
+	OR (addrSinclair(0) AND registro1Uc(3))
+	OR (addrSinclair(1) AND registro1Uc(3))
+	OR (NOT wrSinclair AND registro1Uc(3)));
+busDatosSinclair(3) <= busDatosSinclair_I(3) when busDatosSinclair_OE(3) = '1' else 'Z';
+busDatosSinclair_OE(3) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(4) <= ((rdSinclair AND registro1Uc(4))
+	OR (NOT wrSinclair AND registro1Uc(4))
+	OR (iorqSinclair AND registro1Uc(4))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(4))
+	OR (NOT addrSinclair(2) AND registro1Uc(4))
+	OR (addrSinclair(0) AND registro1Uc(4))
+	OR (addrSinclair(1) AND registro1Uc(4)));
+busDatosSinclair(4) <= busDatosSinclair_I(4) when busDatosSinclair_OE(4) = '1' else 'Z';
+busDatosSinclair_OE(4) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(5) <= ((rdSinclair AND registro1Uc(5))
+	OR (iorqSinclair AND registro1Uc(5))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(5))
+	OR (NOT addrSinclair(2) AND registro1Uc(5))
+	OR (addrSinclair(0) AND registro1Uc(5))
+	OR (addrSinclair(1) AND registro1Uc(5))
+	OR (NOT wrSinclair AND registro1Uc(5)));
+busDatosSinclair(5) <= busDatosSinclair_I(5) when busDatosSinclair_OE(5) = '1' else 'Z';
+busDatosSinclair_OE(5) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(6) <= ((busDatosSinclair_7_IOBUFE.EXP)
+	OR (rdSinclair AND registro1Uc(6))
+	OR (NOT addrSinclair(2) AND registro1Uc(6))
+	OR (addrSinclair(0) AND registro1Uc(6))
+	OR (NOT wrSinclair AND registro1Uc(6))
+	OR (iorqSinclair AND registro1Uc(6))
+	OR (addrSinclair(1) AND registro1Uc(6)));
+busDatosSinclair(6) <= busDatosSinclair_I(6) when busDatosSinclair_OE(6) = '1' else 'Z';
+busDatosSinclair_OE(6) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosSinclair_I(7) <= ((rdSinclair AND registro1Uc(7))
+	OR (NOT wrSinclair AND registro1Uc(7))
+	OR (iorqSinclair AND registro1Uc(7))
+	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(7))
+	OR (NOT addrSinclair(2) AND registro1Uc(7))
+	OR (addrSinclair(0) AND registro1Uc(7))
+	OR (addrSinclair(1) AND registro1Uc(7)));
+busDatosSinclair(7) <= busDatosSinclair_I(7) when busDatosSinclair_OE(7) = '1' else 'Z';
+busDatosSinclair_OE(7) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+	wrSinclair AND NOT iorqSinclair);
+
+
+busDatosUc_I(0) <= ((NOT wrUc AND registro1Spectrum(0))
+	OR (regUc AND registro1Spectrum(0))
+	OR (rdUc AND registro1Spectrum(0))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(0)));
+busDatosUc(0) <= busDatosUc_I(0) when busDatosUc_OE(0) = '1' else 'Z';
+busDatosUc_OE(0) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(1) <= ((NOT wrUc AND registro1Spectrum(1))
+	OR (regUc AND registro1Spectrum(1))
+	OR (rdUc AND registro1Spectrum(1))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(1)));
+busDatosUc(1) <= busDatosUc_I(1) when busDatosUc_OE(1) = '1' else 'Z';
+busDatosUc_OE(1) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(2) <= ((NOT wrUc AND registro1Spectrum(2))
+	OR (regUc AND registro1Spectrum(2))
+	OR (rdUc AND registro1Spectrum(2))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(2)));
+busDatosUc(2) <= busDatosUc_I(2) when busDatosUc_OE(2) = '1' else 'Z';
+busDatosUc_OE(2) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(3) <= ((NOT wrUc AND registro1Spectrum(3))
+	OR (regUc AND registro1Spectrum(3))
+	OR (rdUc AND registro1Spectrum(3))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(3)));
+busDatosUc(3) <= busDatosUc_I(3) when busDatosUc_OE(3) = '1' else 'Z';
+busDatosUc_OE(3) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(4) <= ((NOT wrUc AND registro1Spectrum(4))
+	OR (regUc AND registro1Spectrum(4))
+	OR (rdUc AND registro1Spectrum(4))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(4)));
+busDatosUc(4) <= busDatosUc_I(4) when busDatosUc_OE(4) = '1' else 'Z';
+busDatosUc_OE(4) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(5) <= ((NOT wrUc AND registro1Spectrum(5))
+	OR (regUc AND registro1Spectrum(5))
+	OR (rdUc AND registro1Spectrum(5))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(5)));
+busDatosUc(5) <= busDatosUc_I(5) when busDatosUc_OE(5) = '1' else 'Z';
+busDatosUc_OE(5) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(6) <= ((NOT wrUc AND registro1Spectrum(6))
+	OR (regUc AND registro1Spectrum(6))
+	OR (rdUc AND registro1Spectrum(6))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(6)));
+busDatosUc(6) <= busDatosUc_I(6) when busDatosUc_OE(6) = '1' else 'Z';
+busDatosUc_OE(6) <= (wrUc AND NOT rdUc);
+
+
+busDatosUc_I(7) <= ((NOT wrUc AND registro1Spectrum(7))
+	OR (regUc AND registro1Spectrum(7))
+	OR (rdUc AND registro1Spectrum(7))
+	OR (wrUc AND NOT regUc AND NOT rdUc AND registro0Spectrum(7)));
+busDatosUc(7) <= busDatosUc_I(7) when busDatosUc_OE(7) = '1' else 'Z';
+busDatosUc_OE(7) <= (wrUc AND NOT rdUc);
+
+FTCPE_contadorLedSinclair0: FTCPE port map (contadorLedSinclair(0),contadorLedSinclair_T(0),clkLed,'0',contadorLedSinclair_PRE(0));
+contadorLedSinclair_T(0) <= (NOT contadorLedSinclair(1).LFBK AND 
+	NOT contadorLedSinclair(0).LFBK AND NOT contadorLedSinclair(2).LFBK);
+contadorLedSinclair_PRE(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+	NOT $OpTx$$OpTx$FX_DC$9_INV$78);
+
+FDCPE_contadorLedSinclair1: FDCPE port map (contadorLedSinclair(1),contadorLedSinclair_D(1),clkLed,'0',contadorLedSinclair_PRE(1));
+contadorLedSinclair_D(1) <= ((NOT contadorLedSinclair(1).LFBK AND 
+	NOT contadorLedSinclair(0).LFBK AND contadorLedSinclair(2).LFBK)
+	OR (contadorLedSinclair(1).LFBK AND 
+	contadorLedSinclair(0).LFBK));
+contadorLedSinclair_PRE(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+	NOT $OpTx$$OpTx$FX_DC$9_INV$78);
+
+FTCPE_contadorLedSinclair2: FTCPE port map (contadorLedSinclair(2),contadorLedSinclair_T(2),clkLed,'0',contadorLedSinclair_PRE(2));
+contadorLedSinclair_T(2) <= (NOT contadorLedSinclair(1).LFBK AND 
+	NOT contadorLedSinclair(0).LFBK AND contadorLedSinclair(2).LFBK);
+contadorLedSinclair_PRE(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+	NOT $OpTx$$OpTx$FX_DC$9_INV$78);
+
+FTCPE_contadorLeds0: FTCPE port map (contadorLeds(0),'1',clkLed,'0','0');
+
+FTCPE_contadorLeds1: FTCPE port map (contadorLeds(1),contadorLeds(0).LFBK,clkLed,'0','0');
+
+
+ledActividadSinclair <= NOT (((NOT contadorLeds(1).LFBK)
+	OR (NOT contadorLedSinclair(1) AND NOT contadorLedSinclair(0) AND 
+	NOT contadorLedSinclair(2))));
+
+FDCPE_rd1Signal: FDCPE port map (rd1Signal,'0','0',NOT rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT,rd1Signal_OBUF/rd1Signal_OBUF_SETF);
+
+
+rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT <= ((wrUc AND rd1Signal.PIN)
+	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	wrUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair)
+	OR (NOT rdUc AND rd1Signal.PIN)
+	OR (NOT wrUc AND NOT regUc AND rdUc)
+	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT rdUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair));
+
+
+rd1Signal_OBUF/rd1Signal_OBUF_SETF <= ((NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT regUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair)
+	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT rdUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair)
+	OR (wrUc AND rd1Signal.PIN)
+	OR (NOT rdUc AND rd1Signal.PIN)
+	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	wrUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair));
+
+FDCPE_registro0Spectrum0: FDCPE port map (registro0Spectrum(0),'0','0',registro0Spectrum_CLR(0),registro0Spectrum_PRE(0));
+registro0Spectrum_CLR(0) <= (rdSinclair AND NOT busDatosSinclair(0).PIN AND 
+	addrSinclair(2) AND NOT addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
+	NOT iorqSinclair);
+registro0Spectrum_PRE(0) <= (rdSinclair AND busDatosSinclair(0).PIN AND 
+	addrSinclair(2) AND NOT addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
+	NOT iorqSinclair);
+
+FDCPE_registro0Spectrum1: FDCPE port map (registro0Spectrum(1),'0','0',registro0Spectrum_CLR(1),registro0Spectrum_PRE(1));
+registro0Spectrum_CLR(1) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(1) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Spectrum2: FDCPE port map (registro0Spectrum(2),'0','0',registro0Spectrum_CLR(2),registro0Spectrum_PRE(2));
+registro0Spectrum_CLR(2) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(2) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Spectrum3: FDCPE port map (registro0Spectrum(3),'0','0',registro0Spectrum_CLR(3),registro0Spectrum_PRE(3));
+registro0Spectrum_CLR(3) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(3) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Spectrum4: FDCPE port map (registro0Spectrum(4),'0','0',registro0Spectrum_CLR(4),registro0Spectrum_PRE(4));
+registro0Spectrum_CLR(4) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(4) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Spectrum5: FDCPE port map (registro0Spectrum(5),'0','0',registro0Spectrum_CLR(5),registro0Spectrum_PRE(5));
+registro0Spectrum_CLR(5) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(5) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Spectrum6: FDCPE port map (registro0Spectrum(6),'0','0',registro0Spectrum_CLR(6),registro0Spectrum_PRE(6));
+registro0Spectrum_CLR(6) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(6) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Spectrum7: FDCPE port map (registro0Spectrum(7),'0','0',registro0Spectrum_CLR(7),registro0Spectrum_PRE(7));
+registro0Spectrum_CLR(7) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro0Spectrum_PRE(7) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro0Uc0: FDCPE port map (registro0Uc(0),'0','0',registro0Uc_CLR(0),registro0Uc_PRE(0));
+registro0Uc_CLR(0) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(0).PIN);
+registro0Uc_PRE(0) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(0).PIN);
+
+FDCPE_registro0Uc1: FDCPE port map (registro0Uc(1),'0','0',registro0Uc_CLR(1),registro0Uc_PRE(1));
+registro0Uc_CLR(1) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(1).PIN);
+registro0Uc_PRE(1) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(1).PIN);
+
+FDCPE_registro0Uc2: FDCPE port map (registro0Uc(2),'0','0',registro0Uc_CLR(2),registro0Uc_PRE(2));
+registro0Uc_CLR(2) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(2).PIN);
+registro0Uc_PRE(2) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(2).PIN);
+
+FDCPE_registro0Uc3: FDCPE port map (registro0Uc(3),'0','0',registro0Uc_CLR(3),registro0Uc_PRE(3));
+registro0Uc_CLR(3) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(3).PIN);
+registro0Uc_PRE(3) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(3).PIN);
+
+FDCPE_registro0Uc4: FDCPE port map (registro0Uc(4),'0','0',registro0Uc_CLR(4),registro0Uc_PRE(4));
+registro0Uc_CLR(4) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(4).PIN);
+registro0Uc_PRE(4) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(4).PIN);
+
+FDCPE_registro0Uc5: FDCPE port map (registro0Uc(5),'0','0',registro0Uc_CLR(5),registro0Uc_PRE(5));
+registro0Uc_CLR(5) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(5).PIN);
+registro0Uc_PRE(5) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(5).PIN);
+
+FDCPE_registro0Uc6: FDCPE port map (registro0Uc(6),'0','0',registro0Uc_CLR(6),registro0Uc_PRE(6));
+registro0Uc_CLR(6) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(6).PIN);
+registro0Uc_PRE(6) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(6).PIN);
+
+FDCPE_registro0Uc7: FDCPE port map (registro0Uc(7),'0','0',registro0Uc_CLR(7),registro0Uc_PRE(7));
+registro0Uc_CLR(7) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(7).PIN);
+registro0Uc_PRE(7) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(7).PIN);
+
+FDCPE_registro1Spectrum0: FDCPE port map (registro1Spectrum(0),'0','0',registro1Spectrum_CLR(0),registro1Spectrum_PRE(0));
+registro1Spectrum_CLR(0) <= (rdSinclair AND NOT busDatosSinclair(0).PIN AND 
+	addrSinclair(2) AND addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
+	NOT iorqSinclair);
+registro1Spectrum_PRE(0) <= (rdSinclair AND busDatosSinclair(0).PIN AND 
+	addrSinclair(2) AND addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
+	NOT iorqSinclair);
+
+FDCPE_registro1Spectrum1: FDCPE port map (registro1Spectrum(1),'0','0',registro1Spectrum_CLR(1),registro1Spectrum_PRE(1));
+registro1Spectrum_CLR(1) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(1) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Spectrum2: FDCPE port map (registro1Spectrum(2),'0','0',registro1Spectrum_CLR(2),registro1Spectrum_PRE(2));
+registro1Spectrum_CLR(2) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(2) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Spectrum3: FDCPE port map (registro1Spectrum(3),'0','0',registro1Spectrum_CLR(3),registro1Spectrum_PRE(3));
+registro1Spectrum_CLR(3) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(3) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Spectrum4: FDCPE port map (registro1Spectrum(4),'0','0',registro1Spectrum_CLR(4),registro1Spectrum_PRE(4));
+registro1Spectrum_CLR(4) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(4) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Spectrum5: FDCPE port map (registro1Spectrum(5),'0','0',registro1Spectrum_CLR(5),registro1Spectrum_PRE(5));
+registro1Spectrum_CLR(5) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(5) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Spectrum6: FDCPE port map (registro1Spectrum(6),'0','0',registro1Spectrum_CLR(6),registro1Spectrum_PRE(6));
+registro1Spectrum_CLR(6) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(6) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Spectrum7: FDCPE port map (registro1Spectrum(7),'0','0',registro1Spectrum_CLR(7),registro1Spectrum_PRE(7));
+registro1Spectrum_CLR(7) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+registro1Spectrum_PRE(7) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+
+FDCPE_registro1Uc0: FDCPE port map (registro1Uc(0),'0','0',registro1Uc_CLR(0),registro1Uc_PRE(0));
+registro1Uc_CLR(0) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(0).PIN);
+registro1Uc_PRE(0) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(0).PIN);
+
+FDCPE_registro1Uc1: FDCPE port map (registro1Uc(1),'0','0',registro1Uc_CLR(1),registro1Uc_PRE(1));
+registro1Uc_CLR(1) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(1).PIN);
+registro1Uc_PRE(1) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(1).PIN);
+
+FDCPE_registro1Uc2: FDCPE port map (registro1Uc(2),'0','0',registro1Uc_CLR(2),registro1Uc_PRE(2));
+registro1Uc_CLR(2) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(2).PIN);
+registro1Uc_PRE(2) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(2).PIN);
+
+FDCPE_registro1Uc3: FDCPE port map (registro1Uc(3),'0','0',registro1Uc_CLR(3),registro1Uc_PRE(3));
+registro1Uc_CLR(3) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(3).PIN);
+registro1Uc_PRE(3) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(3).PIN);
+
+FDCPE_registro1Uc4: FDCPE port map (registro1Uc(4),'0','0',registro1Uc_CLR(4),registro1Uc_PRE(4));
+registro1Uc_CLR(4) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(4).PIN);
+registro1Uc_PRE(4) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(4).PIN);
+
+FDCPE_registro1Uc5: FDCPE port map (registro1Uc(5),'0','0',registro1Uc_CLR(5),registro1Uc_PRE(5));
+registro1Uc_CLR(5) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(5).PIN);
+registro1Uc_PRE(5) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(5).PIN);
+
+FDCPE_registro1Uc6: FDCPE port map (registro1Uc(6),'0','0',registro1Uc_CLR(6),registro1Uc_PRE(6));
+registro1Uc_CLR(6) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(6).PIN);
+registro1Uc_PRE(6) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(6).PIN);
+
+FDCPE_registro1Uc7: FDCPE port map (registro1Uc(7),'0','0',registro1Uc_CLR(7),registro1Uc_PRE(7));
+registro1Uc_CLR(7) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(7).PIN);
+registro1Uc_PRE(7) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(7).PIN);
+
+
+wr0Signal <= ((NOT wrUc AND wr0Signal_OBUF.LFBK)
+	OR (regUc AND wr0Signal_OBUF.LFBK)
+	OR (rdUc AND wr0Signal_OBUF.LFBK)
+	OR (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
+	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair));
+
+FDCPE_wr1Signal: FDCPE port map (wr1Signal,'0','0',NOT wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT,NOT wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT);
+
+
+wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT <= ((rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
+	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair)
+	OR (rdSinclair AND addrSinclair(2) AND NOT regUc AND 
+	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair)
+	OR (NOT wrUc AND wr1Signal.PIN)
+	OR (NOT regUc AND wr1Signal.PIN)
+	OR (rdUc AND wr1Signal.PIN)
+	OR (rdSinclair AND addrSinclair(2) AND NOT wrUc AND 
+	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair)
+	OR (rdSinclair AND addrSinclair(2) AND rdUc AND 
+	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair));
+
+
+wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT <= ((registro1Spectrum(1).EXP)
+	OR (wrSinclair AND NOT wr1Signal.PIN)
+	OR (NOT rdSinclair AND wrUc AND regUc AND NOT rdUc)
+	OR (NOT addrSinclair(2) AND wrUc AND regUc AND NOT rdUc)
+	OR (wrUc AND regUc AND NOT rdUc AND addrSinclair(1))
+	OR (wrUc AND regUc AND NOT rdUc AND iorqSinclair)
+	OR (NOT rdSinclair AND NOT wr1Signal.PIN)
+	OR (NOT addrSinclair(2) AND NOT wr1Signal.PIN)
+	OR (addrSinclair(1) AND NOT wr1Signal.PIN)
+	OR (iorqSinclair AND NOT wr1Signal.PIN));
+
+Register Legend:
+ FDCPE (Q,D,C,CLR,PRE); 
+ FTCPE (Q,D,C,CLR,PRE); 
+ LDCP  (Q,D,G,CLR,PRE); 
+
+******************************  Device Pin Out *****************************
+
+Device : XC9572-15-PC44
+
+
+   --------------------------------  
+  /6  5  4  3  2  1  44 43 42 41 40 \
+ | 7                             39 | 
+ | 8                             38 | 
+ | 9                             37 | 
+ | 10                            36 | 
+ | 11        XC9572-15-PC44      35 | 
+ | 12                            34 | 
+ | 13                            33 | 
+ | 14                            32 | 
+ | 15                            31 | 
+ | 16                            30 | 
+ | 17                            29 | 
+ \ 18 19 20 21 22 23 24 25 26 27 28 /
+   --------------------------------  
+
+
+Pin Signal                         Pin Signal                        
+No. Name                           No. Name                          
+  1 addrSinclair<0>                  23 GND                           
+  2 addrSinclair<1>                  24 wr1Signal                     
+  3 ledActividadSinclair             25 PGND                          
+  4 addrSinclair<2>                  26 wr0Signal                     
+  5 clkLed                           27 PGND                          
+  6 busDatosUc<7>                    28 PGND                          
+  7 busDatosUc<6>                    29 PGND                          
+  8 busDatosUc<5>                    30 TDO                           
+  9 busDatosUc<4>                    31 GND                           
+ 10 GND                              32 VCC                           
+ 11 busDatosUc<3>                    33 busDatosSinclair<0>           
+ 12 busDatosUc<2>                    34 busDatosSinclair<1>           
+ 13 busDatosUc<1>                    35 busDatosSinclair<2>           
+ 14 busDatosUc<0>                    36 busDatosSinclair<3>           
+ 15 TDI                              37 busDatosSinclair<4>           
+ 16 TMS                              38 busDatosSinclair<5>           
+ 17 TCK                              39 busDatosSinclair<6>           
+ 18 rdUc                             40 busDatosSinclair<7>           
+ 19 wrUc                             41 VCC                           
+ 20 regUc                            42 rdSinclair                    
+ 21 VCC                              43 wrSinclair                    
+ 22 rd1Signal                        44 iorqSinclair                  
+
+
+Legend :  NC  = Not Connected, unbonded pin
+         PGND = Unused I/O configured as additional Ground pin
+         TIE  = Unused I/O floating -- must tie to VCC, GND or other signal
+         VCC  = Dedicated Power Pin
+         GND  = Dedicated Ground Pin
+         TDI  = Test Data In, JTAG pin
+         TDO  = Test Data Out, JTAG pin
+         TCK  = Test Clock, JTAG pin
+         TMS  = Test Mode Select, JTAG pin
+  PROHIBITED  = User reserved pin
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc9572-15-PC44
+Optimization Method                         : SPEED
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : ON
+Global Clock Optimization                   : ON
+Global Set/Reset Optimization               : ON
+Global Ouput Enable Optimization            : ON
+FASTConnect/UIM optimzation                 : ON
+Local Feedback                              : ON
+Pin Feedback                                : ON
+Input Limit                                 : 36
+Pterm Limit                                 : 25
+</pre>
+<form><span class="pgRef"><table width="90%" align="center"><tr>
+<td align="left"><input type="button" onclick="javascript:parent.leftnav.showTop()" onmouseover="window.status='goto top of page'; return true;" onmouseout="window.status=''" value="back to top"></td>
+<td align="right"><input type="button" onclick="window.print()" onmouseover="window.status='print page'; return true;" onmouseout="window.status=''" value="print page"></td>
+</tr></table></span></form>
+</body></html>

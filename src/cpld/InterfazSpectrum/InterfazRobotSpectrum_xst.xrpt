@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<document OS="lin64" product="ISE" version="14.7">
+
+  <!--The data in this file is primarily intended for consumption by Xilinx tools.
+    The structure and the elements are likely to change over the next few releases.
+    This means code written to parse this file will need to be revisited each subsequent release.-->
+
+  <application stringID="Xst" timeStamp="Thu Mar 19 20:12:59 2015">
+    <section stringID="User_Env">
+      <table stringID="User_EnvVar">
+        <column stringID="variable"/>
+        <column stringID="value"/>
+        <row stringID="row" value="0">
+          <item stringID="variable" value="PATH"/>
+          <item stringID="value" value="/media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE//bin/lin64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/media/datos3/Devel/raspberrypi/BareMetal/compilador/elcompilador/bin/:/media/datos3/Devel/raspberrypi/BareMetal/compilador/ct-ng/bin"/>
+        </row>
+        <row stringID="row" value="1">
+          <item stringID="variable" value="XILINX"/>
+          <item stringID="value" value="/media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE/"/>
+        </row>
+        <row stringID="row" value="2">
+          <item stringID="variable" value="LD_LIBRARY_PATH"/>
+          <item stringID="value" value="/media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE//lib/lin64"/>
+        </row>
+      </table>
+      <item stringID="User_EnvOs" value="OS Information">
+        <item stringID="User_EnvOsname" value="Ubuntu"/>
+        <item stringID="User_EnvOsrelease" value="Ubuntu 14.04.2 LTS"/>
+      </item>
+      <item stringID="User_EnvHost" value="yombo-linuxBox"/>
+      <table stringID="User_EnvCpu">
+        <column stringID="arch"/>
+        <column stringID="speed"/>
+        <row stringID="row" value="0">
+          <item stringID="arch" value="AMD Athlon(tm) 64 X2 Dual Core Processor 6000+"/>
+          <item stringID="speed" value="2600.000 MHz"/>
+        </row>
+      </table>
+    </section>
+    <section stringID="XST_OPTION_SUMMARY">
+      <item DEFAULT="" label="-ifn" stringID="XST_IFN" value="InterfazRobotSpectrum.prj"/>
+      <item DEFAULT="MIXED" label="-ifmt" stringID="XST_IFMT" value="mixed"/>
+      <item DEFAULT="" label="-ofn" stringID="XST_OFN" value="InterfazRobotSpectrum"/>
+      <item DEFAULT="NGC" label="-ofmt" stringID="XST_OFMT" value="NGC"/>
+      <item DEFAULT="" label="-p" stringID="XST_P" value="xc9500"/>
+      <item DEFAULT="" label="-top" stringID="XST_TOP" value="InterfazRobotSpectrum"/>
+      <item DEFAULT="SPEED" label="-opt_mode" stringID="XST_OPTMODE" value="Speed"/>
+      <item DEFAULT="1" label="-opt_level" stringID="XST_OPTLEVEL" value="1"/>
+      <item DEFAULT="NO" label="-iuc" stringID="XST_IUC" value="NO"/>
+      <item DEFAULT="YES" label="-keep_hierarchy" stringID="XST_KEEPHIERARCHY" value="Yes"/>
+      <item DEFAULT="as_optimized" label="-netlist_hierarchy" stringID="XST_NETLISTHIERARCHY" value="As_Optimized"/>
+      <item DEFAULT="NO" label="-rtlview" stringID="XST_RTLVIEW" value="Yes"/>
+      <item DEFAULT="/" stringID="XST_HIERARCHYSEPARATOR" value="/"/>
+      <item DEFAULT="&lt;>" label="-bus_delimiter" stringID="XST_BUSDELIMITER" value="&lt;>"/>
+      <item DEFAULT="MAINTAIN" stringID="XST_CASE" value="Maintain"/>
+      <item DEFAULT="YES" label="-verilog2001" stringID="XST_VERILOG2001" value="YES"/>
+      <item DEFAULT="YES" label="-fsm_extract" stringID="XST_FSMEXTRACT" value="YES"/>
+      <item DEFAULT="AUTO" label="-fsm_encoding" stringID="XST_FSMENCODING" value="Auto"/>
+      <item DEFAULT="NO" label="-safe_implementation" stringID="XST_SAFEIMPLEMENTATION" value="No"/>
+      <item DEFAULT="YES" stringID="XST_MUXEXTRACT" value="Yes"/>
+      <item DEFAULT="YES" label="-resource_sharing" stringID="XST_RESOURCESHARING" value="YES"/>
+      <item DEFAULT="YES" label="-iobuf" stringID="XST_IOBUF" value="YES"/>
+      <item DEFAULT="YES" label="-equivalent_register_removal" stringID="XST_EQUIVALENTREGISTERREMOVAL" value="YES"/>
+    </section>
+    <section stringID="XST_HDL_SYNTHESIS_REPORT">
+      <item dataType="int" stringID="XST_COUNTERS" value="2">
+        <item dataType="int" stringID="XST_2BIT_UP_COUNTER" value="1"/>
+        <item dataType="int" stringID="XST_3BIT_DOWN_COUNTER" value="1"/>
+      </item>
+      <item dataType="int" stringID="XST_TRISTATES" value="2"></item>
+    </section>
+    <section stringID="XST_ADVANCED_HDL_SYNTHESIS_REPORT">
+      <item dataType="int" stringID="XST_COUNTERS" value="2">
+        <item dataType="int" stringID="XST_2BIT_UP_COUNTER" value="1"/>
+        <item dataType="int" stringID="XST_3BIT_DOWN_COUNTER" value="1"/>
+      </item>
+    </section>
+    <section stringID="XST_PARTITION_REPORT">
+      <section stringID="XST_PARTITION_IMPLEMENTATION_STATUS">
+        <section stringID="XST_NO_PARTITIONS_WERE_FOUND_IN_THIS_DESIGN"/>
+      </section>
+    </section>
+    <section stringID="XST_FINAL_REPORT">
+      <section stringID="XST_FINAL_RESULTS">
+        <item stringID="XST_RTL_TOP_LEVEL_OUTPUT_FILE_NAME" value="InterfazRobotSpectrum.ngr"/>
+        <item stringID="XST_TOP_LEVEL_OUTPUT_FILE_NAME" value="InterfazRobotSpectrum"/>
+        <item stringID="XST_OUTPUT_FORMAT" value="NGC"/>
+        <item stringID="XST_OPTIMIZATION_GOAL" value="Speed"/>
+        <item stringID="XST_KEEP_HIERARCHY" value="Yes"/>
+      </section>
+      <section stringID="XST_DESIGN_STATISTICS">
+        <item stringID="XST_IOS" value="30"/>
+      </section>
+      <section stringID="XST_CELL_USAGE">
+        <item dataType="int" stringID="XST_BELS" value="267">
+          <item dataType="int" stringID="XST_AND2" value="97"/>
+          <item dataType="int" stringID="XST_AND3" value="23"/>
+          <item dataType="int" stringID="XST_AND4" value="8"/>
+          <item dataType="int" stringID="XST_GND" value="1"/>
+          <item dataType="int" stringID="XST_INV" value="105"/>
+          <item dataType="int" stringID="XST_OR2" value="27"/>
+          <item dataType="int" stringID="XST_XOR2" value="3"/>
+        </item>
+        <item dataType="int" stringID="XST_FLIPFLOPSLATCHES" value="40">
+          <item dataType="int" stringID="XST_FD" value="2"/>
+          <item dataType="int" stringID="XST_FDP" value="3"/>
+        </item>
+        <item dataType="int" stringID="XST_IO_BUFFERS" value="30">
+          <item dataType="int" stringID="XST_IBUF" value="10"/>
+          <item dataType="int" stringID="XST_OBUF" value="4"/>
+        </item>
+      </section>
+    </section>
+    <section stringID="XST_ERRORS_STATISTICS">
+      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_ERRORS" value="0"/>
+      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_WARNINGS" value="7"/>
+      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_INFOS" value="4"/>
+    </section>
+  </application>
+
+</document>

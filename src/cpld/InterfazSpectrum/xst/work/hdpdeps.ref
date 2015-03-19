@@ -1,0 +1,8 @@
+V3 3
+FL /media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazSpectrum.vhd 2015/03/19.20:11:44 P.20131013
+EN work/InterfazRobotSpectrum 1426792381 \
+      FL /media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazSpectrum.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/InterfazRobotSpectrum/Behavioral 1426792382 \
+      FL /media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazSpectrum.vhd \
+      EN work/InterfazRobotSpectrum 1426792381

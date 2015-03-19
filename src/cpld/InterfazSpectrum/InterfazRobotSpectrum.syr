@@ -1,0 +1,231 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.07 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.07 secs
+ 
+--> 
+Reading design: InterfazRobotSpectrum.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "InterfazRobotSpectrum.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "InterfazRobotSpectrum"
+Output Format                      : NGC
+Target Device                      : XC9500 CPLDs
+
+---- Source Options
+Top Module Name                    : InterfazRobotSpectrum
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+
+---- Target Options
+Add IO Buffers                     : YES
+MACRO Preserve                     : YES
+XOR Preserve                       : YES
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : Yes
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Verilog 2001                       : YES
+
+---- Other Options
+wysiwyg                            : NO
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazSpectrum.vhd" in Library work.
+Entity <interfazrobotspectrum> compiled.
+Entity <interfazrobotspectrum> (Architecture <behavioral>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <InterfazRobotSpectrum> in library <work> (architecture <behavioral>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <InterfazRobotSpectrum> in library <work> (Architecture <behavioral>).
+Entity <InterfazRobotSpectrum> analyzed. Unit <InterfazRobotSpectrum> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <InterfazRobotSpectrum>.
+    Related source file is "/media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazSpectrum.vhd".
+WARNING:Xst:737 - Found 1-bit latch for signal <wr0Signal>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 8-bit latch for signal <registro0Uc>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 8-bit latch for signal <registro0Spectrum>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <rd1Signal>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+WARNING:Xst:737 - Found 8-bit latch for signal <registro1Uc>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+WARNING:Xst:737 - Found 8-bit latch for signal <registro1Spectrum>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+WARNING:Xst:737 - Found 1-bit latch for signal <wr1Signal>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+    Found 8-bit tristate buffer for signal <busDatosSinclair>.
+    Found 8-bit tristate buffer for signal <busDatosUc>.
+    Found 2-bit up counter for signal <contadorLeds>.
+    Found 3-bit down counter for signal <contadorLedSinclair>.
+    Summary:
+	inferred   2 Counter(s).
+	inferred  16 Tristate(s).
+Unit <InterfazRobotSpectrum> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 2
+ 2-bit up counter                                      : 1
+ 3-bit down counter                                    : 1
+# Latches                                              : 7
+ 1-bit latch                                           : 3
+ 8-bit latch                                           : 4
+# Tristates                                            : 2
+ 8-bit tristate buffer                                 : 2
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 2
+ 2-bit up counter                                      : 1
+ 3-bit down counter                                    : 1
+# Latches                                              : 7
+ 1-bit latch                                           : 3
+ 8-bit latch                                           : 4
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <InterfazRobotSpectrum> ...
+  implementation constraint: INIT=r	 : contadorLeds_1
+  implementation constraint: INIT=r	 : contadorLeds_0
+  implementation constraint: INIT=r	 : contadorLedSinclair_2
+  implementation constraint: INIT=r	 : contadorLedSinclair_0
+  implementation constraint: INIT=r	 : contadorLedSinclair_1
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : InterfazRobotSpectrum.ngr
+Top Level Output File Name         : InterfazRobotSpectrum
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : Yes
+Target Technology                  : XC9500 CPLDs
+Macro Preserve                     : YES
+XOR Preserve                       : YES
+wysiwyg                            : NO
+
+Design Statistics
+# IOs                              : 30
+
+Cell Usage :
+# BELS                             : 267
+#      AND2                        : 97
+#      AND3                        : 23
+#      AND4                        : 8
+#      GND                         : 1
+#      INV                         : 105
+#      OR2                         : 27
+#      OR3                         : 3
+#      XOR2                        : 3
+# FlipFlops/Latches                : 40
+#      FD                          : 2
+#      FDP                         : 3
+#      LD                          : 34
+#      LDP                         : 1
+# IO Buffers                       : 30
+#      IBUF                        : 10
+#      IOBUFE                      : 16
+#      OBUF                        : 4
+=========================================================================
+
+
+Total REAL time to Xst completion: 14.00 secs
+Total CPU time to Xst completion: 14.10 secs
+ 
+--> 
+
+
+Total memory usage is 526040 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    7 (   0 filtered)
+Number of infos    :    4 (   0 filtered)
+
