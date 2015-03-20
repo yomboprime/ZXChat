@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="6.4">
+<drawing>
+<settings>
+<setting alwaysvectorfont="no"/>
+<setting verticaltext="up"/>
+</settings>
+<grid distance="1" unitdist="mic" unit="mic" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<layers>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="2" name="Route2" color="1" fill="3" visible="no" active="yes"/>
+<layer number="3" name="Route3" color="4" fill="3" visible="no" active="yes"/>
+<layer number="4" name="Route4" color="1" fill="4" visible="no" active="yes"/>
+<layer number="5" name="Route5" color="4" fill="4" visible="no" active="yes"/>
+<layer number="6" name="Route6" color="1" fill="8" visible="no" active="yes"/>
+<layer number="7" name="Route7" color="4" fill="8" visible="no" active="yes"/>
+<layer number="8" name="Route8" color="1" fill="2" visible="no" active="yes"/>
+<layer number="9" name="Route9" color="4" fill="2" visible="no" active="yes"/>
+<layer number="10" name="Route10" color="1" fill="7" visible="no" active="yes"/>
+<layer number="11" name="Route11" color="4" fill="7" visible="no" active="yes"/>
+<layer number="12" name="Route12" color="1" fill="5" visible="no" active="yes"/>
+<layer number="13" name="Route13" color="4" fill="5" visible="no" active="yes"/>
+<layer number="14" name="Route14" color="1" fill="6" visible="no" active="yes"/>
+<layer number="15" name="Route15" color="4" fill="6" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="53" name="tGND_GNDA" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="54" name="bGND_GNDA" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="94" name="Symbols" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="99" name="SpiceOrder" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="250" name="Descript" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="251" name="SMDround" color="7" fill="1" visible="yes" active="yes"/>
+</layers>
+<library>
+<packages>
+<package name="ZX-IFACE">
+<smd name="A1" x="0" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A2" x="2.54" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A3" x="5.08" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A4" x="7.62" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A6" x="12.7" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A7" x="15.24" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A8" x="17.78" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A9" x="20.32" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A10" x="22.86" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A11" x="25.4" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A12" x="27.94" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A13" x="30.48" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A14" x="33.02" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A15" x="35.56" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A16" x="38.1" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A17" x="40.64" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A18" x="43.18" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A19" x="45.72" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A20" x="48.26" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A21" x="50.8" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A22" x="53.34" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A23" x="55.88" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A24" x="58.42" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A25" x="60.96" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A26" x="63.5" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A27" x="66.04" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="A28" x="68.58" y="0" dx="1.778" dy="5.08" layer="16" roundness="100"/>
+<smd name="B1" x="0" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B2" x="2.54" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B3" x="5.08" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B4" x="7.62" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B6" x="12.7" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B7" x="15.24" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B8" x="17.78" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B9" x="20.32" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B10" x="22.86" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B11" x="25.4" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B12" x="27.94" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B13" x="30.48" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B14" x="33.02" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B15" x="35.56" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B16" x="38.1" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B17" x="40.64" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B18" x="43.18" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B19" x="45.72" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B20" x="48.26" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B21" x="50.8" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B22" x="53.34" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B23" x="55.88" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B24" x="58.42" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B25" x="60.96" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B26" x="63.5" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B27" x="66.04" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<smd name="B28" x="68.58" y="0" dx="1.778" dy="5.08" layer="1" roundness="100"/>
+<text x="0" y="-6.35" size="1.27" layer="21">&gt;NAME</text>
+<text x="44.45" y="-6.35" size="1.27" layer="21">&gt;VALUE</text>
+</package>
+<package name="ZX-SLOT">
+<smd name="A1" x="0" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A2" x="2.54" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A3" x="5.08" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A4" x="7.62" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A6" x="12.7" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A7" x="15.24" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A8" x="17.78" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A9" x="20.32" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A10" x="22.86" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A11" x="25.4" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A12" x="27.94" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A13" x="30.48" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A14" x="33.02" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A15" x="35.56" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A16" x="38.1" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A17" x="40.64" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A18" x="43.18" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A19" x="45.72" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A20" x="48.26" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A21" x="50.8" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A22" x="53.34" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A23" x="55.88" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A24" x="58.42" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A25" x="60.96" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A26" x="63.5" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A27" x="66.04" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="A28" x="68.58" y="0" dx="1.778" dy="1.778" layer="16"/>
+<smd name="B1" x="0" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B2" x="2.54" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B3" x="5.08" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B4" x="7.62" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B6" x="12.7" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B7" x="15.24" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B8" x="17.78" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B9" x="20.32" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B10" x="22.86" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B11" x="25.4" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B12" x="27.94" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B13" x="30.48" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B14" x="33.02" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B15" x="35.56" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B16" x="38.1" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B17" x="40.64" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B18" x="43.18" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B19" x="45.72" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B20" x="48.26" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B21" x="50.8" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B22" x="53.34" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B23" x="55.88" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B24" x="58.42" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B25" x="60.96" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B26" x="63.5" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B27" x="66.04" y="0" dx="1.778" dy="1.778" layer="1"/>
+<smd name="B28" x="68.58" y="0" dx="1.778" dy="1.778" layer="1"/>
+<text x="0" y="-3.81" size="1.27" layer="21">&gt;NAME</text>
+<text x="44.45" y="-3.81" size="1.27" layer="21">&gt;VALUE</text>
+</package>
+<package name="ZX-THR">
+<pad name="1A" x="-34.29" y="2.54" drill="1.016" shape="square"/>
+<pad name="1B" x="-34.29" y="-2.54" drill="1.016"/>
+<pad name="2A" x="-31.75" y="2.54" drill="1.016"/>
+<pad name="2B" x="-31.75" y="-2.54" drill="1.016"/>
+<pad name="3A" x="-29.21" y="2.54" drill="1.016"/>
+<pad name="3B" x="-29.21" y="-2.54" drill="1.016"/>
+<pad name="4A" x="-26.67" y="2.54" drill="1.016"/>
+<pad name="4B" x="-26.67" y="-2.54" drill="1.016"/>
+<pad name="6A" x="-21.59" y="2.54" drill="1.016"/>
+<pad name="6B" x="-21.59" y="-2.54" drill="1.016"/>
+<pad name="7A" x="-19.05" y="2.54" drill="1.016"/>
+<pad name="7B" x="-19.05" y="-2.54" drill="1.016"/>
+<pad name="8A" x="-16.51" y="2.54" drill="1.016"/>
+<pad name="8B" x="-16.51" y="-2.54" drill="1.016"/>
+<pad name="9A" x="-13.97" y="2.54" drill="1.016"/>
+<pad name="9B" x="-13.97" y="-2.54" drill="1.016"/>
+<pad name="10A" x="-11.43" y="2.54" drill="1.016"/>
+<pad name="10B" x="-11.43" y="-2.54" drill="1.016"/>
+<pad name="11A" x="-8.89" y="2.54" drill="1.016"/>
+<pad name="11B" x="-8.89" y="-2.54" drill="1.016"/>
+<pad name="12A" x="-6.35" y="2.54" drill="1.016"/>
+<pad name="12B" x="-6.35" y="-2.54" drill="1.016"/>
+<pad name="13A" x="-3.81" y="2.54" drill="1.016"/>
+<pad name="13B" x="-3.81" y="-2.54" drill="1.016"/>
+<pad name="14A" x="-1.27" y="2.54" drill="1.016"/>
+<pad name="14B" x="-1.27" y="-2.54" drill="1.016"/>
+<pad name="15A" x="1.27" y="2.54" drill="1.016"/>
+<pad name="15B" x="1.27" y="-2.54" drill="1.016"/>
+<pad name="16A" x="3.81" y="2.54" drill="1.016"/>
+<pad name="16B" x="3.81" y="-2.54" drill="1.016"/>
+<pad name="17A" x="6.35" y="2.54" drill="1.016"/>
+<pad name="17B" x="6.35" y="-2.54" drill="1.016"/>
+<pad name="18A" x="8.89" y="2.54" drill="1.016"/>
+<pad name="18B" x="8.89" y="-2.54" drill="1.016"/>
+<pad name="19A" x="11.43" y="2.54" drill="1.016"/>
+<pad name="19B" x="11.43" y="-2.54" drill="1.016"/>
+<pad name="20A" x="13.97" y="2.54" drill="1.016"/>
+<pad name="20B" x="13.97" y="-2.54" drill="1.016"/>
+<pad name="21A" x="16.51" y="2.54" drill="1.016"/>
+<pad name="21B" x="16.51" y="-2.54" drill="1.016"/>
+<pad name="22A" x="19.05" y="2.54" drill="1.016"/>
+<pad name="22B" x="19.05" y="-2.54" drill="1.016"/>
+<pad name="23A" x="21.59" y="2.54" drill="1.016"/>
+<pad name="23B" x="21.59" y="-2.54" drill="1.016"/>
+<pad name="24A" x="24.13" y="2.54" drill="1.016"/>
+<pad name="24B" x="24.13" y="-2.54" drill="1.016"/>
+<pad name="25A" x="26.67" y="2.54" drill="1.016"/>
+<pad name="25B" x="26.67" y="-2.54" drill="1.016"/>
+<pad name="26A" x="29.21" y="2.54" drill="1.016"/>
+<pad name="26B" x="29.21" y="-2.54" drill="1.016"/>
+<pad name="27A" x="31.75" y="2.54" drill="1.016"/>
+<pad name="27B" x="31.75" y="-2.54" drill="1.016"/>
+<pad name="28A" x="34.29" y="2.54" drill="1.016"/>
+<pad name="28B" x="34.29" y="-2.54" drill="1.016"/>
+</package>
+</packages>
+<symbols>
+<symbol name="ZX-EDGE">
+<wire x1="-6.35" y1="12.7" x2="6.35" y2="12.7" width="0.254" layer="94"/>
+<wire x1="6.35" y1="12.7" x2="6.35" y2="-60.96" width="0.254" layer="94"/>
+<wire x1="6.35" y1="-60.96" x2="-6.35" y2="-60.96" width="0.254" layer="94"/>
+<wire x1="-6.35" y1="-60.96" x2="-6.35" y2="12.7" width="0.254" layer="94"/>
+<pin name="+5V" x="-5.08" y="5.08" length="point" rot="R180"/>
+<pin name="/BUSACK" x="-5.08" y="-53.34" length="point" rot="R180"/>
+<pin name="/BUSRQ" x="-5.08" y="-35.56" length="point" rot="R180"/>
+<pin name="/CLK" x="-5.08" y="-7.62" length="point" rot="R180"/>
+<pin name="/HALT" x="5.08" y="-25.4" length="point"/>
+<pin name="/INT" x="5.08" y="-20.32" length="point"/>
+<pin name="/IORQ" x="5.08" y="-30.48" length="point"/>
+<pin name="/M1" x="5.08" y="-48.26" length="point"/>
+<pin name="/MREQ" x="5.08" y="-27.94" length="point"/>
+<pin name="/NMI" x="5.08" y="-22.86" length="point"/>
+<pin name="/RD" x="5.08" y="-33.02" length="point"/>
+<pin name="/RESET" x="-5.08" y="-38.1" length="point" rot="R180"/>
+<pin name="/RFSH" x="5.08" y="-50.8" length="point"/>
+<pin name="/ROMCS" x="-5.08" y="-50.8" length="point" rot="R180"/>
+<pin name="/WAIT" x="5.08" y="-40.64" length="point"/>
+<pin name="/WR" x="5.08" y="-35.56" length="point"/>
+<pin name="A0" x="-5.08" y="-10.16" length="point" rot="R180"/>
+<pin name="A1" x="-5.08" y="-12.7" length="point" rot="R180"/>
+<pin name="A2" x="-5.08" y="-15.24" length="point" rot="R180"/>
+<pin name="A3" x="-5.08" y="-17.78" length="point" rot="R180"/>
+<pin name="A4" x="-5.08" y="-48.26" length="point" rot="R180"/>
+<pin name="A5" x="-5.08" y="-45.72" length="point" rot="R180"/>
+<pin name="A6" x="-5.08" y="-43.18" length="point" rot="R180"/>
+<pin name="A7" x="-5.08" y="-40.64" length="point" rot="R180"/>
+<pin name="A8" x="5.08" y="-53.34" length="point"/>
+<pin name="A9" x="-5.08" y="-55.88" length="point" rot="R180"/>
+<pin name="A10" x="5.08" y="-55.88" length="point"/>
+<pin name="A11" x="-5.08" y="-58.42" length="point" rot="R180"/>
+<pin name="A12" x="-5.08" y="7.62" length="point" rot="R180"/>
+<pin name="A13" x="5.08" y="7.62" length="point"/>
+<pin name="A14" x="-5.08" y="10.16" length="point" rot="R180"/>
+<pin name="A15" x="5.08" y="10.16" length="point"/>
+<pin name="D0" x="5.08" y="-2.54" length="point"/>
+<pin name="D1" x="5.08" y="-5.08" length="point"/>
+<pin name="D2" x="5.08" y="-7.62" length="point"/>
+<pin name="D3" x="5.08" y="-15.24" length="point"/>
+<pin name="D4" x="5.08" y="-17.78" length="point"/>
+<pin name="D5" x="5.08" y="-12.7" length="point"/>
+<pin name="D6" x="5.08" y="-10.16" length="point"/>
+<pin name="D7" x="5.08" y="5.08" length="point"/>
+<pin name="GND@1" x="-5.08" y="-2.54" length="point" rot="R180"/>
+<pin name="GND@2" x="-5.08" y="-5.08" length="point" rot="R180"/>
+<pin name="GND@3" x="-5.08" y="-22.86" length="point" rot="R180"/>
+<pin name="[+12V]" x="5.08" y="-43.18" length="point"/>
+<pin name="[-5V]" x="5.08" y="-38.1" length="point"/>
+<pin name="[-12V]" x="5.08" y="-45.72" length="point"/>
+<pin name="[/IOULA]" x="-5.08" y="-20.32" length="point" rot="R180"/>
+<pin name="[/ROM1OE]" x="5.08" y="2.54" length="point"/>
+<pin name="[/ROM2OE]" x="-5.08" y="-25.4" length="point" rot="R180"/>
+<pin name="[/Y]" x="-5.08" y="-27.94" length="point" rot="R180"/>
+<pin name="[RESET]" x="5.08" y="-58.42" length="point"/>
+<pin name="[USS]" x="-5.08" y="2.54" length="point" rot="R180"/>
+<pin name="[U]" x="-5.08" y="-33.02" length="point" rot="R180"/>
+<pin name="[V]" x="-5.08" y="-30.48" length="point" rot="R180"/>
+<text x="-6.35" y="-63.5" size="1.6764" layer="94">&gt;VALUE</text>
+<text x="-6.35" y="13.335" size="1.6764" layer="95">&gt;NAME</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="ZX-EDGE" prefix="X">
+<description>Opposite part for ZX-Spectrum system bus</description>
+<gates>
+<gate name="ZX-BUS" symbol="ZX-EDGE" x="0" y="0" addlevel="always"/>
+</gates>
+<devices>
+<device name="" package="ZX-IFACE">
+<connects>
+<connect gate="ZX-BUS" pin="+5V" pad="A3"/>
+<connect gate="ZX-BUS" pin="/BUSACK" pad="A26"/>
+<connect gate="ZX-BUS" pin="/BUSRQ" pad="A19"/>
+<connect gate="ZX-BUS" pin="/CLK" pad="A8"/>
+<connect gate="ZX-BUS" pin="/HALT" pad="B15"/>
+<connect gate="ZX-BUS" pin="/INT" pad="B13"/>
+<connect gate="ZX-BUS" pin="/IORQ" pad="B17"/>
+<connect gate="ZX-BUS" pin="/M1" pad="B24"/>
+<connect gate="ZX-BUS" pin="/MREQ" pad="B16"/>
+<connect gate="ZX-BUS" pin="/NMI" pad="B14"/>
+<connect gate="ZX-BUS" pin="/RD" pad="B18"/>
+<connect gate="ZX-BUS" pin="/RESET" pad="A20"/>
+<connect gate="ZX-BUS" pin="/RFSH" pad="B25"/>
+<connect gate="ZX-BUS" pin="/ROMCS" pad="A25"/>
+<connect gate="ZX-BUS" pin="/WAIT" pad="B21"/>
+<connect gate="ZX-BUS" pin="/WR" pad="B19"/>
+<connect gate="ZX-BUS" pin="A0" pad="A9"/>
+<connect gate="ZX-BUS" pin="A1" pad="A10"/>
+<connect gate="ZX-BUS" pin="A10" pad="B27"/>
+<connect gate="ZX-BUS" pin="A11" pad="A28"/>
+<connect gate="ZX-BUS" pin="A12" pad="A2"/>
+<connect gate="ZX-BUS" pin="A13" pad="B2"/>
+<connect gate="ZX-BUS" pin="A14" pad="A1"/>
+<connect gate="ZX-BUS" pin="A15" pad="B1"/>
+<connect gate="ZX-BUS" pin="A2" pad="A11"/>
+<connect gate="ZX-BUS" pin="A3" pad="A12"/>
+<connect gate="ZX-BUS" pin="A4" pad="A24"/>
+<connect gate="ZX-BUS" pin="A5" pad="A23"/>
+<connect gate="ZX-BUS" pin="A6" pad="A22"/>
+<connect gate="ZX-BUS" pin="A7" pad="A21"/>
+<connect gate="ZX-BUS" pin="A8" pad="B26"/>
+<connect gate="ZX-BUS" pin="A9" pad="A27"/>
+<connect gate="ZX-BUS" pin="D0" pad="B6"/>
+<connect gate="ZX-BUS" pin="D1" pad="B7"/>
+<connect gate="ZX-BUS" pin="D2" pad="B8"/>
+<connect gate="ZX-BUS" pin="D3" pad="B11"/>
+<connect gate="ZX-BUS" pin="D4" pad="B12"/>
+<connect gate="ZX-BUS" pin="D5" pad="B10"/>
+<connect gate="ZX-BUS" pin="D6" pad="B9"/>
+<connect gate="ZX-BUS" pin="D7" pad="B3"/>
+<connect gate="ZX-BUS" pin="GND@1" pad="A6"/>
+<connect gate="ZX-BUS" pin="GND@2" pad="A7"/>
+<connect gate="ZX-BUS" pin="GND@3" pad="A14"/>
+<connect gate="ZX-BUS" pin="[+12V]" pad="B22"/>
+<connect gate="ZX-BUS" pin="[-12V]" pad="B23"/>
+<connect gate="ZX-BUS" pin="[-5V]" pad="B20"/>
+<connect gate="ZX-BUS" pin="[/IOULA]" pad="A13"/>
+<connect gate="ZX-BUS" pin="[/ROM1OE]" pad="B4"/>
+<connect gate="ZX-BUS" pin="[/ROM2OE]" pad="A15"/>
+<connect gate="ZX-BUS" pin="[/Y]" pad="A16"/>
+<connect gate="ZX-BUS" pin="[RESET]" pad="B28"/>
+<connect gate="ZX-BUS" pin="[USS]" pad="A4"/>
+<connect gate="ZX-BUS" pin="[U]" pad="A18"/>
+<connect gate="ZX-BUS" pin="[V]" pad="A17"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="F" package="ZX-SLOT">
+<connects>
+<connect gate="ZX-BUS" pin="+5V" pad="A3"/>
+<connect gate="ZX-BUS" pin="/BUSACK" pad="A26"/>
+<connect gate="ZX-BUS" pin="/BUSRQ" pad="A19"/>
+<connect gate="ZX-BUS" pin="/CLK" pad="A8"/>
+<connect gate="ZX-BUS" pin="/HALT" pad="B15"/>
+<connect gate="ZX-BUS" pin="/INT" pad="B13"/>
+<connect gate="ZX-BUS" pin="/IORQ" pad="B17"/>
+<connect gate="ZX-BUS" pin="/M1" pad="B24"/>
+<connect gate="ZX-BUS" pin="/MREQ" pad="B16"/>
+<connect gate="ZX-BUS" pin="/NMI" pad="B14"/>
+<connect gate="ZX-BUS" pin="/RD" pad="B18"/>
+<connect gate="ZX-BUS" pin="/RESET" pad="A20"/>
+<connect gate="ZX-BUS" pin="/RFSH" pad="B25"/>
+<connect gate="ZX-BUS" pin="/ROMCS" pad="A25"/>
+<connect gate="ZX-BUS" pin="/WAIT" pad="B21"/>
+<connect gate="ZX-BUS" pin="/WR" pad="B19"/>
+<connect gate="ZX-BUS" pin="A0" pad="A9"/>
+<connect gate="ZX-BUS" pin="A1" pad="A10"/>
+<connect gate="ZX-BUS" pin="A10" pad="B27"/>
+<connect gate="ZX-BUS" pin="A11" pad="A28"/>
+<connect gate="ZX-BUS" pin="A12" pad="A2"/>
+<connect gate="ZX-BUS" pin="A13" pad="B2"/>
+<connect gate="ZX-BUS" pin="A14" pad="A1"/>
+<connect gate="ZX-BUS" pin="A15" pad="B1"/>
+<connect gate="ZX-BUS" pin="A2" pad="A11"/>
+<connect gate="ZX-BUS" pin="A3" pad="A12"/>
+<connect gate="ZX-BUS" pin="A4" pad="A24"/>
+<connect gate="ZX-BUS" pin="A5" pad="A23"/>
+<connect gate="ZX-BUS" pin="A6" pad="A22"/>
+<connect gate="ZX-BUS" pin="A7" pad="A21"/>
+<connect gate="ZX-BUS" pin="A8" pad="B26"/>
+<connect gate="ZX-BUS" pin="A9" pad="A27"/>
+<connect gate="ZX-BUS" pin="D0" pad="B6"/>
+<connect gate="ZX-BUS" pin="D1" pad="B7"/>
+<connect gate="ZX-BUS" pin="D2" pad="B8"/>
+<connect gate="ZX-BUS" pin="D3" pad="B11"/>
+<connect gate="ZX-BUS" pin="D4" pad="B12"/>
+<connect gate="ZX-BUS" pin="D5" pad="B10"/>
+<connect gate="ZX-BUS" pin="D6" pad="B9"/>
+<connect gate="ZX-BUS" pin="D7" pad="B3"/>
+<connect gate="ZX-BUS" pin="GND@1" pad="A6"/>
+<connect gate="ZX-BUS" pin="GND@2" pad="A7"/>
+<connect gate="ZX-BUS" pin="GND@3" pad="A14"/>
+<connect gate="ZX-BUS" pin="[+12V]" pad="B22"/>
+<connect gate="ZX-BUS" pin="[-12V]" pad="B23"/>
+<connect gate="ZX-BUS" pin="[-5V]" pad="B20"/>
+<connect gate="ZX-BUS" pin="[/IOULA]" pad="A13"/>
+<connect gate="ZX-BUS" pin="[/ROM1OE]" pad="B4"/>
+<connect gate="ZX-BUS" pin="[/ROM2OE]" pad="A15"/>
+<connect gate="ZX-BUS" pin="[/Y]" pad="A16"/>
+<connect gate="ZX-BUS" pin="[RESET]" pad="B28"/>
+<connect gate="ZX-BUS" pin="[USS]" pad="A4"/>
+<connect gate="ZX-BUS" pin="[U]" pad="A18"/>
+<connect gate="ZX-BUS" pin="[V]" pad="A17"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="T" package="ZX-THR">
+<connects>
+<connect gate="ZX-BUS" pin="+5V" pad="3B"/>
+<connect gate="ZX-BUS" pin="/BUSACK" pad="26B"/>
+<connect gate="ZX-BUS" pin="/BUSRQ" pad="19B"/>
+<connect gate="ZX-BUS" pin="/CLK" pad="8B"/>
+<connect gate="ZX-BUS" pin="/HALT" pad="15A"/>
+<connect gate="ZX-BUS" pin="/INT" pad="13A"/>
+<connect gate="ZX-BUS" pin="/IORQ" pad="17A"/>
+<connect gate="ZX-BUS" pin="/M1" pad="24A"/>
+<connect gate="ZX-BUS" pin="/MREQ" pad="16A"/>
+<connect gate="ZX-BUS" pin="/NMI" pad="14A"/>
+<connect gate="ZX-BUS" pin="/RD" pad="18A"/>
+<connect gate="ZX-BUS" pin="/RESET" pad="20B"/>
+<connect gate="ZX-BUS" pin="/RFSH" pad="25A"/>
+<connect gate="ZX-BUS" pin="/ROMCS" pad="25B"/>
+<connect gate="ZX-BUS" pin="/WAIT" pad="21A"/>
+<connect gate="ZX-BUS" pin="/WR" pad="19A"/>
+<connect gate="ZX-BUS" pin="A0" pad="9B"/>
+<connect gate="ZX-BUS" pin="A1" pad="10B"/>
+<connect gate="ZX-BUS" pin="A10" pad="27A"/>
+<connect gate="ZX-BUS" pin="A11" pad="28B"/>
+<connect gate="ZX-BUS" pin="A12" pad="2B"/>
+<connect gate="ZX-BUS" pin="A13" pad="2A"/>
+<connect gate="ZX-BUS" pin="A14" pad="1B"/>
+<connect gate="ZX-BUS" pin="A15" pad="1A"/>
+<connect gate="ZX-BUS" pin="A2" pad="11B"/>
+<connect gate="ZX-BUS" pin="A3" pad="12B"/>
+<connect gate="ZX-BUS" pin="A4" pad="24B"/>
+<connect gate="ZX-BUS" pin="A5" pad="23B"/>
+<connect gate="ZX-BUS" pin="A6" pad="22B"/>
+<connect gate="ZX-BUS" pin="A7" pad="21B"/>
+<connect gate="ZX-BUS" pin="A8" pad="26A"/>
+<connect gate="ZX-BUS" pin="A9" pad="27B"/>
+<connect gate="ZX-BUS" pin="D0" pad="6A"/>
+<connect gate="ZX-BUS" pin="D1" pad="7A"/>
+<connect gate="ZX-BUS" pin="D2" pad="8A"/>
+<connect gate="ZX-BUS" pin="D3" pad="11A"/>
+<connect gate="ZX-BUS" pin="D4" pad="12A"/>
+<connect gate="ZX-BUS" pin="D5" pad="10A"/>
+<connect gate="ZX-BUS" pin="D6" pad="9A"/>
+<connect gate="ZX-BUS" pin="D7" pad="3A"/>
+<connect gate="ZX-BUS" pin="GND@1" pad="6B"/>
+<connect gate="ZX-BUS" pin="GND@2" pad="7B"/>
+<connect gate="ZX-BUS" pin="GND@3" pad="14B"/>
+<connect gate="ZX-BUS" pin="[+12V]" pad="22A"/>
+<connect gate="ZX-BUS" pin="[-12V]" pad="23A"/>
+<connect gate="ZX-BUS" pin="[-5V]" pad="20A"/>
+<connect gate="ZX-BUS" pin="[/IOULA]" pad="13B"/>
+<connect gate="ZX-BUS" pin="[/ROM1OE]" pad="4A"/>
+<connect gate="ZX-BUS" pin="[/ROM2OE]" pad="15B"/>
+<connect gate="ZX-BUS" pin="[/Y]" pad="16B"/>
+<connect gate="ZX-BUS" pin="[RESET]" pad="28A"/>
+<connect gate="ZX-BUS" pin="[USS]" pad="4B"/>
+<connect gate="ZX-BUS" pin="[U]" pad="18B"/>
+<connect gate="ZX-BUS" pin="[V]" pad="17B"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+</drawing>
+</eagle>
