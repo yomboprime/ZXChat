@@ -15353,7 +15353,7 @@ Source: www.kingbright.com</description>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
 <part name="R6" library="resistor" deviceset="R-EU_" device="0207_10" value="10K"/>
 <part name="R7" library="resistor" deviceset="R-EU_" device="0207_10" value="10K"/>
-<part name="R8" library="resistor" deviceset="R-EU_" device="0207_10" value="1K"/>
+<part name="R8" library="resistor" deviceset="R-EU_" device="0207_10" value="300"/>
 <part name="LED1" library="led" deviceset="LED" device="3MM"/>
 </parts>
 <sheets>
