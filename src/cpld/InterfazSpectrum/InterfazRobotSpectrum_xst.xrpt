@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="Xst" timeStamp="Thu Mar 19 20:12:59 2015">
+  <application stringID="Xst" timeStamp="Wed Mar 25 03:33:02 2015">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -33,7 +33,7 @@
         <column stringID="speed"/>
         <row stringID="row" value="0">
           <item stringID="arch" value="AMD Athlon(tm) 64 X2 Dual Core Processor 6000+"/>
-          <item stringID="speed" value="2600.000 MHz"/>
+          <item stringID="speed" value="2800.000 MHz"/>
         </row>
       </table>
     </section>
@@ -42,7 +42,7 @@
       <item DEFAULT="MIXED" label="-ifmt" stringID="XST_IFMT" value="mixed"/>
       <item DEFAULT="" label="-ofn" stringID="XST_OFN" value="InterfazRobotSpectrum"/>
       <item DEFAULT="NGC" label="-ofmt" stringID="XST_OFMT" value="NGC"/>
-      <item DEFAULT="" label="-p" stringID="XST_P" value="xc9500"/>
+      <item DEFAULT="" label="-p" stringID="XST_P" value="xc9500xl"/>
       <item DEFAULT="" label="-top" stringID="XST_TOP" value="InterfazRobotSpectrum"/>
       <item DEFAULT="SPEED" label="-opt_mode" stringID="XST_OPTMODE" value="Speed"/>
       <item DEFAULT="1" label="-opt_level" stringID="XST_OPTLEVEL" value="1"/>
@@ -92,18 +92,17 @@
         <item stringID="XST_IOS" value="30"/>
       </section>
       <section stringID="XST_CELL_USAGE">
-        <item dataType="int" stringID="XST_BELS" value="267">
-          <item dataType="int" stringID="XST_AND2" value="97"/>
-          <item dataType="int" stringID="XST_AND3" value="23"/>
-          <item dataType="int" stringID="XST_AND4" value="8"/>
+        <item dataType="int" stringID="XST_BELS" value="225">
+          <item dataType="int" stringID="XST_AND2" value="89"/>
+          <item dataType="int" stringID="XST_AND3" value="5"/>
           <item dataType="int" stringID="XST_GND" value="1"/>
-          <item dataType="int" stringID="XST_INV" value="105"/>
-          <item dataType="int" stringID="XST_OR2" value="27"/>
+          <item dataType="int" stringID="XST_INV" value="74"/>
+          <item dataType="int" stringID="XST_OR2" value="50"/>
           <item dataType="int" stringID="XST_XOR2" value="3"/>
         </item>
         <item dataType="int" stringID="XST_FLIPFLOPSLATCHES" value="40">
           <item dataType="int" stringID="XST_FD" value="2"/>
-          <item dataType="int" stringID="XST_FDP" value="3"/>
+          <item dataType="int" stringID="XST_FDPE" value="3"/>
         </item>
         <item dataType="int" stringID="XST_IO_BUFFERS" value="30">
           <item dataType="int" stringID="XST_IBUF" value="10"/>

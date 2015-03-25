@@ -5,7 +5,7 @@
 <design name='InterfazRobotSpectrum'/>
 <rptdir name='InterfazRobotSpectrum'/>
 <xilinx path='/media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE:'/>
-<projDir path='/media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum'/>
+<projDir path='/media/datos1/Devel/xilinxise/InterfazSpectrum'/>
 <xslDir path='chipviewer/data/xsl'/>
 <fileDir path='/chipviewer/data/html'/>
 <dataFile file='index.htm'/>
@@ -30,7 +30,7 @@
 <dataFile file='blank.gif'/>
 <dataFile file='fbview.jpg'/>
 <dataFile file='pinview.jpg'/>
-<dataFile file='xc9500_logo.jpg'/>
+<dataFile file='xc9500xl_logo.jpg'/>
 <dataFile file='asciidoc.htm'/>
 <dataFile file='equationsdoc.htm'/>
 <dataFile file='errorsdoc.htm'/>
@@ -190,11 +190,11 @@
 </xmlFile>
 <xmlFile file='/media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE/chipviewer/data/xsl/pinlegend.xml'>
   <xslFile file='legend.xsl'>
-    <param name='device' value='XC9572-15-PC44'/>
+    <param name='device' value='XC9572XL-10-PC44'/>
     <param name='verOn' value='0'/>
     <param name='linkName' value='pinlegendV.htm'/>
     <output file='pinlegend.htm'/>
-    <param name='device' value='XC9572-15-PC44'/>
+    <param name='device' value='XC9572XL-10-PC44'/>
     <param name='verOn' value='1'/>
     <param name='linkName' value='pinlegend.htm'/>
     <output file='pinlegendV.htm'/>
@@ -202,11 +202,11 @@
 </xmlFile>
 <xmlFile file='/media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE/chipviewer/data/xsl/logiclegend.xml'>
   <xslFile file='legend.xsl'>
-    <param name='device' value='XC9572-15-PC44'/>
+    <param name='device' value='XC9572XL-10-PC44'/>
     <param name='verOn' value='0'/>
     <param name='linkName' value='logiclegendV.htm'/>
     <output file='logiclegend.htm'/>
-    <param name='device' value='XC9572-15-PC44'/>
+    <param name='device' value='XC9572XL-10-PC44'/>
     <param name='verOn' value='1'/>
     <param name='linkName' value='logiclegend.htm'/>
     <output file='logiclegendV.htm'/>

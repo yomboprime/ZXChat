@@ -3,12 +3,11 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 Command Line:
 /media/datos3/soft/XilinxISEInstalado6/14.7/ISE_DS/ISE/bin/lin64/unwrapped/ngdbu
-ild -intstyle ise -dd _ngo -uc InterfazSpectrumConstraints.ucf -p xc9572-PC44-15
-InterfazRobotSpectrum.ngc InterfazRobotSpectrum.ngd
+ild -intstyle ise -dd _ngo -uc InterfazSpectrumConstraints.ucf -p
+xc9572xl-PC44-10 InterfazRobotSpectrum.ngc InterfazRobotSpectrum.ngd
 
 Reading NGO file
-"/media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazRobotSpectrum.ngc"
-...
+"/media/datos1/Devel/xilinxise/InterfazSpectrum/InterfazRobotSpectrum.ngc" ...
 Gathering constraint information from source properties...
 Done.
 
@@ -31,7 +30,7 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   0
 
-Total memory usage is 399524 kilobytes
+Total memory usage is 399280 kilobytes
 
 Writing NGD file "InterfazRobotSpectrum.ngd" ...
 Total REAL time to NGDBUILD completion:  9 sec

@@ -1,7 +1,7 @@
 Release 8.1i - Fit P.20131013
 Copyright(c) 1995-2003 Xilinx Inc. All rights reserved
 
- 3-19-2015  8:13PM
+ 3-25-2015  3:33AM
 
 NOTE: This file is designed to be imported into a spreadsheet program
 such as Microsoft Excel for viewing, printing and sorting. The comma ','
@@ -10,8 +10,8 @@ This file is also designed to support parsing.
 
 Input file:  InterfazRobotSpectrum.ngd
 output file: InterfazRobotSpectrum_pad.csv
-Part type:   xc9572
-Speed grade: -15
+Part type:   xc9572xl
+Speed grade: -10
 Package:     pc44
 
 Pinout by Pin Number:
@@ -39,9 +39,9 @@ P18,rdUc,I,I/O,INPUT,,,,,,,,,
 P19,wrUc,I,I/O,INPUT,,,,,,,,,
 P20,regUc,I,I/O,INPUT,,,,,,,,,
 P21,VCC,,VCCINT,,,,,,,,,,
-P22,rd1Signal,I/O,I/O,BIDIR,,,,,,,,,
+P22,rd1Signal,O,I/O,OUTPUT,,,,,,,,,
 P23,GND,,GND,,,,,,,,,,
-P24,wr1Signal,I/O,I/O,BIDIR,,,,,,,,,
+P24,wr1Signal,O,I/O,OUTPUT,,,,,,,,,
 P25,PGND,,I/O,,,,,,,,,,
 P26,wr0Signal,O,I/O,OUTPUT,,,,,,,,,
 P27,PGND,,I/O,,,,,,,,,,

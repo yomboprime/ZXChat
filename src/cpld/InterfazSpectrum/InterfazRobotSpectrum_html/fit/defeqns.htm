@@ -6,9 +6,16 @@
 ********** Mapped Logic **********
 </td></tr><tr><td>
 </td></tr><tr><td>
-$OpTx$$OpTx$FX_DC$9_INV$78 <= (rdSinclair AND wrSinclair);
+$OpTx$$OpTx$FX_DC$29_INV$109 <= (wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
+$OpTx$INV$26__$INT <= ((wrUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND wrSinclair AND NOT rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND wrSinclair AND NOT rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND rd1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdUc AND rd1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrUc AND NOT regUc AND rdUc));
 </td></tr><tr><td>
 </td></tr><tr><td>
 </td></tr><tr><td>
@@ -20,106 +27,113 @@ $OpTx$$OpTx$FX_DC$9_INV$78 <= (rdSinclair AND wrSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
 busDatosSinclair_I(0) <= ((iorqSinclair AND registro1Uc(0))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND registro1Uc(0))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(0) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(0) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(0))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(0))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(0))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(0)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(0) AND NOT wrSinclair));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(0) <= busDatosSinclair_I(0) when busDatosSinclair_OE(0) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(0) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
-busDatosSinclair_I(1) <= ((rdSinclair AND registro1Uc(1))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND registro1Uc(1))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(1))
+busDatosSinclair_I(1) <= ((iorqSinclair AND registro1Uc(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(1) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(1) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(1))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(1))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(1))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(1)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(1) AND NOT wrSinclair));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(1) <= busDatosSinclair_I(1) when busDatosSinclair_OE(1) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(1) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
 busDatosSinclair_I(2) <= ((iorqSinclair AND registro1Uc(2))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND registro1Uc(2))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(2) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(2) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(2))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(2))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(2))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(2)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(2) AND NOT wrSinclair));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(2) <= busDatosSinclair_I(2) when busDatosSinclair_OE(2) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(2) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
-busDatosSinclair_I(3) <= ((rdSinclair AND registro1Uc(3))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND registro1Uc(3))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(3))
+busDatosSinclair_I(3) <= ((iorqSinclair AND registro1Uc(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(3) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(3) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(3))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(3))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(3))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(3)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(3) AND NOT wrSinclair));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(3) <= busDatosSinclair_I(3) when busDatosSinclair_OE(3) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(3) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(3) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
-busDatosSinclair_I(4) <= ((rdSinclair AND registro1Uc(4))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(4))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND registro1Uc(4))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(4))
+busDatosSinclair_I(4) <= ((iorqSinclair AND registro1Uc(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(4) AND NOT wrSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(4) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(4) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(4))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(4))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(4)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(4)));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(4) <= busDatosSinclair_I(4) when busDatosSinclair_OE(4) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(4) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(4) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
-busDatosSinclair_I(5) <= ((rdSinclair AND registro1Uc(5))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND registro1Uc(5))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(5))
+busDatosSinclair_I(5) <= ((iorqSinclair AND registro1Uc(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(5) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(5) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(5))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(5))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(5))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(5)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(5) AND NOT wrSinclair));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(5) <= busDatosSinclair_I(5) when busDatosSinclair_OE(5) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(5) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(5) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
 busDatosSinclair_I(6) <= ((busDatosSinclair_7_IOBUFE.EXP)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND registro1Uc(6))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(6))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(6))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(6))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND registro1Uc(6))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(6)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(6) AND NOT wrSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(6) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(6)));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(6) <= busDatosSinclair_I(6) when busDatosSinclair_OE(6) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(6) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(6) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
-busDatosSinclair_I(7) <= ((rdSinclair AND registro1Uc(7))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrSinclair AND registro1Uc(7))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND registro1Uc(7))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair AND registro0Uc(7))
+busDatosSinclair_I(7) <= ((iorqSinclair AND registro1Uc(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(7) AND NOT wrSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (registro1Uc(7) AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND registro0Uc(7) AND wrSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdSinclair)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND registro1Uc(7))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(7))
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(7)));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND registro1Uc(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(0) AND registro1Uc(7)));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair(7) <= busDatosSinclair_I(7) when busDatosSinclair_OE(7) = '1' else 'Z';
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(7) <= (NOT rdSinclair AND addrSinclair(2) AND NOT addrSinclair(1) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosSinclair_OE(7) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrSinclair AND NOT rdSinclair);
 </td></tr><tr><td>
 </td></tr><tr><td>
 busDatosUc_I(0) <= ((NOT wrUc AND registro1Spectrum(0))
@@ -186,104 +200,108 @@ busDatosUc_I(7) <= ((NOT wrUc AND registro1Spectrum(7))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;busDatosUc_OE(7) <= (wrUc AND NOT rdUc);
 </td></tr><tr><td>
 FTCPE_contadorLedSinclair0: FTCPE port map (contadorLedSinclair(0),contadorLedSinclair_T(0),clkLed,'0',contadorLedSinclair_PRE(0));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_T(0) <= (NOT contadorLedSinclair(1).LFBK AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT contadorLedSinclair(0).LFBK AND NOT contadorLedSinclair(2).LFBK);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_T(0) <= (NOT contadorLedSinclair(0) AND NOT contadorLedSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT contadorLedSinclair(2));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_PRE(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT $OpTx$$OpTx$FX_DC$9_INV$78);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT $OpTx$$OpTx$FX_DC$29_INV$109);
 </td></tr><tr><td>
 FDCPE_contadorLedSinclair1: FDCPE port map (contadorLedSinclair(1),contadorLedSinclair_D(1),clkLed,'0',contadorLedSinclair_PRE(1));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_D(1) <= ((NOT contadorLedSinclair(1).LFBK AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT contadorLedSinclair(0).LFBK AND contadorLedSinclair(2).LFBK)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (contadorLedSinclair(1).LFBK AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	contadorLedSinclair(0).LFBK));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_D(1) <= ((contadorLedSinclair(0) AND contadorLedSinclair(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT contadorLedSinclair(0) AND NOT contadorLedSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	contadorLedSinclair(2)));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_PRE(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT $OpTx$$OpTx$FX_DC$9_INV$78);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT $OpTx$$OpTx$FX_DC$29_INV$109);
 </td></tr><tr><td>
 FTCPE_contadorLedSinclair2: FTCPE port map (contadorLedSinclair(2),contadorLedSinclair_T(2),clkLed,'0',contadorLedSinclair_PRE(2));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_T(2) <= (NOT contadorLedSinclair(1).LFBK AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT contadorLedSinclair(0).LFBK AND contadorLedSinclair(2).LFBK);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_T(2) <= (NOT contadorLedSinclair(0) AND NOT contadorLedSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	contadorLedSinclair(2));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contadorLedSinclair_PRE(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND NOT iorqSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT $OpTx$$OpTx$FX_DC$9_INV$78);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT $OpTx$$OpTx$FX_DC$29_INV$109);
 </td></tr><tr><td>
 FTCPE_contadorLeds0: FTCPE port map (contadorLeds(0),'1',clkLed,'0','0');
 </td></tr><tr><td>
-FTCPE_contadorLeds1: FTCPE port map (contadorLeds(1),contadorLeds(0).LFBK,clkLed,'0','0');
+FTCPE_contadorLeds1: FTCPE port map (contadorLeds(1),contadorLeds(0),clkLed,'0','0');
 </td></tr><tr><td>
 </td></tr><tr><td>
-ledActividadSinclair <= NOT (((NOT contadorLeds(1).LFBK)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT contadorLedSinclair(1) AND NOT contadorLedSinclair(0) AND 
+ledActividadSinclair <= NOT (((NOT contadorLeds(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT contadorLedSinclair(0) AND NOT contadorLedSinclair(1) AND 
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT contadorLedSinclair(2))));
 </td></tr><tr><td>
-FDCPE_rd1Signal: FDCPE port map (rd1Signal,'0','0',NOT rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT,rd1Signal_OBUF/rd1Signal_OBUF_SETF);
+FDCPE_rd1Signal: FDCPE port map (rd1Signal,'0','0',NOT $OpTx$INV$26__$INT,rd1Signal_OBUF/rd1Signal_OBUF_SETF);
 </td></tr><tr><td>
 </td></tr><tr><td>
-rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT <= ((wrUc AND rd1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdUc AND rd1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrUc AND NOT regUc AND rdUc)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair));
-</td></tr><tr><td>
-</td></tr><tr><td>
-rd1Signal_OBUF/rd1Signal_OBUF_SETF <= ((NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT regUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT rdUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND rd1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdUc AND rd1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	wrUc AND NOT addrSinclair(1) AND wrSinclair AND NOT iorqSinclair));
+rd1Signal_OBUF/rd1Signal_OBUF_SETF <= ((wrUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND wrSinclair AND NOT rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT regUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND wrSinclair AND NOT rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND wrSinclair AND NOT rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND rd1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdUc AND rd1Signal));
 </td></tr><tr><td>
 FDCPE_registro0Spectrum0: FDCPE port map (registro0Spectrum(0),'0','0',registro0Spectrum_CLR(0),registro0Spectrum_PRE(0));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(0) <= (rdSinclair AND NOT busDatosSinclair(0).PIN AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(2) AND NOT addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(0) <= (rdSinclair AND busDatosSinclair(0).PIN AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(2) AND NOT addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(0).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(0).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum1: FDCPE port map (registro0Spectrum(1),'0','0',registro0Spectrum_CLR(1),registro0Spectrum_PRE(1));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(1) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(1) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(1).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(1).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum2: FDCPE port map (registro0Spectrum(2),'0','0',registro0Spectrum_CLR(2),registro0Spectrum_PRE(2));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(2) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(2) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(2).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(2).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum3: FDCPE port map (registro0Spectrum(3),'0','0',registro0Spectrum_CLR(3),registro0Spectrum_PRE(3));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(3) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(3) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(3) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(3).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(3) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(3).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum4: FDCPE port map (registro0Spectrum(4),'0','0',registro0Spectrum_CLR(4),registro0Spectrum_PRE(4));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(4) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(4) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(4) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(4).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(4) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(4).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum5: FDCPE port map (registro0Spectrum(5),'0','0',registro0Spectrum_CLR(5),registro0Spectrum_PRE(5));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(5) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(5) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(5) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(5).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(5) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(5).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum6: FDCPE port map (registro0Spectrum(6),'0','0',registro0Spectrum_CLR(6),registro0Spectrum_PRE(6));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(6) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(6) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(6) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(6).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(6) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(6).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Spectrum7: FDCPE port map (registro0Spectrum(7),'0','0',registro0Spectrum_CLR(7),registro0Spectrum_PRE(7));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(7) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(7) <= (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_CLR(7) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(7).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Spectrum_PRE(7) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(7).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro0Uc0: FDCPE port map (registro0Uc(0),'0','0',registro0Uc_CLR(0),registro0Uc_PRE(0));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Uc_CLR(0) <= (NOT wrUc AND NOT regUc AND rdUc AND NOT busDatosUc(0).PIN);
@@ -318,54 +336,68 @@ FDCPE_registro0Uc7: FDCPE port map (registro0Uc(7),'0','0',registro0Uc_CLR(7),re
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro0Uc_PRE(7) <= (NOT wrUc AND NOT regUc AND rdUc AND busDatosUc(7).PIN);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum0: FDCPE port map (registro1Spectrum(0),'0','0',registro1Spectrum_CLR(0),registro1Spectrum_PRE(0));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(0) <= (rdSinclair AND NOT busDatosSinclair(0).PIN AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(2) AND addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(0) <= (rdSinclair AND busDatosSinclair(0).PIN AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(2) AND addrSinclair(0) AND NOT addrSinclair(1) AND NOT wrSinclair AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(0).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(0) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(0).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum1: FDCPE port map (registro1Spectrum(1),'0','0',registro1Spectrum_CLR(1),registro1Spectrum_PRE(1));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(1) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(1) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(1).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(1).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(1) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(1).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum2: FDCPE port map (registro1Spectrum(2),'0','0',registro1Spectrum_CLR(2),registro1Spectrum_PRE(2));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(2) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(2) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(2).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(2).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(2) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(2).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum3: FDCPE port map (registro1Spectrum(3),'0','0',registro1Spectrum_CLR(3),registro1Spectrum_PRE(3));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(3) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(3) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(3).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(3) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(3).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(3) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(3).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum4: FDCPE port map (registro1Spectrum(4),'0','0',registro1Spectrum_CLR(4),registro1Spectrum_PRE(4));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(4) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(4) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(4).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(4) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(4).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(4) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(4).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum5: FDCPE port map (registro1Spectrum(5),'0','0',registro1Spectrum_CLR(5),registro1Spectrum_PRE(5));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(5) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(5) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(5).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(5) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(5).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(5) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(5).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum6: FDCPE port map (registro1Spectrum(6),'0','0',registro1Spectrum_CLR(6),registro1Spectrum_PRE(6));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(6) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(6) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(6).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(6) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(6).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(6) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(6).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Spectrum7: FDCPE port map (registro1Spectrum(7),'0','0',registro1Spectrum_CLR(7),registro1Spectrum_PRE(7));
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(7) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(7) <= (rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	busDatosSinclair(7).PIN AND NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_CLR(7) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT busDatosSinclair(7).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Spectrum_PRE(7) <= (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND busDatosSinclair(7).PIN AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT wrSinclair AND rdSinclair);
 </td></tr><tr><td>
 FDCPE_registro1Uc0: FDCPE port map (registro1Uc(0),'0','0',registro1Uc_CLR(0),registro1Uc_PRE(0));
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Uc_CLR(0) <= (NOT wrUc AND regUc AND rdUc AND NOT busDatosUc(0).PIN);
@@ -400,42 +432,44 @@ FDCPE_registro1Uc7: FDCPE port map (registro1Uc(7),'0','0',registro1Uc_CLR(7),re
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registro1Uc_PRE(7) <= (NOT wrUc AND regUc AND rdUc AND busDatosUc(7).PIN);
 </td></tr><tr><td>
 </td></tr><tr><td>
-wr0Signal <= ((NOT wrUc AND wr0Signal_OBUF.LFBK)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (regUc AND wr0Signal_OBUF.LFBK)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdUc AND wr0Signal_OBUF.LFBK)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND addrSinclair(2) AND NOT addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair));
+wr0Signal <= ((NOT wrUc AND wr0Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (regUc AND wr0Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdUc AND wr0Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT wrSinclair AND rdSinclair));
 </td></tr><tr><td>
 FDCPE_wr1Signal: FDCPE port map (wr1Signal,'0','0',NOT wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT,NOT wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT);
 </td></tr><tr><td>
 </td></tr><tr><td>
-wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT <= ((rdSinclair AND addrSinclair(2) AND addrSinclair(0) AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND addrSinclair(2) AND NOT regUc AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrUc AND wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT regUc AND wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdUc AND wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND addrSinclair(2) AND NOT wrUc AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdSinclair AND addrSinclair(2) AND rdUc AND 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(1) AND NOT wrSinclair AND NOT iorqSinclair));
+wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT <= ((NOT regUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair AND NOT wrSinclair AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	addrSinclair(0) AND NOT iorqSinclair AND NOT wrSinclair AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrUc AND wr1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT regUc AND wr1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdUc AND wr1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wrUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair AND NOT wrSinclair AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (rdUc AND addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT iorqSinclair AND NOT wrSinclair AND rdSinclair));
 </td></tr><tr><td>
 </td></tr><tr><td>
-wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT <= ((registro1Spectrum(1).EXP)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrSinclair AND NOT wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND wrUc AND regUc AND NOT rdUc)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND wrUc AND regUc AND NOT rdUc)
+wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT <= ((wrUc AND regUc AND NOT rdUc AND NOT addrSinclair(2))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND regUc AND NOT rdUc AND addrSinclair(1))
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND regUc AND NOT rdUc AND iorqSinclair)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT rdSinclair AND NOT wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND NOT wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND NOT wr1Signal.PIN)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND NOT wr1Signal.PIN));
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND regUc AND NOT rdUc AND NOT rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (wrUc AND regUc AND NOT rdUc AND wrSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(2) AND NOT addrSinclair(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT addrSinclair(0) AND NOT iorqSinclair AND NOT wrSinclair AND rdSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT addrSinclair(2) AND NOT wr1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (addrSinclair(1) AND NOT wr1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (iorqSinclair AND NOT wr1Signal)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wr1Signal AND wrSinclair)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT wr1Signal AND NOT rdSinclair));
 </td></tr><tr><td>
 Register Legend:
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FDCPE (Q,D,C,CLR,PRE); 
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FTCPE (Q,D,C,CLR,PRE); 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FDCPE (Q,D,C,CLR,PRE,CE); 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FTCPE (Q,D,C,CLR,PRE,CE); 
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LDCP  (Q,D,G,CLR,PRE); 
 </td></tr><tr><td>
 </td></tr>

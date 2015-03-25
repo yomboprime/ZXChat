@@ -3,11 +3,11 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pn" timeStamp="Thu Mar 19 20:12:55 2015">
+<application name="pn" timeStamp="Wed Mar 25 03:32:58 2015">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="B34DD9196597F92D2F1D872C1A505BB0" type="project"/>
 <property name="ProjectIteration" value="0" type="project"/>
-<property name="ProjectFile" value="/media/datos3/Devel/ZXChat/src/cpld/InterfazSpectrum/InterfazSpectrum.xise" type="project"/>
+<property name="ProjectFile" value="/media/datos1/Devel/xilinxise/InterfazSpectrum/InterfazSpectrum.xise" type="project"/>
 <property name="ProjectCreationTimestamp" value="2015-03-19T19:27:52" type="project"/>
 </section>
 <section name="Project Statistics" visible="true">
@@ -30,12 +30,12 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PROP_xilxSynthMaxFanout" value="100000" type="process"/>
 <property name="PROP_xtdoOutputFile" value="changed" type="process"/>
 <property name="PROP_AutoTop" value="true" type="design"/>
-<property name="PROP_DevFamily" value="XC9500 CPLDs" type="design"/>
-<property name="PROP_DevDevice" value="xc9572" type="design"/>
-<property name="PROP_DevFamilyPMName" value="xc9500" type="design"/>
+<property name="PROP_DevFamily" value="XC9500XL CPLDs" type="design"/>
+<property name="PROP_DevDevice" value="xc9572xl" type="design"/>
+<property name="PROP_DevFamilyPMName" value="xc9500xl" type="design"/>
 <property name="PROP_DevPackage" value="PC44" type="design"/>
 <property name="PROP_Synthesis_Tool" value="XST (VHDL/Verilog)" type="design"/>
-<property name="PROP_DevSpeed" value="-15" type="design"/>
+<property name="PROP_DevSpeed" value="-10" type="design"/>
 <property name="PROP_PreferredLanguage" value="VHDL" type="design"/>
 <property name="FILE_UCF" value="1" type="source"/>
 <property name="FILE_VHDL" value="1" type="source"/>
