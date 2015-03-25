@@ -14222,7 +14222,7 @@ IR transmitter Siemens</description>
 <text x="1.27" y="-1.651" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
 <package name="P-LCC-2">
-<description>&lt;b&gt;TOPLED® High-optical Power LED (HOP)&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;TOPLED� High-optical Power LED (HOP)&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... ls_t675.pdf</description>
 <wire x1="-1.4" y1="-1.05" x2="-1.4" y2="-1.6" width="0.2032" layer="51"/>
 <wire x1="-1.4" y1="-1.6" x2="-1.1" y2="-1.6" width="0.2032" layer="51"/>
@@ -14255,7 +14255,7 @@ Source: http://www.osram.convergy.de/ ... ls_t675.pdf</description>
 <rectangle x1="-1.4" y1="-2.35" x2="1.4" y2="-0.65" layer="29"/>
 </package>
 <package name="OSRAM-MINI-TOP-LED">
-<description>&lt;b&gt;BLUE LINETM Hyper Mini TOPLED® Hyper-Bright LED&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;BLUE LINETM Hyper Mini TOPLED� Hyper-Bright LED&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... LB M676.pdf</description>
 <wire x1="-0.6" y1="0.9" x2="-0.6" y2="-0.7" width="0.1016" layer="51"/>
 <wire x1="-0.45" y1="-0.9" x2="-0.4" y2="-0.9" width="0.1016" layer="51"/>
@@ -14282,7 +14282,7 @@ Source: http://www.osram.convergy.de/ ... LB M676.pdf</description>
 <rectangle x1="-0.45" y1="-1.35" x2="0.45" y2="-0.65" layer="31"/>
 </package>
 <package name="OSRAM-SIDELED">
-<description>&lt;b&gt;Super SIDELED® High-Current LED&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;Super SIDELED� High-Current LED&lt;/b&gt;&lt;p&gt;
 LG A672, LP A672 &lt;br&gt;
 Source: http://www.osram.convergy.de/ ... LG_LP_A672.pdf (2004.05.13)</description>
 <wire x1="-1.85" y1="-2.05" x2="-1.85" y2="-0.75" width="0.1016" layer="51"/>
@@ -14332,7 +14332,7 @@ Source: http://www.osram.convergy.de/ ... LA_LO_LS_LY L896.pdf</description>
 <rectangle x1="-0.15" y1="-0.85" x2="0.15" y2="-0.6" layer="51"/>
 </package>
 <package name="P-LCC-2-TOPLED-RG">
-<description>&lt;b&gt;Hyper TOPLED® RG Hyper-Bright LED&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;Hyper TOPLED� RG Hyper-Bright LED&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... LA_LO_LS_LY T776.pdf</description>
 <wire x1="-1.4" y1="-1.05" x2="-1.4" y2="-1.6" width="0.2032" layer="51"/>
 <wire x1="-1.4" y1="-1.6" x2="-1.1" y2="-1.6" width="0.2032" layer="51"/>
@@ -14366,7 +14366,7 @@ Source: http://www.osram.convergy.de/ ... LA_LO_LS_LY T776.pdf</description>
 <hole x="0" y="0" drill="2.8"/>
 </package>
 <package name="MICRO-SIDELED">
-<description>&lt;b&gt;Hyper Micro SIDELED®&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;Hyper Micro SIDELED�&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... LA_LO_LS_LY Y876.pdf</description>
 <wire x1="0.65" y1="1.1" x2="-0.1" y2="1.1" width="0.1016" layer="51"/>
 <wire x1="-0.1" y1="1.1" x2="-0.35" y2="1" width="0.1016" layer="51"/>
@@ -14389,7 +14389,7 @@ Source: http://www.osram.convergy.de/ ... LA_LO_LS_LY Y876.pdf</description>
 <rectangle x1="-0.125" y1="-1.75" x2="0.125" y2="-1.125" layer="51"/>
 </package>
 <package name="P-LCC-4">
-<description>&lt;b&gt;Power TOPLED®&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;Power TOPLED�&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... LA_LO_LA_LY E67B.pdf</description>
 <wire x1="-1.4" y1="-1.05" x2="-1.4" y2="-1.6" width="0.2032" layer="51"/>
 <wire x1="-1.4" y1="-1.6" x2="-1" y2="-1.6" width="0.2032" layer="51"/>
@@ -14468,7 +14468,7 @@ Source: http://www.osram.convergy.de/ ... lb_r99a.pdf</description>
 <rectangle x1="-0.675" y1="-1.05" x2="0.675" y2="-0.45" layer="51"/>
 </package>
 <package name="MINI-TOPLED-SANTANA">
-<description>&lt;b&gt;Mini TOPLED Santana®&lt;/b&gt;&lt;p&gt;
+<description>&lt;b&gt;Mini TOPLED Santana�&lt;/b&gt;&lt;p&gt;
 Source: http://www.osram.convergy.de/ ... LG M470.pdf</description>
 <wire x1="0.7" y1="-1" x2="0.35" y2="-1" width="0.1016" layer="21"/>
 <wire x1="0.35" y1="-1" x2="-0.7" y2="-1" width="0.1016" layer="21"/>
@@ -14628,7 +14628,7 @@ Source: http://www.osram.convergy.de/ ... LO_LS_LY L89K.pdf</description>
 <rectangle x1="-0.225" y1="-0.975" x2="0.225" y2="-0.3" layer="31" rot="R180"/>
 </package>
 <package name="LUMILED+">
-<description>&lt;b&gt;Lumileds Lighting. LUXEON®&lt;/b&gt; with cool pad&lt;p&gt;
+<description>&lt;b&gt;Lumileds Lighting. LUXEON�&lt;/b&gt; with cool pad&lt;p&gt;
 Source: K2.pdf</description>
 <wire x1="-3.575" y1="2.3375" x2="-2.3375" y2="3.575" width="0.2032" layer="21"/>
 <wire x1="-2.3375" y1="3.575" x2="2.3375" y2="3.575" width="0.2032" layer="21"/>
@@ -14680,7 +14680,7 @@ Source: K2.pdf</description>
 </polygon>
 </package>
 <package name="LUMILED">
-<description>&lt;b&gt;Lumileds Lighting. LUXEON®&lt;/b&gt; without cool pad&lt;p&gt;
+<description>&lt;b&gt;Lumileds Lighting. LUXEON�&lt;/b&gt; without cool pad&lt;p&gt;
 Source: K2.pdf</description>
 <wire x1="-3.575" y1="2.3375" x2="-2.3375" y2="3.575" width="0.2032" layer="21"/>
 <wire x1="-2.3375" y1="3.575" x2="2.3375" y2="3.575" width="0.2032" layer="21"/>
@@ -14901,7 +14901,7 @@ LY A675&lt;br&gt;
 LS A676, LA A676, LO A676, LY A676, LW A676&lt;br&gt;
 LS A679, LY A679, LG A679&lt;br&gt;
 
--  &lt;u&gt;Hyper Micro SIDELED®&lt;/u&gt;&lt;br&gt;
+-  &lt;u&gt;Hyper Micro SIDELED�&lt;/u&gt;&lt;br&gt;
 LS Y876, LA Y876, LO Y876, LY Y876&lt;br&gt;
 LT Y87S&lt;br&gt;
 
@@ -14930,17 +14930,17 @@ LS T776, LA T776, LO T776, LY T776, LB T776&lt;br&gt;
 LHGB T686&lt;br&gt;
 LT T68C, LB T68C&lt;br&gt;
 
-- &lt;u&gt;Hyper Mini TOPLED®&lt;/u&gt;&lt;br&gt;
+- &lt;u&gt;Hyper Mini TOPLED�&lt;/u&gt;&lt;br&gt;
 LB M676&lt;br&gt;
 
-- &lt;u&gt;Mini TOPLED Santana®&lt;/u&gt;&lt;br&gt;
+- &lt;u&gt;Mini TOPLED Santana�&lt;/u&gt;&lt;br&gt;
 LG M470&lt;br&gt;
 LS M47K, LO M47K, LY M47K
 &lt;p&gt;
 Source: http://www.osram.convergy.de&lt;p&gt;
 
 &lt;u&gt;LUXEON:&lt;/u&gt;&lt;br&gt;
-- &lt;u&gt;LUMILED®&lt;/u&gt;&lt;br&gt;
+- &lt;u&gt;LUMILED�&lt;/u&gt;&lt;br&gt;
 LXK2-PW12-R00, LXK2-PW12-S00, LXK2-PW14-U00, LXK2-PW14-V00&lt;br&gt;
 LXK2-PM12-R00, LXK2-PM12-S00, LXK2-PM14-U00&lt;br&gt;
 LXK2-PE12-Q00, LXK2-PE12-R00, LXK2-PE12-S00, LXK2-PE14-T00, LXK2-PE14-U00&lt;br&gt;
@@ -15304,7 +15304,7 @@ Source: www.kingbright.com</description>
 <classes>
 <class number="0" name="default" width="0.2032" drill="0">
 </class>
-<class number="1" name="ground" width="0.4064" drill="0">
+<class number="1" name="ground" width="0.254" drill="0">
 </class>
 <class number="2" name="power" width="0.4064" drill="0">
 </class>
@@ -15354,7 +15354,7 @@ Source: www.kingbright.com</description>
 <part name="R6" library="resistor" deviceset="R-EU_" device="0207_10" value="10K"/>
 <part name="R7" library="resistor" deviceset="R-EU_" device="0207_10" value="10K"/>
 <part name="R8" library="resistor" deviceset="R-EU_" device="0207_10" value="300"/>
-<part name="LED1" library="led" deviceset="LED" device="3MM"/>
+<part name="ACTIV." library="led" deviceset="LED" device="3MM" value="-"/>
 </parts>
 <sheets>
 <sheet>
@@ -15405,7 +15405,7 @@ Source: www.kingbright.com</description>
 <instance part="R6" gate="G$1" x="33.02" y="40.64" rot="R270"/>
 <instance part="R7" gate="G$1" x="83.82" y="35.56" rot="R270"/>
 <instance part="R8" gate="G$1" x="226.06" y="68.58"/>
-<instance part="LED1" gate="G$1" x="233.68" y="68.58" rot="R90"/>
+<instance part="ACTIV." gate="G$1" x="233.68" y="68.58" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -16196,7 +16196,7 @@ Source: www.kingbright.com</description>
 <label x="271.78" y="88.9" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="LED1" gate="G$1" pin="C"/>
+<pinref part="ACTIV." gate="G$1" pin="C"/>
 <wire x1="238.76" y1="68.58" x2="241.3" y2="68.58" width="0.1524" layer="91"/>
 <label x="241.3" y="68.58" size="1.27" layer="95" xref="yes"/>
 </segment>
@@ -16294,7 +16294,7 @@ Source: www.kingbright.com</description>
 <wire x1="116.84" y1="121.92" x2="106.68" y2="121.92" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="N$3" class="2">
 <segment>
 <pinref part="JP3" gate="G$1" pin="1"/>
 <pinref part="X1" gate="ZX-BUS" pin="+5V"/>
@@ -16340,9 +16340,9 @@ Source: www.kingbright.com</description>
 <junction x="76.2" y="35.56"/>
 </segment>
 </net>
-<net name="N$2" class="0">
+<net name="N$2" class="1">
 <segment>
-<pinref part="LED1" gate="G$1" pin="A"/>
+<pinref part="ACTIV." gate="G$1" pin="A"/>
 <pinref part="R8" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -16355,7 +16355,6 @@ Source: www.kingbright.com</description>
 <approved hash="104,1,45.72,33.02,IC4,VCC,+3.3V,,,"/>
 <approved hash="113,1,185.657,134.751,JP4,,,,,"/>
 <approved hash="113,1,56.1171,137.291,JP5,,,,,"/>
-<approved hash="113,1,234.95,68.9017,LED1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
