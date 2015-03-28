@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.07 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.07 secs
  
 --> 
 Reading design: InterfazRobotSpectrum.prj
@@ -198,13 +198,13 @@ Design Statistics
 # IOs                              : 30
 
 Cell Usage :
-# BELS                             : 225
-#      AND2                        : 89
-#      AND3                        : 5
+# BELS                             : 232
+#      AND2                        : 86
+#      AND3                        : 6
 #      GND                         : 1
-#      INV                         : 74
-#      OR2                         : 50
-#      OR3                         : 3
+#      INV                         : 81
+#      OR2                         : 51
+#      OR3                         : 4
 #      XOR2                        : 3
 # FlipFlops/Latches                : 40
 #      FD                          : 2
@@ -218,13 +218,13 @@ Cell Usage :
 =========================================================================
 
 
-Total REAL time to Xst completion: 14.00 secs
-Total CPU time to Xst completion: 13.87 secs
+Total REAL time to Xst completion: 15.00 secs
+Total CPU time to Xst completion: 15.22 secs
  
 --> 
 
 
-Total memory usage is 526084 kilobytes
+Total memory usage is 526088 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    7 (   0 filtered)

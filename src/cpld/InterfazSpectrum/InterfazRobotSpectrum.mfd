@@ -1,233 +1,241 @@
 MDF Database:  version 1.0
 MDF_INFO | InterfazRobotSpectrum | XC9572XL-10-PC44
-MACROCELL | 0 | 1 | contadorLedSinclair<0>
+MACROCELL | 3 | 9 | contadorLedSinclair<0>
 ATTRIBUTES | 4359040 | 0
-OUTPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 0 | 5
-INPUTS | 7 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | $OpTx$$OpTx$FX_DC$29_INV$109
-INPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 1 | 15
-INPUTP | 3 | 15 | 12 | 10
+OUTPUTMC | 5 | 3 | 9 | 3 | 17 | 0 | 0 | 0 | 5 | 3 | 0
+INPUTS | 7 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>  | addrSinclair<0>  | addrSinclair<2>  | iorqSinclair  | $OpTx$$OpTx$FX_DC$26_INV$113
+INPUTMC | 4 | 3 | 9 | 3 | 17 | 0 | 0 | 3 | 8
+INPUTP | 3 | 11 | 15 | 10
 EQ | 5 | 
    !contadorLedSinclair<0>.T = !contadorLedSinclair<0> & !contadorLedSinclair<1> & 
 	!contadorLedSinclair<2>;
    contadorLedSinclair<0>.CLK = clkLed;	// GCK
-   contadorLedSinclair<0>.AP = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	!$OpTx$$OpTx$FX_DC$29_INV$109;
+   contadorLedSinclair<0>.AP = addrSinclair<0> & !addrSinclair<2> & !iorqSinclair & 
+	!$OpTx$$OpTx$FX_DC$26_INV$113;
 GLOBALS | 1 | 2 | clkLed
 
-MACROCELL | 0 | 17 | contadorLedSinclair<1>
+MACROCELL | 3 | 17 | contadorLedSinclair<1>
 ATTRIBUTES | 8553344 | 0
-OUTPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 0 | 5
-INPUTS | 7 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | $OpTx$$OpTx$FX_DC$29_INV$109
-INPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 1 | 15
-INPUTP | 3 | 15 | 12 | 10
-EQ | 6 | 
+OUTPUTMC | 6 | 3 | 9 | 3 | 17 | 0 | 0 | 0 | 5 | 3 | 0 | 3 | 16
+INPUTS | 12 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | registro1Uc<1>  | addrSinclair<0>  | addrSinclair<2>  | iorqSinclair  | $OpTx$$OpTx$FX_DC$26_INV$113  | rdSinclair  | addrSinclair<1>  | registro0Uc<1>  | wrSinclair  | EXP10_.EXP
+INPUTMC | 6 | 3 | 9 | 3 | 17 | 2 | 6 | 3 | 8 | 2 | 14 | 3 | 0
+INPUTP | 6 | 11 | 15 | 10 | 7 | 12 | 9
+EXPORTS | 1 | 3 | 16
+IMPORTS | 1 | 3 | 0
+EQ | 12 | 
    contadorLedSinclair<1>.D = contadorLedSinclair<0> & contadorLedSinclair<1>
+;Imported pterms FB4_1
 	# !contadorLedSinclair<0> & !contadorLedSinclair<1> & 
 	contadorLedSinclair<2>;
    contadorLedSinclair<1>.CLK = clkLed;	// GCK
-   contadorLedSinclair<1>.AP = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	!$OpTx$$OpTx$FX_DC$29_INV$109;
+   contadorLedSinclair<1>.AP = addrSinclair<0> & !addrSinclair<2> & !iorqSinclair & 
+	!$OpTx$$OpTx$FX_DC$26_INV$113;
+    contadorLedSinclair<1>.EXP  =  iorqSinclair & registro1Uc<1>
+	# registro1Uc<1> & rdSinclair
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<1> & wrSinclair & 
+	!rdSinclair
 GLOBALS | 1 | 2 | clkLed
 
 MACROCELL | 0 | 0 | contadorLedSinclair<2>
 ATTRIBUTES | 4359040 | 0
-OUTPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 0 | 5
-INPUTS | 7 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | $OpTx$$OpTx$FX_DC$29_INV$109
-INPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 1 | 15
-INPUTP | 3 | 15 | 12 | 10
+OUTPUTMC | 4 | 3 | 9 | 3 | 0 | 0 | 0 | 0 | 5
+INPUTS | 7 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>  | addrSinclair<0>  | addrSinclair<2>  | iorqSinclair  | $OpTx$$OpTx$FX_DC$26_INV$113
+INPUTMC | 4 | 3 | 9 | 3 | 17 | 0 | 0 | 3 | 8
+INPUTP | 3 | 11 | 15 | 10
 EQ | 5 | 
    contadorLedSinclair<2>.T = !contadorLedSinclair<0> & !contadorLedSinclair<1> & 
 	contadorLedSinclair<2>;
    contadorLedSinclair<2>.CLK = clkLed;	// GCK
-   contadorLedSinclair<2>.AP = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	!$OpTx$$OpTx$FX_DC$29_INV$109;
+   contadorLedSinclair<2>.AP = addrSinclair<0> & !addrSinclair<2> & !iorqSinclair & 
+	!$OpTx$$OpTx$FX_DC$26_INV$113;
 GLOBALS | 1 | 2 | clkLed
 
 MACROCELL | 3 | 14 | busDatosSinclair_0_IOBUFE
 ATTRIBUTES | 265986 | 0
-INPUTS | 9 | addrSinclair<0>  | registro1Uc<0>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | registro0Uc<6>.EXP  | registro0Spectrum<7>.EXP
-INPUTMC | 3 | 2 | 9 | 3 | 13 | 3 | 15
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 8 | addrSinclair<0>  | registro1Uc<0>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | registro1Spectrum<7>.EXP  | registro0Spectrum<7>.EXP  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST
+INPUTMC | 4 | 2 | 9 | 3 | 13 | 3 | 15 | 3 | 10
+INPUTP | 4 | 11 | 12 | 15 | 9
 IMPORTS | 2 | 3 | 13 | 3 | 15
 EQ | 13 | 
-   busDatosSinclair<0> = !addrSinclair<2> & registro1Uc<0>
+   busDatosSinclair<0> = addrSinclair<0> & registro1Uc<0>
+	# addrSinclair<2> & registro1Uc<0>
 	# addrSinclair<1> & registro1Uc<0>
-	# addrSinclair<0> & registro1Uc<0>
 	# registro1Uc<0> & !wrSinclair
 ;Imported pterms FB4_14
 	# iorqSinclair & registro1Uc<0>
 ;Imported pterms FB4_16
 	# registro1Uc<0> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<0> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<0> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<0>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
+   busDatosSinclair<0>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
 
 MACROCELL | 3 | 16 | busDatosSinclair_1_IOBUFE
 ATTRIBUTES | 265986 | 0
-INPUTS | 8 | addrSinclair<0>  | registro1Uc<1>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | rd1Signal_OBUF/rd1Signal_OBUF_SETF.EXP
-INPUTMC | 2 | 2 | 6 | 3 | 17
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 7 | addrSinclair<0>  | registro1Uc<1>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | contadorLedSinclair<1>.EXP  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST
+INPUTMC | 3 | 2 | 6 | 3 | 17 | 3 | 10
+INPUTP | 4 | 11 | 12 | 15 | 9
 IMPORTS | 1 | 3 | 17
 EQ | 12 | 
-   busDatosSinclair<1> = !addrSinclair<2> & registro1Uc<1>
+   busDatosSinclair<1> = addrSinclair<0> & registro1Uc<1>
+	# addrSinclair<2> & registro1Uc<1>
 	# addrSinclair<1> & registro1Uc<1>
-	# addrSinclair<0> & registro1Uc<1>
 	# registro1Uc<1> & !wrSinclair
 ;Imported pterms FB4_18
 	# iorqSinclair & registro1Uc<1>
 	# registro1Uc<1> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<1> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<1> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<1>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
+   busDatosSinclair<1>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
 
 MACROCELL | 1 | 1 | busDatosSinclair_2_IOBUFE
 ATTRIBUTES | 265986 | 0
-INPUTS | 9 | addrSinclair<0>  | registro1Uc<2>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | registro0Uc<7>.EXP  | registro0Spectrum<1>.EXP
-INPUTMC | 3 | 2 | 5 | 1 | 0 | 1 | 2
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 8 | addrSinclair<0>  | registro1Uc<2>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT.EXP  | registro1Spectrum<0>.EXP  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST
+INPUTMC | 4 | 2 | 5 | 1 | 0 | 1 | 2 | 3 | 10
+INPUTP | 4 | 11 | 12 | 15 | 9
 IMPORTS | 2 | 1 | 0 | 1 | 2
 EQ | 13 | 
-   busDatosSinclair<2> = !addrSinclair<2> & registro1Uc<2>
+   busDatosSinclair<2> = addrSinclair<0> & registro1Uc<2>
+	# addrSinclair<2> & registro1Uc<2>
 	# addrSinclair<1> & registro1Uc<2>
-	# addrSinclair<0> & registro1Uc<2>
 	# registro1Uc<2> & !wrSinclair
 ;Imported pterms FB2_1
 	# iorqSinclair & registro1Uc<2>
-	# registro1Uc<2> & rdSinclair
 ;Imported pterms FB2_3
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<2> & wrSinclair & 
+	# registro1Uc<2> & rdSinclair
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<2> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<2>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
+   busDatosSinclair<2>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
 
 MACROCELL | 1 | 4 | busDatosSinclair_3_IOBUFE
 ATTRIBUTES | 265986 | 0
-INPUTS | 9 | addrSinclair<0>  | registro1Uc<3>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | registro1Spectrum<1>.EXP  | busDatosSinclair_4_IOBUFE.EXP
-INPUTMC | 3 | 2 | 3 | 1 | 3 | 1 | 5
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 8 | addrSinclair<0>  | registro1Uc<3>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | registro0Spectrum<1>.EXP  | busDatosSinclair_4_IOBUFE.EXP  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST
+INPUTMC | 4 | 2 | 3 | 1 | 3 | 1 | 5 | 3 | 10
+INPUTP | 4 | 11 | 12 | 15 | 9
 IMPORTS | 2 | 1 | 3 | 1 | 5
 EQ | 13 | 
-   busDatosSinclair<3> = !addrSinclair<2> & registro1Uc<3>
+   busDatosSinclair<3> = addrSinclair<0> & registro1Uc<3>
+	# addrSinclair<2> & registro1Uc<3>
 	# addrSinclair<1> & registro1Uc<3>
-	# addrSinclair<0> & registro1Uc<3>
 	# registro1Uc<3> & !wrSinclair
 ;Imported pterms FB2_4
 	# iorqSinclair & registro1Uc<3>
 	# registro1Uc<3> & rdSinclair
 ;Imported pterms FB2_6
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<3> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<3> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<3>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
+   busDatosSinclair<3>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
 
 MACROCELL | 1 | 5 | busDatosSinclair_4_IOBUFE
 ATTRIBUTES | 265986 | 0
 OUTPUTMC | 1 | 1 | 4
-INPUTS | 9 | addrSinclair<0>  | registro1Uc<4>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | registro0Uc<3>  | EXP6_.EXP
-INPUTMC | 3 | 2 | 2 | 2 | 12 | 1 | 6
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 10 | addrSinclair<0>  | registro1Uc<4>  | addrSinclair<1>  | addrSinclair<2>  | iorqSinclair  | registro0Uc<3>  | wrSinclair  | rdSinclair  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST  | EXP6_.EXP
+INPUTMC | 4 | 2 | 2 | 2 | 12 | 3 | 10 | 1 | 6
+INPUTP | 6 | 11 | 12 | 15 | 10 | 9 | 7
 EXPORTS | 1 | 1 | 4
 IMPORTS | 1 | 1 | 6
 EQ | 15 | 
-   busDatosSinclair<4> = !addrSinclair<2> & registro1Uc<4>
+   busDatosSinclair<4> = addrSinclair<0> & registro1Uc<4>
+	# addrSinclair<2> & registro1Uc<4>
 	# addrSinclair<1> & registro1Uc<4>
-	# addrSinclair<0> & registro1Uc<4>
 ;Imported pterms FB2_7
 	# iorqSinclair & registro1Uc<4>
 	# registro1Uc<4> & !wrSinclair
 	# registro1Uc<4> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<4> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<4> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<4>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
-    busDatosSinclair_4_IOBUFE.EXP  =  addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<3> & wrSinclair & 
+   busDatosSinclair<4>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
+    busDatosSinclair_4_IOBUFE.EXP  =  !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<3> & wrSinclair & 
 	!rdSinclair
 
 MACROCELL | 1 | 7 | busDatosSinclair_5_IOBUFE
 ATTRIBUTES | 265986 | 0
-INPUTS | 8 | addrSinclair<0>  | registro1Uc<5>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | busDatosSinclair_6_IOBUFE.EXP
-INPUTMC | 2 | 2 | 0 | 1 | 8
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 7 | addrSinclair<0>  | registro1Uc<5>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | busDatosSinclair_6_IOBUFE.EXP  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST
+INPUTMC | 3 | 2 | 0 | 1 | 8 | 3 | 10
+INPUTP | 4 | 11 | 12 | 15 | 9
 IMPORTS | 1 | 1 | 8
 EQ | 12 | 
-   busDatosSinclair<5> = !addrSinclair<2> & registro1Uc<5>
+   busDatosSinclair<5> = addrSinclair<0> & registro1Uc<5>
+	# addrSinclair<2> & registro1Uc<5>
 	# addrSinclair<1> & registro1Uc<5>
-	# addrSinclair<0> & registro1Uc<5>
 	# registro1Uc<5> & !wrSinclair
 ;Imported pterms FB2_9
 	# iorqSinclair & registro1Uc<5>
 	# registro1Uc<5> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<5> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<5> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<5>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
+   busDatosSinclair<5>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
 
 MACROCELL | 1 | 8 | busDatosSinclair_6_IOBUFE
 ATTRIBUTES | 265986 | 0
 OUTPUTMC | 1 | 1 | 7
-INPUTS | 10 | addrSinclair<0>  | registro1Uc<6>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | registro1Uc<5>  | registro0Uc<5>  | EXP7_.EXP
-INPUTMC | 4 | 3 | 11 | 2 | 0 | 2 | 10 | 1 | 9
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 11 | addrSinclair<0>  | registro1Uc<6>  | iorqSinclair  | registro1Uc<5>  | rdSinclair  | addrSinclair<2>  | addrSinclair<1>  | registro0Uc<5>  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST  | wrSinclair  | EXP7_.EXP
+INPUTMC | 5 | 3 | 12 | 2 | 0 | 2 | 10 | 3 | 10 | 1 | 9
+INPUTP | 6 | 11 | 10 | 7 | 15 | 12 | 9
 EXPORTS | 1 | 1 | 7
 IMPORTS | 1 | 1 | 9
 EQ | 18 | 
    busDatosSinclair<6> = addrSinclair<0> & registro1Uc<6>
 ;Imported pterms FB2_10
-	# !addrSinclair<2> & registro1Uc<6>
+	# addrSinclair<2> & registro1Uc<6>
 	# addrSinclair<1> & registro1Uc<6>
 	# iorqSinclair & registro1Uc<6>
 	# registro1Uc<6> & !wrSinclair
 	# registro1Uc<6> & rdSinclair
 ;Imported pterms FB2_11
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<6> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<6> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<6>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
+   busDatosSinclair<6>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
     busDatosSinclair_6_IOBUFE.EXP  =  iorqSinclair & registro1Uc<5>
 	# registro1Uc<5> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<5> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<5> & wrSinclair & 
 	!rdSinclair
 
 MACROCELL | 1 | 10 | busDatosSinclair_7_IOBUFE
 ATTRIBUTES | 265986 | 0
 OUTPUTMC | 1 | 1 | 9
-INPUTS | 9 | addrSinclair<0>  | registro1Uc<7>  | addrSinclair<1>  | addrSinclair<2>  | wrSinclair  | iorqSinclair  | rdSinclair  | registro0Uc<6>  | EXP8_.EXP
-INPUTMC | 3 | 3 | 10 | 3 | 13 | 1 | 11
-INPUTP | 6 | 11 | 12 | 15 | 9 | 10 | 7
+INPUTS | 10 | addrSinclair<0>  | registro1Uc<7>  | addrSinclair<1>  | addrSinclair<2>  | iorqSinclair  | registro0Uc<6>  | wrSinclair  | rdSinclair  | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST  | EXP8_.EXP
+INPUTMC | 4 | 3 | 11 | 0 | 8 | 3 | 10 | 1 | 11
+INPUTP | 6 | 11 | 12 | 15 | 10 | 9 | 7
 EXPORTS | 1 | 1 | 9
 IMPORTS | 1 | 1 | 11
 EQ | 15 | 
-   busDatosSinclair<7> = !addrSinclair<2> & registro1Uc<7>
+   busDatosSinclair<7> = addrSinclair<0> & registro1Uc<7>
+	# addrSinclair<2> & registro1Uc<7>
 	# addrSinclair<1> & registro1Uc<7>
-	# addrSinclair<0> & registro1Uc<7>
 ;Imported pterms FB2_12
 	# iorqSinclair & registro1Uc<7>
 	# registro1Uc<7> & !wrSinclair
 	# registro1Uc<7> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<7> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<7> & wrSinclair & 
 	!rdSinclair;
-   busDatosSinclair<7>.OE = addrSinclair<2> & !addrSinclair<1> & !iorqSinclair & 
-	wrSinclair & !rdSinclair;
-    busDatosSinclair_7_IOBUFE.EXP  =  addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<6> & wrSinclair & 
+   busDatosSinclair<7>.OE = 
+	busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST;
+    busDatosSinclair_7_IOBUFE.EXP  =  !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<6> & wrSinclair & 
 	!rdSinclair
 
 MACROCELL | 2 | 8 | busDatosUc_0_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<0>  | regUc  | wrUc  | registro0Spectrum<0>
-INPUTMC | 2 | 1 | 17 | 1 | 12
+INPUTMC | 2 | 1 | 2 | 1 | 12
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<0> = !wrUc & registro1Spectrum<0>
@@ -239,7 +247,7 @@ EQ | 5 |
 MACROCELL | 2 | 7 | busDatosUc_1_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<1>  | regUc  | wrUc  | registro0Spectrum<1>
-INPUTMC | 2 | 1 | 3 | 1 | 2
+INPUTMC | 2 | 1 | 16 | 1 | 3
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<1> = !wrUc & registro1Spectrum<1>
@@ -251,7 +259,7 @@ EQ | 5 |
 MACROCELL | 2 | 4 | busDatosUc_2_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<2>  | regUc  | wrUc  | registro0Spectrum<2>
-INPUTMC | 2 | 0 | 7 | 0 | 15
+INPUTMC | 2 | 0 | 6 | 0 | 17
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<2> = !wrUc & registro1Spectrum<2>
@@ -263,7 +271,7 @@ EQ | 5 |
 MACROCELL | 2 | 1 | busDatosUc_3_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<3>  | regUc  | wrUc  | registro0Spectrum<3>
-INPUTMC | 2 | 0 | 6 | 0 | 12
+INPUTMC | 2 | 0 | 4 | 0 | 15
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<3> = !wrUc & registro1Spectrum<3>
@@ -275,7 +283,7 @@ EQ | 5 |
 MACROCELL | 0 | 16 | busDatosUc_4_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<4>  | regUc  | wrUc  | registro0Spectrum<4>
-INPUTMC | 2 | 0 | 4 | 0 | 11
+INPUTMC | 2 | 0 | 3 | 0 | 12
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<4> = !wrUc & registro1Spectrum<4>
@@ -287,7 +295,7 @@ EQ | 5 |
 MACROCELL | 0 | 14 | busDatosUc_5_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<5>  | regUc  | wrUc  | registro0Spectrum<5>
-INPUTMC | 2 | 0 | 3 | 0 | 9
+INPUTMC | 2 | 0 | 2 | 0 | 11
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<5> = !wrUc & registro1Spectrum<5>
@@ -299,7 +307,7 @@ EQ | 5 |
 MACROCELL | 0 | 13 | busDatosUc_6_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<6>  | regUc  | wrUc  | registro0Spectrum<6>
-INPUTMC | 2 | 0 | 2 | 0 | 8
+INPUTMC | 2 | 0 | 1 | 0 | 9
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<6> = !wrUc & registro1Spectrum<6>
@@ -311,7 +319,7 @@ EQ | 5 |
 MACROCELL | 0 | 10 | busDatosUc_7_IOBUFE
 ATTRIBUTES | 265986 | 0
 INPUTS | 5 | rdUc  | registro1Spectrum<7>  | regUc  | wrUc  | registro0Spectrum<7>
-INPUTMC | 2 | 3 | 12 | 3 | 15
+INPUTMC | 2 | 3 | 13 | 3 | 15
 INPUTP | 3 | 46 | 50 | 49
 EQ | 5 | 
    busDatosUc<7> = !wrUc & registro1Spectrum<7>
@@ -322,20 +330,20 @@ EQ | 5 |
 
 MACROCELL | 2 | 16 | rd1Signal_OBUF
 ATTRIBUTES | 8782770 | 0
-OUTPUTMC | 2 | 3 | 17 | 1 | 13
-INPUTS | 2 | rd1Signal_OBUF/rd1Signal_OBUF_SETF  | $OpTx$INV$26__$INT
-INPUTMC | 2 | 3 | 17 | 1 | 13
+OUTPUTMC | 2 | 1 | 13 | 1 | 14
+INPUTS | 2 | rd1Signal_OBUF/rd1Signal_OBUF_SETF  | rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT
+INPUTMC | 2 | 1 | 13 | 1 | 14
 EQ | 4 | 
    rd1Signal.D = Gnd;
    rd1Signal.CLK = Gnd;
    rd1Signal.AP = rd1Signal_OBUF/rd1Signal_OBUF_SETF;
-   rd1Signal.AR = !$OpTx$INV$26__$INT;
+   rd1Signal.AR = !rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT;
 
 MACROCELL | 2 | 15 | wr1Signal_OBUF
 ATTRIBUTES | 8782770 | 0
-OUTPUTMC | 2 | 1 | 16 | 1 | 14
+OUTPUTMC | 3 | 1 | 0 | 1 | 15 | 1 | 17
 INPUTS | 2 | wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT  | wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT
-INPUTMC | 2 | 1 | 16 | 1 | 14
+INPUTMC | 2 | 1 | 0 | 1 | 15
 EQ | 4 | 
    wr1Signal.D = Gnd;
    wr1Signal.CLK = Gnd;
@@ -345,29 +353,29 @@ EQ | 4 |
 MACROCELL | 3 | 4 | wr0Signal_OBUF
 ATTRIBUTES | 396034 | 0
 OUTPUTMC | 1 | 3 | 4
-INPUTS | 10 | rdUc  | wr0Signal  | regUc  | wrUc  | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | wrSinclair  | rdSinclair
+INPUTS | 10 | rdUc  | wr0Signal  | regUc  | wrUc  | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | wrSinclair  | rdSinclair
 INPUTMC | 1 | 3 | 4
-INPUTP | 9 | 46 | 50 | 49 | 15 | 12 | 11 | 10 | 9 | 7
+INPUTP | 9 | 46 | 50 | 49 | 11 | 15 | 12 | 10 | 9 | 7
 EQ | 5 | 
    wr0Signal = !wrUc & wr0Signal
 	# regUc & wr0Signal
 	# rdUc & wr0Signal
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !wrSinclair & rdSinclair;
+	# addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !wrSinclair & rdSinclair;
 
-MACROCELL | 3 | 8 | contadorLeds<1>
+MACROCELL | 3 | 6 | contadorLeds<1>
 ATTRIBUTES | 4358912 | 0
 OUTPUTMC | 1 | 0 | 5
 INPUTS | 1 | contadorLeds<0>
-INPUTMC | 1 | 3 | 9
+INPUTMC | 1 | 3 | 7
 EQ | 2 | 
    contadorLeds<1>.T = contadorLeds<0>;
    contadorLeds<1>.CLK = clkLed;	// GCK
 GLOBALS | 1 | 2 | clkLed
 
-MACROCELL | 3 | 9 | contadorLeds<0>
+MACROCELL | 3 | 7 | contadorLeds<0>
 ATTRIBUTES | 4358912 | 0
-OUTPUTMC | 1 | 3 | 8
+OUTPUTMC | 1 | 3 | 6
 INPUTS | 0
 EQ | 2 | 
    contadorLeds<0>.T = Vcc;
@@ -377,137 +385,136 @@ GLOBALS | 1 | 2 | clkLed
 MACROCELL | 1 | 12 | registro0Spectrum<0>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 2 | 2 | 8 | 1 | 13
-INPUTS | 9 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<0>.PIN  | wrSinclair  | rdSinclair  | wrUc  | rdUc
-INPUTP | 9 | 15 | 12 | 11 | 10 | 82 | 9 | 7 | 49 | 46
+INPUTS | 9 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<0>.PIN  | wrSinclair  | rdSinclair  | regUc  | rdUc
+INPUTP | 9 | 11 | 15 | 12 | 10 | 82 | 9 | 7 | 50 | 46
 EXPORTS | 1 | 1 | 13
 EQ | 12 | 
    registro0Spectrum<0>.D = Gnd;
    registro0Spectrum<0>.CLK = Gnd;
-   registro0Spectrum<0>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<0>.PIN & 
+   registro0Spectrum<0>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<0>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<0>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<0>.PIN & 
+   registro0Spectrum<0>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<0>.PIN & 
 	!wrSinclair & rdSinclair;
-    registro0Spectrum<0>.EXP  =  wrUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
-	# !rdUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
+    registro0Spectrum<0>.EXP  =  !regUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+	# !rdUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
 
-MACROCELL | 1 | 2 | registro0Spectrum<1>
+MACROCELL | 1 | 3 | registro0Spectrum<1>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 2 | 2 | 7 | 1 | 1
-INPUTS | 8 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<1>.PIN  | wrSinclair  | rdSinclair  | registro0Uc<2>
-INPUTMC | 1 | 2 | 13
-INPUTP | 7 | 15 | 12 | 11 | 10 | 83 | 9 | 7
-EXPORTS | 1 | 1 | 1
-EQ | 11 | 
+OUTPUTMC | 2 | 2 | 7 | 1 | 4
+INPUTS | 8 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<1>.PIN  | wrSinclair  | rdSinclair  | registro1Uc<3>
+INPUTMC | 1 | 2 | 3
+INPUTP | 7 | 11 | 15 | 12 | 10 | 83 | 9 | 7
+EXPORTS | 1 | 1 | 4
+EQ | 10 | 
    registro0Spectrum<1>.D = Gnd;
    registro0Spectrum<1>.CLK = Gnd;
-   registro0Spectrum<1>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<1>.PIN & 
+   registro0Spectrum<1>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<1>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<1>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<1>.PIN & 
+   registro0Spectrum<1>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<1>.PIN & 
 	!wrSinclair & rdSinclair;
-    registro0Spectrum<1>.EXP  =  addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<2> & wrSinclair & 
-	!rdSinclair
+    registro0Spectrum<1>.EXP  =  iorqSinclair & registro1Uc<3>
+	# registro1Uc<3> & rdSinclair
 
-MACROCELL | 0 | 15 | registro0Spectrum<2>
+MACROCELL | 0 | 17 | registro0Spectrum<2>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 2 | 4
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<2>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 87 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<2>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 87 | 9 | 7
 EQ | 8 | 
    registro0Spectrum<2>.D = Gnd;
    registro0Spectrum<2>.CLK = Gnd;
-   registro0Spectrum<2>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<2>.PIN & 
+   registro0Spectrum<2>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<2>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<2>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<2>.PIN & 
+   registro0Spectrum<2>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<2>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 12 | registro0Spectrum<3>
+MACROCELL | 0 | 15 | registro0Spectrum<3>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 2 | 1
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<3>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 88 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<3>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 88 | 9 | 7
 EQ | 8 | 
    registro0Spectrum<3>.D = Gnd;
    registro0Spectrum<3>.CLK = Gnd;
-   registro0Spectrum<3>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<3>.PIN & 
+   registro0Spectrum<3>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<3>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<3>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<3>.PIN & 
+   registro0Spectrum<3>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<3>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 11 | registro0Spectrum<4>
+MACROCELL | 0 | 12 | registro0Spectrum<4>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 0 | 16
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<4>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 89 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<4>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 89 | 9 | 7
 EQ | 8 | 
    registro0Spectrum<4>.D = Gnd;
    registro0Spectrum<4>.CLK = Gnd;
-   registro0Spectrum<4>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<4>.PIN & 
+   registro0Spectrum<4>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<4>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<4>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<4>.PIN & 
+   registro0Spectrum<4>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<4>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 9 | registro0Spectrum<5>
+MACROCELL | 0 | 11 | registro0Spectrum<5>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 0 | 14
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<5>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 90 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<5>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 90 | 9 | 7
 EQ | 8 | 
    registro0Spectrum<5>.D = Gnd;
    registro0Spectrum<5>.CLK = Gnd;
-   registro0Spectrum<5>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<5>.PIN & 
+   registro0Spectrum<5>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<5>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<5>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<5>.PIN & 
+   registro0Spectrum<5>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<5>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 8 | registro0Spectrum<6>
+MACROCELL | 0 | 9 | registro0Spectrum<6>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 0 | 13
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<6>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 92 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<6>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 92 | 9 | 7
 EQ | 8 | 
    registro0Spectrum<6>.D = Gnd;
    registro0Spectrum<6>.CLK = Gnd;
-   registro0Spectrum<6>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<6>.PIN & 
+   registro0Spectrum<6>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<6>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<6>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<6>.PIN & 
+   registro0Spectrum<6>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<6>.PIN & 
 	!wrSinclair & rdSinclair;
 
 MACROCELL | 3 | 15 | registro0Spectrum<7>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 2 | 0 | 10 | 3 | 14
-INPUTS | 9 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<7>.PIN  | wrSinclair  | rdSinclair  | registro1Uc<0>  | registro0Uc<0>
+INPUTS | 9 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<7>.PIN  | wrSinclair  | rdSinclair  | registro1Uc<0>  | registro0Uc<0>
 INPUTMC | 2 | 2 | 9 | 2 | 17
-INPUTP | 7 | 15 | 12 | 11 | 10 | 3 | 9 | 7
+INPUTP | 7 | 11 | 15 | 12 | 10 | 3 | 9 | 7
 EXPORTS | 1 | 3 | 14
 EQ | 12 | 
    registro0Spectrum<7>.D = Gnd;
    registro0Spectrum<7>.CLK = Gnd;
-   registro0Spectrum<7>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & busDatosSinclair<7>.PIN & 
+   registro0Spectrum<7>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & busDatosSinclair<7>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro0Spectrum<7>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !busDatosSinclair<7>.PIN & 
+   registro0Spectrum<7>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !busDatosSinclair<7>.PIN & 
 	!wrSinclair & rdSinclair;
     registro0Spectrum<7>.EXP  =  registro1Uc<0> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<0> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<0> & wrSinclair & 
 	!rdSinclair
 
 MACROCELL | 2 | 17 | registro0Uc<0>
@@ -576,162 +583,160 @@ EQ | 4 |
    registro0Uc<5>.AP = !wrUc & !regUc & rdUc & busDatosUc<5>.PIN;
    registro0Uc<5>.AR = !wrUc & !regUc & rdUc & !busDatosUc<5>.PIN;
 
-MACROCELL | 3 | 13 | registro0Uc<6>
+MACROCELL | 0 | 8 | registro0Uc<6>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 2 | 1 | 10 | 3 | 14
-INPUTS | 6 | wrUc  | regUc  | rdUc  | busDatosUc<6>.PIN  | iorqSinclair  | registro1Uc<0>
-INPUTMC | 1 | 2 | 9
-INPUTP | 5 | 49 | 50 | 46 | 24 | 10
-EXPORTS | 1 | 3 | 14
-EQ | 5 | 
+OUTPUTMC | 1 | 1 | 10
+INPUTS | 4 | wrUc  | regUc  | rdUc  | busDatosUc<6>.PIN
+INPUTP | 4 | 49 | 50 | 46 | 24
+EQ | 4 | 
    registro0Uc<6>.D = Gnd;
    registro0Uc<6>.CLK = Gnd;
    registro0Uc<6>.AP = !wrUc & !regUc & rdUc & busDatosUc<6>.PIN;
    registro0Uc<6>.AR = !wrUc & !regUc & rdUc & !busDatosUc<6>.PIN;
-    registro0Uc<6>.EXP  =  iorqSinclair & registro1Uc<0>
 
-MACROCELL | 1 | 0 | registro0Uc<7>
+MACROCELL | 0 | 7 | registro0Uc<7>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 2 | 1 | 11 | 1 | 1
-INPUTS | 7 | wrUc  | regUc  | rdUc  | busDatosUc<7>.PIN  | iorqSinclair  | registro1Uc<2>  | rdSinclair
-INPUTMC | 1 | 2 | 5
-INPUTP | 6 | 49 | 50 | 46 | 21 | 10 | 7
-EXPORTS | 1 | 1 | 1
-EQ | 6 | 
+OUTPUTMC | 1 | 1 | 11
+INPUTS | 4 | wrUc  | regUc  | rdUc  | busDatosUc<7>.PIN
+INPUTP | 4 | 49 | 50 | 46 | 21
+EQ | 4 | 
    registro0Uc<7>.D = Gnd;
    registro0Uc<7>.CLK = Gnd;
    registro0Uc<7>.AP = !wrUc & !regUc & rdUc & busDatosUc<7>.PIN;
    registro0Uc<7>.AR = !wrUc & !regUc & rdUc & !busDatosUc<7>.PIN;
-    registro0Uc<7>.EXP  =  iorqSinclair & registro1Uc<2>
-	# registro1Uc<2> & rdSinclair
 
-MACROCELL | 1 | 17 | registro1Spectrum<0>
+MACROCELL | 1 | 2 | registro1Spectrum<0>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 2 | 2 | 8 | 1 | 16
-INPUTS | 10 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<0>.PIN  | wrSinclair  | rdSinclair  | wrUc  | regUc  | rdUc
-INPUTP | 10 | 15 | 12 | 11 | 10 | 82 | 9 | 7 | 49 | 50 | 46
-EXPORTS | 1 | 1 | 16
-EQ | 11 | 
+OUTPUTMC | 2 | 2 | 8 | 1 | 1
+INPUTS | 9 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<0>.PIN  | wrSinclair  | rdSinclair  | registro1Uc<2>  | registro0Uc<2>
+INPUTMC | 2 | 2 | 5 | 2 | 13
+INPUTP | 7 | 11 | 15 | 12 | 10 | 82 | 9 | 7
+EXPORTS | 1 | 1 | 1
+EQ | 12 | 
    registro1Spectrum<0>.D = Gnd;
    registro1Spectrum<0>.CLK = Gnd;
-   registro1Spectrum<0>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<0>.PIN & 
+   registro1Spectrum<0>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<0>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<0>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<0>.PIN & 
+   registro1Spectrum<0>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<0>.PIN & 
 	!wrSinclair & rdSinclair;
-    registro1Spectrum<0>.EXP  =  wrUc & regUc & !rdUc & wrSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !wrSinclair & rdSinclair
+    registro1Spectrum<0>.EXP  =  registro1Uc<2> & rdSinclair
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<2> & wrSinclair & 
+	!rdSinclair
 
-MACROCELL | 1 | 3 | registro1Spectrum<1>
+MACROCELL | 1 | 16 | registro1Spectrum<1>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 2 | 2 | 7 | 1 | 4
-INPUTS | 8 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<1>.PIN  | wrSinclair  | rdSinclair  | registro1Uc<3>
-INPUTMC | 1 | 2 | 3
-INPUTP | 7 | 15 | 12 | 11 | 10 | 83 | 9 | 7
-EXPORTS | 1 | 1 | 4
-EQ | 10 | 
+OUTPUTMC | 2 | 2 | 7 | 1 | 17
+INPUTS | 10 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<1>.PIN  | wrSinclair  | rdSinclair  | wrUc  | regUc  | rdUc
+INPUTP | 10 | 11 | 15 | 12 | 10 | 83 | 9 | 7 | 49 | 50 | 46
+EXPORTS | 1 | 1 | 17
+EQ | 11 | 
    registro1Spectrum<1>.D = Gnd;
    registro1Spectrum<1>.CLK = Gnd;
-   registro1Spectrum<1>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<1>.PIN & 
+   registro1Spectrum<1>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<1>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<1>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<1>.PIN & 
+   registro1Spectrum<1>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<1>.PIN & 
 	!wrSinclair & rdSinclair;
-    registro1Spectrum<1>.EXP  =  iorqSinclair & registro1Uc<3>
-	# registro1Uc<3> & rdSinclair
+    registro1Spectrum<1>.EXP  =  wrUc & regUc & !rdUc & wrSinclair
+	# addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !wrSinclair & rdSinclair
 
-MACROCELL | 0 | 7 | registro1Spectrum<2>
+MACROCELL | 0 | 6 | registro1Spectrum<2>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 2 | 4
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<2>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 87 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<2>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 87 | 9 | 7
 EQ | 8 | 
    registro1Spectrum<2>.D = Gnd;
    registro1Spectrum<2>.CLK = Gnd;
-   registro1Spectrum<2>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<2>.PIN & 
+   registro1Spectrum<2>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<2>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<2>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<2>.PIN & 
+   registro1Spectrum<2>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<2>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 6 | registro1Spectrum<3>
+MACROCELL | 0 | 4 | registro1Spectrum<3>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 2 | 1
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<3>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 88 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<3>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 88 | 9 | 7
 EQ | 8 | 
    registro1Spectrum<3>.D = Gnd;
    registro1Spectrum<3>.CLK = Gnd;
-   registro1Spectrum<3>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<3>.PIN & 
+   registro1Spectrum<3>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<3>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<3>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<3>.PIN & 
+   registro1Spectrum<3>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<3>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 4 | registro1Spectrum<4>
+MACROCELL | 0 | 3 | registro1Spectrum<4>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 0 | 16
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<4>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 89 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<4>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 89 | 9 | 7
 EQ | 8 | 
    registro1Spectrum<4>.D = Gnd;
    registro1Spectrum<4>.CLK = Gnd;
-   registro1Spectrum<4>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<4>.PIN & 
+   registro1Spectrum<4>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<4>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<4>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<4>.PIN & 
+   registro1Spectrum<4>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<4>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 3 | registro1Spectrum<5>
+MACROCELL | 0 | 2 | registro1Spectrum<5>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 0 | 14
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<5>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 90 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<5>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 90 | 9 | 7
 EQ | 8 | 
    registro1Spectrum<5>.D = Gnd;
    registro1Spectrum<5>.CLK = Gnd;
-   registro1Spectrum<5>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<5>.PIN & 
+   registro1Spectrum<5>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<5>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<5>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<5>.PIN & 
+   registro1Spectrum<5>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<5>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 0 | 2 | registro1Spectrum<6>
+MACROCELL | 0 | 1 | registro1Spectrum<6>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 1 | 0 | 13
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<6>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 92 | 9 | 7
+INPUTS | 7 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<6>.PIN  | wrSinclair  | rdSinclair
+INPUTP | 7 | 11 | 15 | 12 | 10 | 92 | 9 | 7
 EQ | 8 | 
    registro1Spectrum<6>.D = Gnd;
    registro1Spectrum<6>.CLK = Gnd;
-   registro1Spectrum<6>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<6>.PIN & 
+   registro1Spectrum<6>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<6>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<6>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<6>.PIN & 
+   registro1Spectrum<6>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<6>.PIN & 
 	!wrSinclair & rdSinclair;
 
-MACROCELL | 3 | 12 | registro1Spectrum<7>
+MACROCELL | 3 | 13 | registro1Spectrum<7>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 1 | 0 | 10
-INPUTS | 7 | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | busDatosSinclair<7>.PIN  | wrSinclair  | rdSinclair
-INPUTP | 7 | 15 | 12 | 11 | 10 | 3 | 9 | 7
-EQ | 8 | 
+OUTPUTMC | 2 | 0 | 10 | 3 | 14
+INPUTS | 8 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | busDatosSinclair<7>.PIN  | wrSinclair  | rdSinclair  | registro1Uc<0>
+INPUTMC | 1 | 2 | 9
+INPUTP | 7 | 11 | 15 | 12 | 10 | 3 | 9 | 7
+EXPORTS | 1 | 3 | 14
+EQ | 9 | 
    registro1Spectrum<7>.D = Gnd;
    registro1Spectrum<7>.CLK = Gnd;
-   registro1Spectrum<7>.AP = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & busDatosSinclair<7>.PIN & 
+   registro1Spectrum<7>.AP = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & busDatosSinclair<7>.PIN & 
 	!wrSinclair & rdSinclair;
-   registro1Spectrum<7>.AR = addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !busDatosSinclair<7>.PIN & 
+   registro1Spectrum<7>.AR = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !busDatosSinclair<7>.PIN & 
 	!wrSinclair & rdSinclair;
+    registro1Spectrum<7>.EXP  =  iorqSinclair & registro1Uc<0>
 
 MACROCELL | 2 | 9 | registro1Uc<0>
 ATTRIBUTES | 8520624 | 0
@@ -757,7 +762,7 @@ EQ | 4 |
 
 MACROCELL | 2 | 5 | registro1Uc<2>
 ATTRIBUTES | 8520624 | 0
-OUTPUTMC | 2 | 1 | 1 | 1 | 0
+OUTPUTMC | 3 | 1 | 1 | 1 | 0 | 1 | 2
 INPUTS | 4 | wrUc  | regUc  | rdUc  | busDatosUc<2>.PIN
 INPUTP | 4 | 49 | 50 | 46 | 31
 EQ | 4 | 
@@ -799,7 +804,7 @@ EQ | 4 |
    registro1Uc<5>.AP = !wrUc & regUc & rdUc & busDatosUc<5>.PIN;
    registro1Uc<5>.AR = !wrUc & regUc & rdUc & !busDatosUc<5>.PIN;
 
-MACROCELL | 3 | 11 | registro1Uc<6>
+MACROCELL | 3 | 12 | registro1Uc<6>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 2 | 1 | 8 | 1 | 9
 INPUTS | 4 | wrUc  | regUc  | rdUc  | busDatosUc<6>.PIN
@@ -810,7 +815,7 @@ EQ | 4 |
    registro1Uc<6>.AP = !wrUc & regUc & rdUc & busDatosUc<6>.PIN;
    registro1Uc<6>.AR = !wrUc & regUc & rdUc & !busDatosUc<6>.PIN;
 
-MACROCELL | 3 | 10 | registro1Uc<7>
+MACROCELL | 3 | 11 | registro1Uc<7>
 ATTRIBUTES | 8520624 | 0
 OUTPUTMC | 2 | 1 | 10 | 1 | 11
 INPUTS | 4 | wrUc  | regUc  | rdUc  | busDatosUc<7>.PIN
@@ -824,205 +829,227 @@ EQ | 4 |
 MACROCELL | 0 | 5 | ledActividadSinclair_OBUF
 ATTRIBUTES | 264962 | 0
 INPUTS | 4 | contadorLeds<1>  | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>
-INPUTMC | 4 | 3 | 8 | 0 | 1 | 0 | 17 | 0 | 0
+INPUTMC | 4 | 3 | 6 | 3 | 9 | 3 | 17 | 0 | 0
 EQ | 3 | 
-   !ledActividadSinclair = !contadorLeds<1>
+   ledActividadSinclair = !contadorLeds<1>
 	# !contadorLedSinclair<0> & !contadorLedSinclair<1> & 
 	!contadorLedSinclair<2>;
 
-MACROCELL | 1 | 15 | $OpTx$$OpTx$FX_DC$29_INV$109
+MACROCELL | 3 | 8 | $OpTx$$OpTx$FX_DC$26_INV$113
 ATTRIBUTES | 133888 | 0
-OUTPUTMC | 4 | 0 | 1 | 0 | 17 | 0 | 0 | 1 | 16
-INPUTS | 8 | wrSinclair  | rdSinclair  | wrUc  | regUc  | rdUc  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair
-INPUTP | 8 | 9 | 7 | 49 | 50 | 46 | 15 | 12 | 10
-EXPORTS | 1 | 1 | 16
-EQ | 5 | 
-   $OpTx$$OpTx$FX_DC$29_INV$109 = wrSinclair & rdSinclair;
-    $OpTx$$OpTx$FX_DC$29_INV$109.EXP  =  wrUc & regUc & !rdUc & !addrSinclair<2>
-	# wrUc & regUc & !rdUc & addrSinclair<1>
-	# wrUc & regUc & !rdUc & iorqSinclair
-	# wrUc & regUc & !rdUc & !rdSinclair
+OUTPUTMC | 3 | 3 | 9 | 3 | 17 | 0 | 0
+INPUTS | 2 | wrSinclair  | rdSinclair
+INPUTP | 2 | 9 | 7
+EQ | 1 | 
+   $OpTx$$OpTx$FX_DC$26_INV$113 = wrSinclair & rdSinclair;
 
-MACROCELL | 3 | 17 | rd1Signal_OBUF/rd1Signal_OBUF_SETF
+MACROCELL | 3 | 10 | busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST
 ATTRIBUTES | 133888 | 0
-OUTPUTMC | 2 | 2 | 16 | 3 | 16
-INPUTS | 12 | wrUc  | rd1Signal  | rdUc  | iorqSinclair  | registro1Uc<1>  | rdSinclair  | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | registro0Uc<1>  | wrSinclair  | EXP9_.EXP
-INPUTMC | 4 | 2 | 16 | 2 | 6 | 2 | 14 | 3 | 0
-INPUTP | 8 | 49 | 46 | 10 | 7 | 15 | 12 | 11 | 9
-EXPORTS | 1 | 3 | 16
-IMPORTS | 1 | 3 | 0
-EQ | 14 | 
-   rd1Signal_OBUF/rd1Signal_OBUF_SETF = wrUc & rd1Signal
-	# !rdUc & rd1Signal
-;Imported pterms FB4_1
-	# wrUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
-	# !regUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
-	# !rdUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair;
-    rd1Signal_OBUF/rd1Signal_OBUF_SETF.EXP  =  iorqSinclair & registro1Uc<1>
-	# registro1Uc<1> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<1> & wrSinclair & 
-	!rdSinclair
+OUTPUTMC | 8 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10
+INPUTS | 6 | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | wrSinclair  | rdSinclair
+INPUTP | 6 | 11 | 15 | 12 | 10 | 9 | 7
+EQ | 4 | 
+   busDatosSinclair_6_IOBUFE/busDatosSinclair_6_IOBUFE_TRST = addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair;
 
-MACROCELL | 1 | 13 | $OpTx$INV$26__$INT
+MACROCELL | 1 | 13 | rd1Signal_OBUF/rd1Signal_OBUF_SETF
 ATTRIBUTES | 133888 | 0
 OUTPUTMC | 2 | 2 | 16 | 1 | 14
-INPUTS | 11 | wrUc  | rd1Signal  | rdUc  | regUc  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | wrSinclair  | rdSinclair  | addrSinclair<0>  | registro0Spectrum<0>.EXP
+INPUTS | 10 | wrUc  | rd1Signal  | rdUc  | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | wrSinclair  | rdSinclair  | registro0Spectrum<0>.EXP
 INPUTMC | 2 | 2 | 16 | 1 | 12
-INPUTP | 9 | 49 | 46 | 50 | 15 | 12 | 10 | 9 | 7 | 11
+INPUTP | 8 | 49 | 46 | 11 | 15 | 12 | 10 | 9 | 7
 EXPORTS | 1 | 1 | 14
 IMPORTS | 1 | 1 | 12
+EQ | 13 | 
+   rd1Signal_OBUF/rd1Signal_OBUF_SETF = wrUc & rd1Signal
+	# !rdUc & rd1Signal
+	# wrUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+;Imported pterms FB2_13
+	# !regUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+	# !rdUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair;
+    rd1Signal_OBUF/rd1Signal_OBUF_SETF.EXP  =  wrUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+	# !rdUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+
+MACROCELL | 1 | 14 | rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT
+ATTRIBUTES | 133888 | 0
+OUTPUTMC | 2 | 2 | 16 | 1 | 15
+INPUTS | 11 | wrUc  | rd1Signal  | rdUc  | regUc  | addrSinclair<0>  | addrSinclair<2>  | iorqSinclair  | wrSinclair  | rdSinclair  | addrSinclair<1>  | rd1Signal_OBUF/rd1Signal_OBUF_SETF.EXP
+INPUTMC | 2 | 2 | 16 | 1 | 13
+INPUTP | 9 | 49 | 46 | 50 | 11 | 15 | 10 | 9 | 7 | 12
+EXPORTS | 1 | 1 | 15
+IMPORTS | 1 | 1 | 13
 EQ | 12 | 
-   $OpTx$INV$26__$INT = wrUc & rd1Signal
+   rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT = wrUc & rd1Signal
 	# !rdUc & rd1Signal
 	# !wrUc & !regUc & rdUc
-;Imported pterms FB2_13
-	# wrUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
-	# !rdUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair;
-    $OpTx$INV$26__$INT.EXP  =  !regUc & addrSinclair<2> & !addrSinclair<1> & 
+;Imported pterms FB2_14
+	# wrUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair
+	# !rdUc & addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & wrSinclair & !rdSinclair;
+    rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT.EXP  =  !regUc & addrSinclair<0> & !addrSinclair<2> & 
 	!iorqSinclair & !wrSinclair & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !wrSinclair & rdSinclair
+	# addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !wrSinclair & rdSinclair
 
-MACROCELL | 1 | 16 | wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT
+MACROCELL | 1 | 0 | wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT
 ATTRIBUTES | 133888 | 0
-OUTPUTMC | 1 | 2 | 15
-INPUTS | 8 | addrSinclair<1>  | wr1Signal  | addrSinclair<2>  | iorqSinclair  | rdSinclair  | wrSinclair  | $OpTx$$OpTx$FX_DC$29_INV$109.EXP  | registro1Spectrum<0>.EXP
-INPUTMC | 3 | 2 | 15 | 1 | 15 | 1 | 17
-INPUTP | 5 | 12 | 15 | 10 | 7 | 9
-IMPORTS | 2 | 1 | 15 | 1 | 17
-EQ | 14 | 
-   wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT = !addrSinclair<2> & !wr1Signal
-	# addrSinclair<1> & !wr1Signal
+OUTPUTMC | 2 | 2 | 15 | 1 | 1
+INPUTS | 7 | addrSinclair<0>  | wr1Signal  | addrSinclair<2>  | iorqSinclair  | rdSinclair  | registro1Uc<2>  | EXP9_.EXP
+INPUTMC | 3 | 2 | 15 | 2 | 5 | 1 | 17
+INPUTP | 4 | 11 | 15 | 10 | 7
+EXPORTS | 1 | 1 | 1
+IMPORTS | 1 | 1 | 17
+EQ | 15 | 
+   wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT = !addrSinclair<0> & !wr1Signal
+	# addrSinclair<2> & !wr1Signal
 	# iorqSinclair & !wr1Signal
-	# !wr1Signal & wrSinclair
 	# !wr1Signal & !rdSinclair
-;Imported pterms FB2_16
-	# wrUc & regUc & !rdUc & !addrSinclair<2>
-	# wrUc & regUc & !rdUc & addrSinclair<1>
+;Imported pterms FB2_18
+	# !wr1Signal & wrSinclair
+	# wrUc & regUc & !rdUc & !addrSinclair<0>
+	# wrUc & regUc & !rdUc & addrSinclair<2>
 	# wrUc & regUc & !rdUc & iorqSinclair
 	# wrUc & regUc & !rdUc & !rdSinclair
-;Imported pterms FB2_18
+;Imported pterms FB2_17
 	# wrUc & regUc & !rdUc & wrSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & !wrSinclair & rdSinclair;
+	# addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !wrSinclair & rdSinclair;
+    wr1Signal_OBUF/wr1Signal_OBUF_SETF__$INT.EXP  =  iorqSinclair & registro1Uc<2>
 
-MACROCELL | 1 | 14 | wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT
+MACROCELL | 1 | 15 | wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT
 ATTRIBUTES | 133888 | 0
 OUTPUTMC | 1 | 2 | 15
-INPUTS | 10 | wrUc  | wr1Signal  | rdUc  | regUc  | addrSinclair<2>  | addrSinclair<1>  | iorqSinclair  | wrSinclair  | rdSinclair  | $OpTx$INV$26__$INT.EXP
-INPUTMC | 2 | 2 | 15 | 1 | 13
-INPUTP | 8 | 49 | 46 | 50 | 15 | 12 | 10 | 9 | 7
-IMPORTS | 1 | 1 | 13
+INPUTS | 10 | wrUc  | wr1Signal  | rdUc  | regUc  | addrSinclair<0>  | addrSinclair<2>  | iorqSinclair  | wrSinclair  | rdSinclair  | rd1Signal_OBUF/rd1Signal_OBUF_RSTF__$INT.EXP
+INPUTMC | 2 | 2 | 15 | 1 | 14
+INPUTP | 8 | 49 | 46 | 50 | 11 | 15 | 10 | 9 | 7
+IMPORTS | 1 | 1 | 14
 EQ | 12 | 
    wr1Signal_OBUF/wr1Signal_OBUF_RSTF__$INT = !wrUc & wr1Signal
 	# !regUc & wr1Signal
 	# rdUc & wr1Signal
-	# !wrUc & addrSinclair<2> & !addrSinclair<1> & 
+	# !wrUc & addrSinclair<0> & !addrSinclair<2> & 
 	!iorqSinclair & !wrSinclair & rdSinclair
-	# rdUc & addrSinclair<2> & !addrSinclair<1> & 
+	# rdUc & addrSinclair<0> & !addrSinclair<2> & 
 	!iorqSinclair & !wrSinclair & rdSinclair
-;Imported pterms FB2_14
-	# !regUc & addrSinclair<2> & !addrSinclair<1> & 
+;Imported pterms FB2_15
+	# !regUc & addrSinclair<0> & !addrSinclair<2> & 
 	!iorqSinclair & !wrSinclair & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & !wrSinclair & rdSinclair;
+	# addrSinclair<0> & !addrSinclair<2> & 
+	addrSinclair<1> & !iorqSinclair & !wrSinclair & rdSinclair;
 
 MACROCELL | 1 | 6 | EXP6_
 ATTRIBUTES | 2048 | 0
 OUTPUTMC | 1 | 1 | 5
-INPUTS | 8 | iorqSinclair  | registro1Uc<4>  | wrSinclair  | rdSinclair  | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | registro0Uc<4>
+INPUTS | 8 | iorqSinclair  | registro1Uc<4>  | wrSinclair  | rdSinclair  | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | registro0Uc<4>
 INPUTMC | 2 | 2 | 2 | 2 | 11
-INPUTP | 6 | 10 | 9 | 7 | 15 | 12 | 11
+INPUTP | 6 | 10 | 9 | 7 | 11 | 15 | 12
 EXPORTS | 1 | 1 | 5
 EQ | 6 | 
        EXP6_.EXP  =  iorqSinclair & registro1Uc<4>
 	# registro1Uc<4> & !wrSinclair
 	# registro1Uc<4> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<4> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<4> & wrSinclair & 
 	!rdSinclair
 
 MACROCELL | 1 | 9 | EXP7_
 ATTRIBUTES | 2048 | 0
 OUTPUTMC | 1 | 1 | 8
 INPUTS | 7 | addrSinclair<2>  | registro1Uc<6>  | addrSinclair<1>  | iorqSinclair  | wrSinclair  | rdSinclair  | busDatosSinclair_7_IOBUFE.EXP
-INPUTMC | 2 | 3 | 11 | 1 | 10
+INPUTMC | 2 | 3 | 12 | 1 | 10
 INPUTP | 5 | 15 | 12 | 10 | 9 | 7
 EXPORTS | 1 | 1 | 8
 IMPORTS | 1 | 1 | 10
 EQ | 9 | 
-       EXP7_.EXP  =  !addrSinclair<2> & registro1Uc<6>
+       EXP7_.EXP  =  addrSinclair<2> & registro1Uc<6>
 	# addrSinclair<1> & registro1Uc<6>
 	# iorqSinclair & registro1Uc<6>
 	# registro1Uc<6> & !wrSinclair
 	# registro1Uc<6> & rdSinclair
 ;Imported pterms FB2_11
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<6> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<6> & wrSinclair & 
 	!rdSinclair
 
 MACROCELL | 1 | 11 | EXP8_
 ATTRIBUTES | 2048 | 0
 OUTPUTMC | 1 | 1 | 10
-INPUTS | 8 | iorqSinclair  | registro1Uc<7>  | wrSinclair  | rdSinclair  | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | registro0Uc<7>
-INPUTMC | 2 | 3 | 10 | 1 | 0
-INPUTP | 6 | 10 | 9 | 7 | 15 | 12 | 11
+INPUTS | 8 | iorqSinclair  | registro1Uc<7>  | wrSinclair  | rdSinclair  | addrSinclair<0>  | addrSinclair<2>  | addrSinclair<1>  | registro0Uc<7>
+INPUTMC | 2 | 3 | 11 | 0 | 7
+INPUTP | 6 | 10 | 9 | 7 | 11 | 15 | 12
 EXPORTS | 1 | 1 | 10
 EQ | 6 | 
        EXP8_.EXP  =  iorqSinclair & registro1Uc<7>
 	# registro1Uc<7> & !wrSinclair
 	# registro1Uc<7> & rdSinclair
-	# addrSinclair<2> & !addrSinclair<1> & 
-	!addrSinclair<0> & !iorqSinclair & registro0Uc<7> & wrSinclair & 
+	# !addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & registro0Uc<7> & wrSinclair & 
 	!rdSinclair
 
-MACROCELL | 3 | 0 | EXP9_
+MACROCELL | 1 | 17 | EXP9_
+ATTRIBUTES | 2048 | 0
+OUTPUTMC | 1 | 1 | 0
+INPUTS | 10 | wr1Signal  | wrSinclair  | wrUc  | regUc  | rdUc  | addrSinclair<0>  | addrSinclair<2>  | iorqSinclair  | rdSinclair  | registro1Spectrum<1>.EXP
+INPUTMC | 2 | 2 | 15 | 1 | 16
+INPUTP | 8 | 9 | 49 | 50 | 46 | 11 | 15 | 10 | 7
+EXPORTS | 1 | 1 | 0
+IMPORTS | 1 | 1 | 16
+EQ | 9 | 
+       EXP9_.EXP  =  !wr1Signal & wrSinclair
+	# wrUc & regUc & !rdUc & !addrSinclair<0>
+	# wrUc & regUc & !rdUc & addrSinclair<2>
+	# wrUc & regUc & !rdUc & iorqSinclair
+	# wrUc & regUc & !rdUc & !rdSinclair
+;Imported pterms FB2_17
+	# wrUc & regUc & !rdUc & wrSinclair
+	# addrSinclair<0> & !addrSinclair<2> & 
+	!addrSinclair<1> & !iorqSinclair & !wrSinclair & rdSinclair
+
+MACROCELL | 3 | 0 | EXP10_
 ATTRIBUTES | 2048 | 0
 OUTPUTMC | 1 | 3 | 17
-INPUTS | 9 | wrUc  | addrSinclair<2>  | addrSinclair<1>  | addrSinclair<0>  | iorqSinclair  | wrSinclair  | rdSinclair  | regUc  | rdUc
-INPUTP | 9 | 49 | 15 | 12 | 11 | 10 | 9 | 7 | 50 | 46
+INPUTS | 3 | contadorLedSinclair<0>  | contadorLedSinclair<1>  | contadorLedSinclair<2>
+INPUTMC | 3 | 3 | 9 | 3 | 17 | 0 | 0
 EXPORTS | 1 | 3 | 17
-EQ | 6 | 
-       EXP9_.EXP  =  wrUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
-	# !regUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
-	# !rdUc & addrSinclair<2> & !addrSinclair<1> & 
-	addrSinclair<0> & !iorqSinclair & wrSinclair & !rdSinclair
+EQ | 2 | 
+       EXP10_.EXP  =  !contadorLedSinclair<0> & !contadorLedSinclair<1> & 
+	contadorLedSinclair<2>
 
-PIN | clkLed | 4096 | 0 | N/A | 20 | 5 | 0 | 1 | 0 | 17 | 0 | 0 | 3 | 8 | 3 | 9
-PIN | iorqSinclair | 64 | 0 | N/A | 10 | 39 | 0 | 1 | 0 | 17 | 0 | 0 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 2 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 0 | 8 | 3 | 15 | 1 | 17 | 1 | 3 | 0 | 7 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 3 | 12 | 3 | 13 | 1 | 11 | 1 | 16 | 1 | 14 | 1 | 0 | 1 | 6 | 1 | 9 | 1 | 13 | 1 | 15 | 3 | 0 | 3 | 17
-PIN | addrSinclair<1> | 64 | 0 | N/A | 12 | 37 | 0 | 1 | 0 | 17 | 0 | 0 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 2 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 0 | 8 | 3 | 15 | 1 | 17 | 1 | 3 | 0 | 7 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 3 | 12 | 3 | 0 | 1 | 11 | 1 | 16 | 1 | 14 | 1 | 6 | 1 | 9 | 1 | 13 | 1 | 15 | 3 | 17
-PIN | addrSinclair<2> | 64 | 0 | N/A | 15 | 37 | 0 | 1 | 0 | 17 | 0 | 0 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 2 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 0 | 8 | 3 | 15 | 1 | 17 | 1 | 3 | 0 | 7 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 3 | 12 | 3 | 0 | 1 | 11 | 1 | 16 | 1 | 14 | 1 | 6 | 1 | 9 | 1 | 13 | 1 | 15 | 3 | 17
-PIN | rdSinclair | 64 | 0 | N/A | 7 | 35 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 2 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 0 | 8 | 3 | 15 | 1 | 17 | 1 | 3 | 0 | 7 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 3 | 12 | 1 | 15 | 3 | 0 | 1 | 11 | 1 | 16 | 1 | 14 | 1 | 0 | 1 | 6 | 1 | 9 | 1 | 13 | 3 | 17
-PIN | wrSinclair | 64 | 0 | N/A | 9 | 34 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 2 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 0 | 8 | 3 | 15 | 1 | 17 | 1 | 3 | 0 | 7 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 3 | 12 | 1 | 15 | 3 | 0 | 1 | 11 | 1 | 16 | 1 | 14 | 1 | 6 | 1 | 9 | 1 | 13 | 3 | 17
-PIN | addrSinclair<0> | 64 | 0 | N/A | 11 | 30 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 2 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 0 | 8 | 3 | 15 | 1 | 17 | 1 | 3 | 0 | 7 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 3 | 12 | 3 | 0 | 1 | 11 | 1 | 6 | 1 | 13 | 3 | 17
-PIN | rdUc | 64 | 0 | N/A | 46 | 32 | 2 | 8 | 2 | 7 | 2 | 4 | 2 | 1 | 0 | 16 | 0 | 14 | 0 | 13 | 0 | 10 | 3 | 4 | 2 | 17 | 2 | 14 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 13 | 1 | 0 | 2 | 9 | 2 | 6 | 2 | 5 | 2 | 3 | 2 | 2 | 2 | 0 | 3 | 11 | 3 | 10 | 3 | 17 | 1 | 13 | 1 | 15 | 1 | 14 | 1 | 12 | 1 | 17 | 3 | 0
-PIN | wrUc | 64 | 0 | N/A | 49 | 32 | 2 | 8 | 2 | 7 | 2 | 4 | 2 | 1 | 0 | 16 | 0 | 14 | 0 | 13 | 0 | 10 | 3 | 4 | 2 | 17 | 2 | 14 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 13 | 1 | 0 | 2 | 9 | 2 | 6 | 2 | 5 | 2 | 3 | 2 | 2 | 2 | 0 | 3 | 11 | 3 | 10 | 3 | 17 | 1 | 13 | 1 | 15 | 1 | 14 | 1 | 12 | 1 | 17 | 3 | 0
-PIN | regUc | 64 | 0 | N/A | 50 | 30 | 2 | 8 | 2 | 7 | 2 | 4 | 2 | 1 | 0 | 16 | 0 | 14 | 0 | 13 | 0 | 10 | 3 | 4 | 2 | 17 | 2 | 14 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 3 | 13 | 1 | 0 | 2 | 9 | 2 | 6 | 2 | 5 | 2 | 3 | 2 | 2 | 2 | 0 | 3 | 11 | 3 | 10 | 3 | 0 | 1 | 13 | 1 | 15 | 1 | 14 | 1 | 17
+PIN | clkLed | 4096 | 0 | N/A | 20 | 5 | 3 | 9 | 3 | 17 | 0 | 0 | 3 | 6 | 3 | 7
+PIN | iorqSinclair | 64 | 0 | N/A | 10 | 32 | 3 | 9 | 3 | 17 | 0 | 0 | 1 | 17 | 1 | 14 | 1 | 15 | 1 | 0 | 1 | 11 | 1 | 6 | 1 | 5 | 1 | 9 | 3 | 4 | 1 | 12 | 1 | 3 | 0 | 17 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 3 | 15 | 1 | 2 | 1 | 16 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 0 | 1 | 3 | 13 | 3 | 10 | 1 | 13 | 1 | 8 | 1 | 10
+PIN | addrSinclair<0> | 64 | 0 | N/A | 11 | 36 | 3 | 9 | 3 | 17 | 0 | 0 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 8 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 3 | 0 | 17 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 3 | 15 | 1 | 2 | 1 | 16 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 0 | 1 | 3 | 13 | 3 | 10 | 1 | 13 | 1 | 11 | 1 | 0 | 1 | 15 | 1 | 6 | 1 | 14 | 1 | 17
+PIN | addrSinclair<2> | 64 | 0 | N/A | 15 | 37 | 3 | 9 | 3 | 17 | 0 | 0 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 6 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 3 | 0 | 17 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 3 | 15 | 1 | 2 | 1 | 16 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 0 | 1 | 3 | 13 | 3 | 10 | 1 | 13 | 1 | 11 | 1 | 0 | 1 | 15 | 1 | 8 | 1 | 9 | 1 | 14 | 1 | 17
+PIN | addrSinclair<1> | 64 | 0 | N/A | 12 | 32 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 5 | 1 | 7 | 1 | 6 | 1 | 10 | 3 | 4 | 1 | 12 | 1 | 3 | 0 | 17 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 3 | 15 | 1 | 2 | 1 | 16 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 0 | 1 | 3 | 13 | 3 | 10 | 1 | 13 | 1 | 11 | 1 | 14 | 1 | 8 | 1 | 9 | 3 | 17
+PIN | wrSinclair | 64 | 0 | N/A | 9 | 35 | 3 | 14 | 3 | 16 | 1 | 1 | 1 | 4 | 1 | 15 | 1 | 7 | 1 | 6 | 1 | 9 | 3 | 4 | 1 | 12 | 1 | 3 | 0 | 17 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 3 | 15 | 1 | 2 | 1 | 16 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 0 | 1 | 3 | 13 | 3 | 8 | 3 | 10 | 1 | 13 | 1 | 11 | 1 | 5 | 1 | 8 | 1 | 10 | 1 | 14 | 1 | 17 | 3 | 17
+PIN | rdSinclair | 64 | 0 | N/A | 7 | 31 | 1 | 17 | 1 | 14 | 1 | 15 | 1 | 0 | 1 | 11 | 1 | 6 | 1 | 5 | 1 | 9 | 3 | 4 | 1 | 12 | 1 | 3 | 0 | 17 | 0 | 15 | 0 | 12 | 0 | 11 | 0 | 9 | 3 | 15 | 1 | 2 | 1 | 16 | 0 | 6 | 0 | 4 | 0 | 3 | 0 | 2 | 0 | 1 | 3 | 13 | 3 | 8 | 3 | 10 | 1 | 13 | 1 | 8 | 1 | 10 | 3 | 17
+PIN | rdUc | 64 | 0 | N/A | 46 | 31 | 2 | 8 | 2 | 7 | 2 | 4 | 2 | 1 | 0 | 16 | 0 | 14 | 0 | 13 | 0 | 10 | 3 | 4 | 2 | 17 | 2 | 14 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 0 | 8 | 0 | 7 | 2 | 9 | 2 | 6 | 2 | 5 | 2 | 3 | 2 | 2 | 2 | 0 | 3 | 12 | 3 | 11 | 1 | 13 | 1 | 14 | 1 | 15 | 1 | 12 | 1 | 16 | 1 | 17
+PIN | wrUc | 64 | 0 | N/A | 49 | 30 | 2 | 8 | 2 | 7 | 2 | 4 | 2 | 1 | 0 | 16 | 0 | 14 | 0 | 13 | 0 | 10 | 3 | 4 | 2 | 17 | 2 | 14 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 0 | 8 | 0 | 7 | 2 | 9 | 2 | 6 | 2 | 5 | 2 | 3 | 2 | 2 | 2 | 0 | 3 | 12 | 3 | 11 | 1 | 13 | 1 | 14 | 1 | 15 | 1 | 16 | 1 | 17
+PIN | regUc | 64 | 0 | N/A | 50 | 30 | 2 | 8 | 2 | 7 | 2 | 4 | 2 | 1 | 0 | 16 | 0 | 14 | 0 | 13 | 0 | 10 | 3 | 4 | 2 | 17 | 2 | 14 | 2 | 13 | 2 | 12 | 2 | 11 | 2 | 10 | 0 | 8 | 0 | 7 | 2 | 9 | 2 | 6 | 2 | 5 | 2 | 3 | 2 | 2 | 2 | 0 | 3 | 12 | 3 | 11 | 1 | 12 | 1 | 14 | 1 | 15 | 1 | 16 | 1 | 17
 PIN | rd1Signal | 536871040 | 0 | N/A | 52
 PIN | wr1Signal | 536871040 | 0 | N/A | 59
 PIN | wr0Signal | 536871040 | 0 | N/A | 63
 PIN | ledActividadSinclair | 536871040 | 0 | N/A | 13
-PIN | busDatosSinclair<0> | 536870976 | 0 | N/A | 82 | 2 | 1 | 12 | 1 | 17
-PIN | busDatosSinclair<1> | 536870976 | 0 | N/A | 83 | 2 | 1 | 2 | 1 | 3
-PIN | busDatosSinclair<2> | 536870976 | 0 | N/A | 87 | 2 | 0 | 15 | 0 | 7
-PIN | busDatosSinclair<3> | 536870976 | 0 | N/A | 88 | 2 | 0 | 12 | 0 | 6
-PIN | busDatosSinclair<4> | 536870976 | 0 | N/A | 89 | 2 | 0 | 11 | 0 | 4
-PIN | busDatosSinclair<5> | 536870976 | 0 | N/A | 90 | 2 | 0 | 9 | 0 | 3
-PIN | busDatosSinclair<6> | 536870976 | 0 | N/A | 92 | 2 | 0 | 8 | 0 | 2
-PIN | busDatosSinclair<7> | 536870976 | 0 | N/A | 3 | 2 | 3 | 15 | 3 | 12
+PIN | busDatosSinclair<0> | 536870976 | 0 | N/A | 82 | 2 | 1 | 12 | 1 | 2
+PIN | busDatosSinclair<1> | 536870976 | 0 | N/A | 83 | 2 | 1 | 3 | 1 | 16
+PIN | busDatosSinclair<2> | 536870976 | 0 | N/A | 87 | 2 | 0 | 17 | 0 | 6
+PIN | busDatosSinclair<3> | 536870976 | 0 | N/A | 88 | 2 | 0 | 15 | 0 | 4
+PIN | busDatosSinclair<4> | 536870976 | 0 | N/A | 89 | 2 | 0 | 12 | 0 | 3
+PIN | busDatosSinclair<5> | 536870976 | 0 | N/A | 90 | 2 | 0 | 11 | 0 | 2
+PIN | busDatosSinclair<6> | 536870976 | 0 | N/A | 92 | 2 | 0 | 9 | 0 | 1
+PIN | busDatosSinclair<7> | 536870976 | 0 | N/A | 3 | 2 | 3 | 15 | 3 | 13
 PIN | busDatosUc<0> | 536870976 | 0 | N/A | 38 | 2 | 2 | 17 | 2 | 9
 PIN | busDatosUc<1> | 536870976 | 0 | N/A | 33 | 2 | 2 | 14 | 2 | 6
 PIN | busDatosUc<2> | 536870976 | 0 | N/A | 31 | 2 | 2 | 13 | 2 | 5
 PIN | busDatosUc<3> | 536870976 | 0 | N/A | 29 | 2 | 2 | 12 | 2 | 3
 PIN | busDatosUc<4> | 536870976 | 0 | N/A | 27 | 2 | 2 | 11 | 2 | 2
 PIN | busDatosUc<5> | 536870976 | 0 | N/A | 26 | 2 | 2 | 10 | 2 | 0
-PIN | busDatosUc<6> | 536870976 | 0 | N/A | 24 | 2 | 3 | 13 | 3 | 11
-PIN | busDatosUc<7> | 536870976 | 0 | N/A | 21 | 2 | 1 | 0 | 3 | 10
+PIN | busDatosUc<6> | 536870976 | 0 | N/A | 24 | 2 | 0 | 8 | 3 | 12
+PIN | busDatosUc<7> | 536870976 | 0 | N/A | 21 | 2 | 0 | 7 | 3 | 11

@@ -61,12 +61,13 @@
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
     <transform xil_pn:end_ts="1427250585" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1427250585">
       <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
     </transform>
     <transform xil_pn:end_ts="1427250585" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="5262894076738150031" xil_pn:start_ts="1427250585">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1427250796" xil_pn:in_ck="7192300844958813030" xil_pn:name="TRANEXT_xstsynthesize_xc9500xl" xil_pn:prop_ck="8660637954229364610" xil_pn:start_ts="1427250777">
+    <transform xil_pn:end_ts="1427581271" xil_pn:in_ck="7192300844958813030" xil_pn:name="TRANEXT_xstsynthesize_xc9500xl" xil_pn:prop_ck="8660637954229364610" xil_pn:start_ts="1427581250">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -86,7 +87,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1427250809" xil_pn:in_ck="-816389088757563492" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="920057667651985957" xil_pn:start_ts="1427250796">
+    <transform xil_pn:end_ts="1427581285" xil_pn:in_ck="-816389088757563492" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="920057667651985957" xil_pn:start_ts="1427581271">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="InterfazRobotSpectrum.bld"/>
@@ -95,7 +96,7 @@
       <outfile xil_pn:name="_ngo"/>
       <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
     </transform>
-    <transform xil_pn:end_ts="1427250818" xil_pn:in_ck="6295969970397279011" xil_pn:name="TRANEXT_vm6File_xc9500xl" xil_pn:prop_ck="256882771782742527" xil_pn:start_ts="1427250809">
+    <transform xil_pn:end_ts="1427581295" xil_pn:in_ck="6295969970397279011" xil_pn:name="TRANEXT_vm6File_xc9500xl" xil_pn:prop_ck="256882771782742527" xil_pn:start_ts="1427581285">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -113,7 +114,7 @@
       <outfile xil_pn:name="InterfazRobotSpectrum_html"/>
       <outfile xil_pn:name="InterfazRobotSpectrum_pad.csv"/>
     </transform>
-    <transform xil_pn:end_ts="1427250820" xil_pn:in_ck="6295969970397287875" xil_pn:name="TRANEXT_crtProg_xc9500" xil_pn:prop_ck="-6294026017969277533" xil_pn:start_ts="1427250818">
+    <transform xil_pn:end_ts="1427581297" xil_pn:in_ck="6295969970397287875" xil_pn:name="TRANEXT_crtProg_xc9500" xil_pn:prop_ck="-6294026017969277533" xil_pn:start_ts="1427581295">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="InterfazRobotSpectrum.jed"/>

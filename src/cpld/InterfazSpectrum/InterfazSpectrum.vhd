@@ -27,7 +27,7 @@ entity InterfazRobotSpectrum is
     Port ( rdSinclair : in STD_LOGIC; -- read del spectrum - NEGADO
 			  wrSinclair : in STD_LOGIC; -- write del spectrum - NEGADO
 			  iorqSinclair : in STD_LOGIC; -- iorq del spectrum - NEGADO
-			  addrSinclair : in  STD_LOGIC_VECTOR (2 DOWNTO 0); -- direccion del spectrum A0, A7, A6
+			  addrSinclair : in  STD_LOGIC_VECTOR (2 DOWNTO 0); -- direccion del spectrum A7, A6, A0
 			  busDatosSinclair : inout  STD_LOGIC_VECTOR (7 DOWNTO 0); -- bus datos bidireccional del spectrum
 			  rdUc : in STD_LOGIC; -- read del microcontrolador - NEGADO
 			  wrUc : in STD_LOGIC; -- write del microcontrolador - NEGADO
@@ -82,11 +82,11 @@ process( rdSinclair, wrSinclair, iorqSinclair, addrSinclair, busDatosSinclair,
 begin
 
 	-- Lectura desde el Spectrum registro 0
-	if ( iorqSinclair = '0' and rdSinclair = '0' and wrSinclair = '1' and addrSinclair = "100" ) then
+	if ( iorqSinclair = '0' and rdSinclair = '0' and wrSinclair = '1' and addrSinclair = "000" ) then
 		busDatosSinclair <= registro0Uc;
 --		rd0Signal <= '1';
 	-- Lectura desde el Spectrum registro 1
-	elsif ( iorqSinclair = '0' and rdSinclair = '0' and wrSinclair = '1' and addrSinclair = "101" ) then
+	elsif ( iorqSinclair = '0' and rdSinclair = '0' and wrSinclair = '1' and addrSinclair = "011" ) then
 		busDatosSinclair <= registro1Uc;
 		rd1Signal <= '1';
 	-- En cualquier otro caso ponemos el bus del Spectrum en alta impedancia
@@ -110,11 +110,11 @@ begin
 
 
 	-- Escritura desde el Spectrum registro 0
-	if ( iorqSinclair = '0' and wrSinclair = '0' and rdSinclair = '1' and addrSinclair = "100" ) then
+	if ( iorqSinclair = '0' and wrSinclair = '0' and rdSinclair = '1' and addrSinclair = "001" ) then
 		registro0Spectrum <= busDatosSinclair;
 		wr0Signal <= '1';
 	-- Escritura desde el Spectrum registro 1
-	elsif ( iorqSinclair = '0' and wrSinclair = '0' and rdSinclair = '1' and addrSinclair = "101" ) then
+	elsif ( iorqSinclair = '0' and wrSinclair = '0' and rdSinclair = '1' and addrSinclair = "011" ) then
 		registro1Spectrum <= busDatosSinclair;
 		wr1Signal <= '1';
 	end if;
@@ -140,7 +140,7 @@ begin
 	-- Actualizacion del contador de actividad de Spectrum
 	-- Si se esta accediendo al cpld...
 	if ( ( iorqSinclair = '0' and ( rdSinclair = '0' or wrSinclair = '0' ) ) and 
-		  ( ( addrSinclair = "100" ) or ( addrSinclair = "101" ) ) ) then
+		  ( ( addrSinclair = "001" ) or ( addrSinclair = "011" ) ) ) then
 --	if ( rdUc = '0' or wrUc = '0' ) then
 		-- Resetea el contador
 		contadorLedSinclair <= "111";
@@ -149,11 +149,11 @@ begin
 		contadorLedSinclair <= std_logic_vector( to_unsigned( to_integer( unsigned( contadorLedSinclair ) ) - 1, 3 ) );
 	end if;
 
-	-- Actualizacion del led de Spectrum
+	-- Actualizacion del led de Spectrum (activo a nivel bajo)
 	if ( contadorLedSinclair /= "000" ) then
-		ledActividadSinclair <= contadorLeds( 1 );
+		ledActividadSinclair <= not contadorLeds( 1 );
 	else
-		ledActividadSinclair <= '0';
+		ledActividadSinclair <= '1';
 	end if;
 
 --	-- Actualizacion del contador de actividad externo 0
@@ -167,9 +167,9 @@ begin
 --
 --	-- Actualizacion del led externo 0
 --	if ( contadorLedExterno0 /= "000" ) then
---		ledActividadExterno0 <= contadorLeds( 1 );
+--		ledActividadExterno0 <= not contadorLeds( 1 );
 --	else
---		ledActividadExterno0 <= '0';
+--		ledActividadExterno0 <= '1';
 --	end if;
 --
 --	-- Actualizacion del contador de actividad externo 1
@@ -183,9 +183,9 @@ begin
 --
 --	-- Actualizacion del led externo 1
 --	if ( contadorLedExterno1 /= "000" ) then
---		ledActividadExterno1 <= contadorLeds( 1 );
+--		ledActividadExterno1 <= not contadorLeds( 1 );
 --	else
---		ledActividadExterno1 <= '0';
+--		ledActividadExterno1 <= '1';
 --	end if;
 
 

@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="Xst" timeStamp="Wed Mar 25 03:33:02 2015">
+  <application stringID="Xst" timeStamp="Sat Mar 28 23:20:55 2015">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -33,7 +33,7 @@
         <column stringID="speed"/>
         <row stringID="row" value="0">
           <item stringID="arch" value="AMD Athlon(tm) 64 X2 Dual Core Processor 6000+"/>
-          <item stringID="speed" value="2800.000 MHz"/>
+          <item stringID="speed" value="2000.000 MHz"/>
         </row>
       </table>
     </section>
@@ -92,12 +92,12 @@
         <item stringID="XST_IOS" value="30"/>
       </section>
       <section stringID="XST_CELL_USAGE">
-        <item dataType="int" stringID="XST_BELS" value="225">
-          <item dataType="int" stringID="XST_AND2" value="89"/>
-          <item dataType="int" stringID="XST_AND3" value="5"/>
+        <item dataType="int" stringID="XST_BELS" value="232">
+          <item dataType="int" stringID="XST_AND2" value="86"/>
+          <item dataType="int" stringID="XST_AND3" value="6"/>
           <item dataType="int" stringID="XST_GND" value="1"/>
-          <item dataType="int" stringID="XST_INV" value="74"/>
-          <item dataType="int" stringID="XST_OR2" value="50"/>
+          <item dataType="int" stringID="XST_INV" value="81"/>
+          <item dataType="int" stringID="XST_OR2" value="51"/>
           <item dataType="int" stringID="XST_XOR2" value="3"/>
         </item>
         <item dataType="int" stringID="XST_FLIPFLOPSLATCHES" value="40">
