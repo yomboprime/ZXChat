@@ -126,6 +126,7 @@ retrocant cdvazquez Sinclair tacha</text>
 <wire x1="5.3975" y1="30.48" x2="6.0325" y2="30.48" width="0.2032" layer="21"/>
 <wire x1="5.715" y1="30.1625" x2="5.715" y2="30.7975" width="0.2032" layer="21"/>
 <text x="71.755" y="28.829" size="0.8128" layer="21" font="vector">IO0</text>
+<text x="33.02" y="42.70336875" size="1.778" layer="21" font="vector">vidamia</text>
 </plain>
 <libraries>
 <library name="special">
