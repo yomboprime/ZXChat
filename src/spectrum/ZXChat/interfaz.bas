@@ -24,6 +24,7 @@ end while
 
 cls 
 
+dim strIPServidor as string
 dim strUrl as string
 dim tamUrl as uinteger
 dim y0 as integer
@@ -33,7 +34,9 @@ dim numScrolls as integer
 dim cadenaEntrada as string
 dim tamRespuesta as uinteger
 dim timestamp as string
+dim codigoError as ubyte
 
+strIPServidor = "88.20.17.84"
 timestamp = "0"
 strUrl = ""
 y0 = 0
@@ -41,7 +44,9 @@ cadenaEntrada = ""
 while cadenaEntrada <> " "
 
 	cadenaEntrada = leerCadenaEntrada( y0 )
-	
+
+	border 0
+
 	if cadenaEntrada = " " then
 		goto finBucle
 	end if
@@ -56,9 +61,9 @@ while cadenaEntrada <> " "
 		cadenaEntrada = reemplazarCadena( cadenaEntrada, $3F, "%3F" )'!
 
 		' Envia mensaje
-		strUrl = "192.168.0.196:8080/YomboServer/ZXChat/chat?accion=enviar&nick=YomboZXSpectrum&mensaje=" + cadenaEntrada
+		strUrl = strIPServidor + ":8080/YomboServer/ZXChat/chat?accion=enviar&nick=YomboZXSpectrum&mensaje=" + cadenaEntrada
 		tamUrl = copiarCadenaABufer( strUrl )
-		tamRespuesta = peticionGet( tamUrl )
+		codigoError = peticionGet( tamUrl, tamRespuesta )
 	end if
 
 	if y0 < 0 then
@@ -66,15 +71,16 @@ while cadenaEntrada <> " "
 	end if
 
 	' Refresca chat
-
-	while ( ( leerRegistroControl() band 1 ) = 0 )
-	end while
-
-	strUrl = "192.168.0.196:8080/YomboServer/ZXChat/chat?accion=listar&timestamp=" + timestamp
+	strUrl = strIPServidor + ":8080/YomboServer/ZXChat/chat?accion=listar&timestamp=" + timestamp
 	tamUrl = copiarCadenaABufer( strUrl )
-	tamRespuesta = peticionGet( tamUrl )
+	
+	'Hace la peticion
+	codigoError = peticionGet( tamUrl, tamRespuesta )
 
 	if ( tamRespuesta > 0 ) then
+	
+		' Pone borde verde
+		border 4
 
 		timestamp = ""
 		i = 0
@@ -86,14 +92,23 @@ while cadenaEntrada <> " "
 			j = j - 1
 		end while
 		
-		imprimirCadenaBuferWrap( cast(uinteger,i), j, 0, y0, x1, y1 )
-		y0 = y1 + 1
+		if ( i < (TAM_BUFER + 1) and i < (tamRespuesta + 1) and bufer( i ) = 13 and bufer( i + 1 ) = 10 ) then
+			i = i + 2
+			j = j - 2
+		end if
+
+		if j > 0 then 
+			imprimirCadenaBuferWrap( cast(uinteger,i), j, 0, y0, x1, y1 )
+			y0 = y1 + 1
+		end if
 
 		'print "Recibidos bytes:";tamRespuesta
 		'print "Timestamp=";timestamp;", ";len(timestamp)
 
 	else
-		imprimirCadenaWrap( "Network error.", 0, y0, 0, x1, y1 )
+		' Pone borde amarillo (error)
+		border 6
+		imprimirCadenaWrap( "Codigo de error: " + str( codigoError ), 0, y0, 0, x1, y1 )
 		y0 = y1 + 1
 	end if
 
@@ -108,6 +123,9 @@ print "FIN"
 function copiarCadenaABufer( cadena as string ) as integer
 	dim tam as integer
 	tam = len( cadena )
+	if tam > TAM_BUFER - 1 then
+		tam = TAM_BUFER - 1
+	end if
 	dim i as integer
 	for i = 0 to tam - 1
 		bufer( i ) = code( cadena( i ) )
@@ -118,7 +136,7 @@ function copiarCadenaABufer( cadena as string ) as integer
 	return tam
 end function
 
-function peticionGet( tam as uinteger ) as uinteger
+function peticionGet( tamPeticion as uinteger, byref tamRespuesta as uinteger ) as ubyte
 
 	' Devuelve tam de los bytes recibidos en el bufer
 
@@ -126,11 +144,15 @@ function peticionGet( tam as uinteger ) as uinteger
 	dim b1 as ubyte
 	dim b02 as ubyte
 	dim b12 as ubyte
-	dim tam2 as uinteger
+	dim codigoError as ubyte
+	codigoError = 0
 
-	b0 = cast( ubyte, tam band $00FF )
-	b1 = cast( ubyte, ( tam shr 8 ) band $00FF )
-	
+	b0 = cast( ubyte, tamPeticion band $00FF )
+	b1 = cast( ubyte, ( tamPeticion shr 8 ) band $00FF )
+
+	while ( ( leerRegistroControl() band 1 ) = 0 )
+	end while
+
 	' Escribe instruccion
 	escribirRegistroControl( 36 )
 
@@ -143,7 +165,7 @@ function peticionGet( tam as uinteger ) as uinteger
 	escribirRegistroDatos( b1 )
 
 	esperarNOP( 1 )
-	for i = 0 to tam - 1
+	for i = 0 to tamPeticion - 1
 		escribirRegistroDatos( bufer( i ) )
 	next i
 
@@ -153,26 +175,28 @@ function peticionGet( tam as uinteger ) as uinteger
 	b02 = leerRegistroDatos()
 	b12 = leerRegistroDatos()
 	
-	tam2 = ((b12 shl 8 ) band $FF00) bor (b02 band $00FF)
+	tamRespuesta = ((b12 shl 8 ) band $FF00) bor (b02 band $00FF)
 
-	if ( tam2 > TAM_BUFER ) then
-		tam2 = TAM_BUFER
+	if ( tamRespuesta > TAM_BUFER ) then
+		tamRespuesta = TAM_BUFER
 	end if
 
 	esperarNOP( 100 )
 
-	if ( tam2 > 0 ) then
+	if ( tamRespuesta > 0 ) then
 	
 		' No se por que hace falta esta lectura pero si no los bytes se desplazan una posicion.
 		leerRegistroDatos()
 
-		for i = 0 to tam2 - 1
+		for i = 0 to tamRespuesta - 1
 			bufer( i ) = leerRegistroDatos()
 		next i
 
 	end if
 
-	return tam2
+	codigoError = ( leerRegistroControl() shr 4 ) band $0F
+	'codigoError = leerRegistroControl()
+	return codigoError
 
 end function
 	

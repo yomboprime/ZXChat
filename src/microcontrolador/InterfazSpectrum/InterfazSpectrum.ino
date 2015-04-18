@@ -37,6 +37,7 @@ Significado del registro de control en direccion uC -> Spectrum:
 #define UC_LISTO 1
 #define UC_LISTO_RECIBIR 2
 #define UC_LISTO_TRANSMITIR 4
+
 /*
 b0	0 = uC busy, 1 = uC ready, escuchando nuevo comando.
 b1  uC Listo para recibir datos
@@ -233,7 +234,8 @@ void setup() {
 		esperar( 1 );
 
 		Serial.println( "\nConectando a Wifi..." );
-		if ( moduloWiFi.conectarAWifi( (uint8_t*)"JAZZTEL", (uint8_t*)"elcorraldelapacheca" ) ) {
+		//if ( moduloWiFi.conectarAWifi( (uint8_t*)"MOVISTAR_16", (uint8_t*)"elcorraldelapacheca" ) ) {
+		if ( moduloWiFi.conectarAWifi( (uint8_t*)"yombo", (uint8_t*)"ninobravo" ) ) {
 			Serial.println( "\nConectado a Wifi Satisfactoriamente." );
 			conectadoOk = true;
 		}
@@ -256,6 +258,8 @@ void esperar( unsigned long segundos ) {
 	delay( segundos * 1000 );
 }
 
+
+/*
 // Loop de prueba de alimentacion externa
 void loop() {
 
@@ -263,7 +267,9 @@ void loop() {
 	while ( Serial.available() == 0 ) {}
 	Serial.read();
 
-	sprintf( (char*)bufer, "192.168.0.196:8080/YomboServer/ZXChat/chat?accion=listar&timestamp=0" );
+	//sprintf( (char*)bufer, "192.168.1.100:8080/YomboServer/ZXChat/chat?accion=listar&timestamp=0" );
+	sprintf( (char*)bufer, "88.20.17.84:8080/YomboServer/ZXChat/chat?accion=listar&timestamp=0" );
+
 	int numBytes = 0;
 	int errorPeticion = moduloWiFi.peticionHttpGet( bufer, &numBytes );
 	if ( errorPeticion == 0 ) {
@@ -279,12 +285,11 @@ void loop() {
 		Serial.println( errorPeticion );
 	}
 
-/*	while ( Serial.available() > 0 ) {
-		Serial.read();
-	}
-*/
+//	while ( Serial.available() > 0 ) {
+//		Serial.read();
+//	}
 }
-
+*/
 
 /*
 // Segunda prueba wifi con interface de software
@@ -355,12 +360,6 @@ void loop() {
 
 	Serial.println( "Empezando..." );
 	
-	Serial.println( "Reiniciando WiFi..." );
-
-	moduloWiFi.reiniciar();
-	
-	Serial.println( "WiFi reiniciada." );
-
 	Serial.println( "Entrando en comunicacion directa..." );
 
 	while ( 1 ) {
@@ -381,7 +380,7 @@ void loop() {
 }
 */
 
-/*
+
 // Prueba comunicacion Spectrum
 void loop() {
 	
@@ -557,7 +556,8 @@ void loop() {
 			escribirRegistro( REGISTRO_DATOS, b02 );
 			
 			// Listo para transmitir
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR );
+			byte valorRegControl = ( errorPeticion << 4 ) & 0xF0;
+			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR | valorRegControl );
 
 			while ( ! getSenyalRd1() ) {}
 			escribirRegistro( REGISTRO_DATOS, b12 );
@@ -569,8 +569,9 @@ void loop() {
 
 			Serial.println( "Transmitido el bufer." );
 			
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
+			// En el registro de control escribe bit de que esta listo, y 
+			// en los cuatro bits altos pone el resultado de la operacion
+			escribirRegistro( REGISTRO_CONTROL, UC_LISTO | valorRegControl );
 		}
 	}
 }
-*/

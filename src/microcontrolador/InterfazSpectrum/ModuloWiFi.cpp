@@ -40,6 +40,11 @@ bool ModuloWiFi::conectarAWifi( uint8_t* ssid, uint8_t* password ) {
 	puertoSerie->write( "\"\r\n" );
 
 	this->ssidConectada = buscarRespuesta( (uint8_t*)"OK", 25000 );
+
+	purgarPuertoSerie();
+	puertoSerie->write( "AT+CIFSR\r\n" );
+	buscarRespuesta( (uint8_t*)"OK", 2000 );
+
 	return this->ssidConectada;
 }
 
