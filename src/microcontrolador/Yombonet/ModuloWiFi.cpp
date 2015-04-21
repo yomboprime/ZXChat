@@ -69,7 +69,7 @@ bool ModuloWiFi::desconectarWifi() {
 
 int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 	
-	// El parametro url esta contenido en el bufer y debe estar terminado en 0
+	// El parametro url esta contenido en el bufer y debe estar terminado en el byte nulo (0)
 	// Al retorno, el parametro url es sobreescrito, el bufer contiene la respuesta.
 	// En longitudRespuesta se devuelve el numero de bytes que ocupa la respuesta en el bufer,
 	// incluyendo  0 terminador.
@@ -79,7 +79,9 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 	// 192.168.1.100:8080/algun/documento.jsp
 	// www.google.com/
 	// yombo.org/blog
-	
+
+	*longitudRespuesta = 0;
+
 	if ( ! ssidConectada ) {
 		return 1;
 	}

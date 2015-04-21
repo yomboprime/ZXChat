@@ -86,14 +86,23 @@ bit 2: Analogamente al bit anterior, si la instruccion espera que el Spectrum re
 
 A continuacion se listan las instrucciones:
 
-Instrucciones de Internet
--------------------------
-
 Codigo instruccion: 0b00000000
 Descripcion: Obtener numero de revision del firmware
 	Se devuelve una cadena de bytes con la descripcion del numero de revision.
 
 Codigo instruccion: 0b00000001
+Descripcion: Activar/desactivar debug por puerto serie
+	Se espera que se haya escrito un byte en el registro de datos antes de escribir el byte de esta
+	instruccion. El byte indica con 00000000 que se quiere desactivar el debug por consola (puerto
+	serie por software en el pin TXDB, solo salida). Con 00000001 se activa el debug.
+	Codigos de error:
+		0	Debug desactivado
+		1	Debug activado
+
+Instrucciones de Internet
+-------------------------
+
+Codigo instruccion: 0b00000010
 Descripcion: Conectar a Wifi
 	Se espera una cadena de bytes "SSID PASSW" donde
 	SSID es el SSID de la Wifi a la que se quiere conectar, y PASSW el password.
@@ -104,12 +113,12 @@ Descripcion: Conectar a Wifi
 		0	Exito
 		1	Error al conectar
 
-Codigo instruccion: 0b00000010
+Codigo instruccion: 0b00000011
 Descripcion: Preguntar si hay conexion
 	El microcontrolador responde con un unico byte en el registro de datos, 00000000 si no estamos
 	conectados	o 00000001 si lo estamos.
 
-Codigo instruccion: 0b00000011
+Codigo instruccion: 0b00000100
 Descripcion: Hacer peticion HTTP GET
 	Se espera una cadena de bytes con la URL de la peticion, sin "http://" y es obligatorio que la
 	raiz "/" de la url este presente. El puerto TCP es opcional. Un ejemplo: "www.google.es/".
@@ -242,7 +251,7 @@ Descripcion: Escribir todas las salidas B0...B3
 // Definiciones y variables globales
 
 // Bufer
-#define TAM_BUFER 770
+#define TAM_BUFER 771
 byte bufer[ TAM_BUFER ];
 
 // Modulo WiFi
@@ -256,6 +265,16 @@ ModuloWiFi moduloWiFi;
 SoftwareSerial SerialDebug( 8, 9 ); // 8,9 en ATMEGA1284P
 //SoftwareSerial SerialDebug( 10, 11 ); //10,11 en Atmega32A
 
+
+
+// Funciones varias
+
+void esperar( int segundos ) {
+	SerialDebug.print( "\nEsperando " );
+	SerialDebug.print( segundos );
+	SerialDebug.println( " segundos..." );
+	delay( segundos * 1000 );
+}
 
 // Funciones de la interfaz con Spectrum
 
@@ -330,9 +349,101 @@ inline byte leerRegistro( byte registro ) {
 	return valor;
 }
 
+int recibirCadenaBytes() {
+
+	// Recibe dos bytes que forman un entero N de 16 bits (LSB primero)
+	// A continuacion recibe esa cantidad de N bytes en el bufer.
+	// Se devuelve N (N >= 0)
+
+	// Lee registro de datos para borrar flags
+	leerRegistro( REGISTRO_DATOS );
+
+	byte b0 = 0, b1 = 0;
+	
+	// Listo para recibir
+	escribirRegistro( REGISTRO_CONTROL, UC_LISTO_RECIBIR );
+
+	// Lee primer byte del entero
+	while ( ! getSenyalWr1() ) {}
+	b0 = leerRegistro( REGISTRO_DATOS );
+
+	// Lee segundo byte del entero
+	while ( ! getSenyalWr1() ) {}
+	b1 = leerRegistro( REGISTRO_DATOS );
+
+	// Construye entero numBytes con los dos bytes
+	int numBytes = ( ( ((int)b1) << 8 ) & 0xFF00 ) | ( ((int)b0) & 0x00FF );
+	numBytes = min( numBytes, TAM_BUFER - 3 );
+
+	// Recibe numBytes bytes
+	for ( int i = 0; i < numBytes; i++ ) {
+		while ( ! getSenyalWr1() ) {}
+		bufer[ i ] = leerRegistro( REGISTRO_DATOS );
+	}
+
+	return numBytes;
+}
+
+void transmitirCadenaBytes( int numBytes, byte valorRegControl ) {
+
+	// Transmite dos bytes que forman un entero N de 16 bits (LSB primero)
+	// A continuacion transmite esa cantidad de N bytes desde el bufer.
+	// Durante la transmision se pone el valorRegControl en el registro  de control
+	// ( ha de tener los cuatro bits bajos a 0)
+
+	byte b02 = numBytes & 0x00FF;
+	byte b12 = ( numBytes >> 8 ) & 0x00FF;
+
+	escribirRegistro( REGISTRO_DATOS, b02 );
+	
+	// Listo para transmitir
+	escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR | valorRegControl );
+
+	while ( ! getSenyalRd1() ) {}
+	escribirRegistro( REGISTRO_DATOS, b12 );
+
+	for ( int i = 0; i < numBytes; i++ ) {
+		while ( ! getSenyalRd1() ) {}
+		escribirRegistro( REGISTRO_DATOS, bufer[ i ] );
+	}
+}
+
+int instruccionPeticionGet( int* numBytesRespuesta  ) {
+
+	SerialDebug.println( "Recibida Instruccion Peticion HTTP GET" );
+
+	int numBytes = recibirCadenaBytes();
+
+	SerialDebug.print( "Recibida cadena de bytes: " );
+	SerialDebug.println( numBytes );
+	
+	// Asegura que el bufer termina en byte nulo (0)
+	bufer[ numBytes ] = 0;
+
+	int codigoError = moduloWiFi.peticionHttpGet( bufer, numBytesRespuesta );
+	
+	if ( codigoError == 0 ) {
+		SerialDebug.print( "\nPeticion Http Respondida OK. Longitud datos = " );
+		SerialDebug.println( *numBytesRespuesta );
+	}
+	else {
+		SerialDebug.print( "\nPeticion HTTP FALLADA. Error=" );
+		SerialDebug.println( codigoError );
+	}
+
+	SerialDebug.print( "Se transmitira cadena de bytes: " );
+	SerialDebug.println( *numBytesRespuesta );
+
+	return codigoError;
+}
+
+
 void setup() {
 
 	inicializarInterfaz();
+
+	// Inicializa registro de control como no listo
+	escribirRegistro( REGISTRO_CONTROL, 0 );
 
 	// Genera reloj para los leds
 	pinMode( pinRelojLED, OUTPUT );
@@ -359,24 +470,10 @@ void setup() {
 	SerialWifi.begin( 9600 );
 	moduloWiFi.configurar( &SerialWifi, pinResetModuloWiFi, bufer, TAM_BUFER );
 
-//	SerialDebug.println( "Inicio" );
-//	SerialDebug.println();
-
-/*
-	while ( SerialDebug.available() == 0 ) {}
-
-	SerialDebug.println( "Empezando" );
-	SerialDebug.println();
+	SerialDebug.println( "Inicio" );
 	SerialDebug.println();
 
-	while ( SerialDebug.available() > 0 ) {
-		SerialDebug.read();
-	}
-*/
-//	SerialDebug.println( "Empezando" );
-
-
-
+	// Conecta a la Wifi
 	bool conectadoOk = false;
 	while ( ! conectadoOk ) {
 
@@ -391,7 +488,7 @@ void setup() {
 
 		esperar( 1 );
 
-		SerialDebug.println( "\n___Conectando a Wifi..." );
+		SerialDebug.println( "\nConectando a Wifi..." );
 		if ( moduloWiFi.conectarAWifi( (uint8_t*)"yombo", (uint8_t*)"ninobravo" ) ) {
 			SerialDebug.println( "\nConectado a Wifi Satisfactoriamente." );
 			conectadoOk = true;
@@ -408,327 +505,40 @@ void setup() {
 
 }
 
-void esperar( unsigned long segundos ) {
-	SerialDebug.print( "\nEsperando " );
-	SerialDebug.print( segundos );
-	SerialDebug.println( " segundos..." );
-	delay( segundos * 1000 );
-}
-
-
-/*
-// Loop de prueba de alimentacion externa
-void loop() {
-
-	SerialDebug.println( "\nPulse tecla..." );
-	while ( SerialDebug.available() == 0 ) {}
-	SerialDebug.read();
-
-	//sprintf( (char*)bufer, "192.168.1.100:8080/YomboServer/ZXChat/chat?accion=listar&timestamp=0" );
-	sprintf( (char*)bufer, "88.20.17.84:8080/YomboServer/ZXChat/chat?accion=listar&timestamp=0" );
-
-	int numBytes = 0;
-	int errorPeticion = moduloWiFi.peticionHttpGet( bufer, &numBytes );
-	if ( errorPeticion == 0 ) {
-		SerialDebug.print( "\nPeticion Http Respondida OK. Longitud datos = " );
-		SerialDebug.println( numBytes );
-		SerialDebug.print( "DATOS: -->" );
-		bufer[numBytes] = 0;
-		SerialDebug.print( (char*)bufer );
-		SerialDebug.print( "<--FIN DATOS" );
-	}
-	else {
-		SerialDebug.print( "\nPeticion HTTP FALLADA. Error=" );
-		SerialDebug.println( errorPeticion );
-	}
-
-//	while ( SerialDebug.available() > 0 ) {
-//		SerialDebug.read();
-//	}
-}
-*/
-
-/*
-// Segunda prueba wifi con interface de software
-void loop() {
-	
-	SerialDebug.println( "*********************************************" );
-	SerialDebug.println( "\nPulse una tecla..." );
-	while ( SerialDebug.available() == 0 ) {}
-	while ( SerialDebug.available() > 0 ) {
-		SerialDebug.read();
-	}
-
-	SerialDebug.println( "\nReiniciando WiFi..." );
-
-	if ( moduloWiFi.reiniciar() ) {
-		SerialDebug.println( "\nWiFi reiniciada satisfactoriamente." );
-	}
-	else {
-		SerialDebug.println( "\nNo se ha recibido respuesta al reiniciar." );
-	}
-
-	esperar( 1 );
-	
-	SerialDebug.println( "\nConectando a Wifi..." );
-	if ( moduloWiFi.conectarAWifi( (uint8_t*)"JAZZTEL", (uint8_t*)"elcorraldelapacheca" ) ) {
-		SerialDebug.println( "\nConectado a Wifi Satisfactoriamente." );
-	}
-	else {
-		SerialDebug.println( "\nError al conectar a la wifi." );
-	}
-	
-	esperar( 1 );
-
-	SerialDebug.println( "\nHaciendo peticion al chat..." );
-	int l = 0;
-	sprintf( (char*)bufer, "192.168.0.196:8080/ZXChat/chat?accion=listar&timestamp=0" );
-	if ( moduloWiFi.peticionHttpGet( bufer, &l ) ) {
-		SerialDebug.print( "\n[[[[****]]]]Peticion Http Respondida OK. Longitud datos = " );
-		SerialDebug.println( l );
-		SerialDebug.print( "DATOS: -->" );
-		bufer[l] = 0;
-		SerialDebug.print( (char*)bufer );
-		SerialDebug.print( "<--FIN DATOS" );
-	}
-	else {
-		SerialDebug.println( "\nPeticion HTTP FALLADA." );
-	}
-	
-	esperar( 1 );
-	
-	SerialDebug.println( "\nDesconectado de Wifi..." );
-	if ( moduloWiFi.desconectarWifi() ) {
-		SerialDebug.println( "\nDesconectado de Wifi Satisfactoriamente." );
-	}
-	else {
-		SerialDebug.println( "\nError al desconectar de wifi." );
-	}
-
-	while ( SerialDebug.available() > 0 ) {
-		SerialDebug.read();
-	}
-}
-*/
-
-/*
-// Primera prueba wifi con interface de software
-void loop() {
-
-	SerialDebug.println( "Empezando..." );
-	
-	SerialDebug.println( "Entrando en comunicacion directa..." );
-
-	while ( 1 ) {
-		if ( SerialWifi.available() > 0 ) {
-			SerialDebug.write( SerialWifi.read() );
-		}
-		if ( SerialDebug.available() > 0 ) {
-			uint8_t b = SerialDebug.read();
-			if ( b == '\n' ) {
-				SerialWifi.write( '\r' );
-				SerialWifi.write( '\n' );
-			}
-			else {
-				SerialWifi.write( b );
-			}
-		}
-	}
-}
-*/
-
-
-// Prueba comunicacion Spectrum
 void loop() {
 	
 	// Si el Spectrum ha escrito en el registro de control...
 	if ( getSenyalWr0() ) {
 
-		// Lee el registro de control
-		byte instruccion = leerRegistro( 0 );
+		// Lee la instruccion del registro de control
+		byte instruccion = leerRegistro( REGISTRO_CONTROL );
+		
+		int codigoError = 0;
+		bool transmitirRespuesta = false;
+		int numBytesRespuesta = 0;
 
 		// Decodificacion de la instruccion
-		if ( instruccion == 0 ) {
-
-			// Instruccion de transmitir un bitmap de pantalla al spectrum
-
-			//SerialDebug.write( (uint8_t)34 );
-
-			//for ( int i = 0; i < 6144; i++ ) {
-			//	while ( SerialDebug.available() == 0 ) {}
-			//	bufer[ i ] = SerialDebug.read();
-			//}
-
-			escribirRegistro( REGISTRO_DATOS, bufer[ 0 ] );
-			
-			// Listo para transmitir
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR );
-
-			for ( int i = 1; i < 6144; i++ ) {
-				while ( ! getSenyalRd1() ) {}
-				escribirRegistro( REGISTRO_DATOS, bufer[ i ] );
-			}
-
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
+		switch ( instruccion ) {
+			case 0b00000100:
+				// Peticion HTTP GET
+				codigoError = instruccionPeticionGet( &numBytesRespuesta );
+				transmitirRespuesta = true;
+				break;
+			default:
+				SerialDebug.print( "Recibida instruccion no reconocida: " );
+				SerialDebug.println( instruccion );
 		}
-		else if ( instruccion == 34 ) {
-			
-			// Instruccion de recibir 10 bytes
 
-			SerialDebug.println( "Recibida instruccion 34." );
+		byte valorRegControl = ( codigoError << 4 ) & 0xF0;
 
-			// Lee registro de datos para borrar flags
-			leerRegistro( REGISTRO_DATOS );
-
-			// Recibe una cadena
-			int n = 15000;
-
-			// Listo para recibir
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_RECIBIR );
-			
-			for ( int i = 0; i < n; i++ ) {
-				while ( ! getSenyalWr1() ) {}
-				bufer[ i ] = leerRegistro( REGISTRO_DATOS );
-			}
-			
-			SerialDebug.print( "Recibidos " );
-			SerialDebug.print( n );
-			SerialDebug.println( " bytes del Spectrum." );
-			SerialDebug.println( "Los 15 primeros son:" );
-			
-			for ( int i = 0; i < 15 ; i++ ) {
-				SerialDebug.println( (int)bufer[ i ] );
-			}
-			SerialDebug.println();
-
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
-		}
-		else if ( instruccion == 35 ) {
-			
-			// Instruccion de transmitir 15000 bytes al spectrum
-
-			SerialDebug.println( "Recibida instruccion 35." );
-
-			// Transmite una cadena de bytes
-			int n = 15000;
-			for ( int i = 0; i < n; i++ ) {
-				bufer[ i ] = i;
-			}
-
-			unsigned long t0 = micros();
-			
-			escribirRegistro( REGISTRO_DATOS, bufer[ 0 ] );
-			
-			// Listo para transmitir
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR );
-
-			for ( int i = 1; i < n; i++ ) {
-				while ( ! getSenyalRd1() ) {}
-				escribirRegistro( REGISTRO_DATOS, bufer[ i ] );
-			}
-			
-			unsigned long t1 = micros();
-
-//			SerialDebug.print( "Transmitidos " );
-//			SerialDebug.print( n );
-//			SerialDebug.println( " bytes al Spectrum." );
-//			unsigned long microsPasados = t1 - t0;
-//			SerialDebug.print( "Tiempo: " );
-//			SerialDebug.print( microsPasados );
-//			SerialDebug.println( " microsegundos." );
-//			float seg = microsPasados / 1000000.0f;
-//			SerialDebug.print( "Tiempo: " );
-//			SerialDebug.print( seg );
-//			SerialDebug.println( " segundos." );
-//			float bytesSeg = n / seg;
-//			SerialDebug.print( "Velocidad de transferencia: " );
-//			SerialDebug.print( bytesSeg );
-//			SerialDebug.println( " bytes/segundo." );
-
-
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
-		}
-		else if ( instruccion == 36 ) {
-			
-			// Instruccion de recibir un entero N de dos bytes y a continuacion N bytes,
-			// y de responder igualmente con otro paquete variable
-
-			SerialDebug.println( "Recibida instruccion 36." );
-
-			// Lee registro de datos para borrar flags
-			leerRegistro( REGISTRO_DATOS );
-
-			byte b0 = 0, b1 = 0;
-			
-			// Listo para recibir
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_RECIBIR );
-
-			// Lee primer byte del entero
-			while ( ! getSenyalWr1() ) {}
-			b0 = leerRegistro( REGISTRO_DATOS );
-
-			// Lee segundo byte del entero
-			while ( ! getSenyalWr1() ) {}
-			b1 = leerRegistro( REGISTRO_DATOS );
-
-			// Construye entero numBytes con los dos bytes
-			int numBytes = ( ( ((int)b1) << 8 ) & 0xFF00 ) | ( ((int)b0) & 0x00FF );
-			numBytes = min( numBytes, TAM_BUFER );
-
-			// Recibe numBytes bytes
-			for ( int i = 0; i < numBytes; i++ ) {
-				while ( ! getSenyalWr1() ) {}
-				bufer[ i ] = leerRegistro( REGISTRO_DATOS );
-			}
-
-			SerialDebug.print( "Recibida cadena de bytes: " );
-			SerialDebug.println( numBytes );
-
-			//SerialDebug.print( "Cadena recibida:" );
-			//SerialDebug.println( (char*)bufer );
-
-			//int numBytes2 = sprintf( (char*)bufer,"Hola mundooo!!!" ) + 1;
-			int numBytes2 = 0;
-			int errorPeticion = moduloWiFi.peticionHttpGet( bufer, &numBytes2 );
-			if ( errorPeticion == 0 ) {
-				SerialDebug.print( "\nPeticion Http Respondida OK. Longitud datos = " );
-				SerialDebug.println( numBytes2 );
-				//SerialDebug.print( "DATOS: -->" );
-				//bufer[numBytes2] = 0;
-				//SerialDebug.print( (char*)bufer );
-				//SerialDebug.print( "<--FIN DATOS" );
-			}
-			else {
-				SerialDebug.print( "\nPeticion HTTP FALLADA. Error=" );
-				SerialDebug.println( errorPeticion );
-				numBytes2 = 0;
-			}
-
-			SerialDebug.print( "Se transmitira cadena de bytes: " );
-			SerialDebug.println( numBytes2 );
-
-			byte b02 = numBytes2 & 0x00FF;
-			byte b12 = ( numBytes2 >> 8 ) & 0x00FF;
-
-			escribirRegistro( REGISTRO_DATOS, b02 );
-			
-			// Listo para transmitir
-			byte valorRegControl = ( errorPeticion << 4 ) & 0xF0;
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR | valorRegControl );
-
-			while ( ! getSenyalRd1() ) {}
-			escribirRegistro( REGISTRO_DATOS, b12 );
-
-			for ( int i = 0; i < numBytes2; i++ ) {
-				while ( ! getSenyalRd1() ) {}
-				escribirRegistro( REGISTRO_DATOS, bufer[ i ] );
-			}
-
+		if ( transmitirRespuesta ) {
+			transmitirCadenaBytes( numBytesRespuesta, valorRegControl );
 			SerialDebug.println( "Transmitido el bufer." );
-			
-			// En el registro de control escribe bit de que esta listo, y 
-			// en los cuatro bits altos pone el resultado de la operacion
-			escribirRegistro( REGISTRO_CONTROL, UC_LISTO | valorRegControl );
 		}
+
+		// En el registro de control escribe bit de que esta listo, y 
+		// en los cuatro bits altos pone el resultado de la operacion
+		escribirRegistro( REGISTRO_CONTROL, UC_LISTO | valorRegControl );
 	}
 }
+
