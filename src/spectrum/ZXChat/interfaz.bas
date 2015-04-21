@@ -36,7 +36,7 @@ dim tamRespuesta as uinteger
 dim timestamp as string
 dim codigoError as ubyte
 
-strIPServidor = "88.20.17.84"
+strIPServidor = "81.35.6.85"
 timestamp = "0"
 strUrl = ""
 y0 = 0
@@ -77,7 +77,7 @@ while cadenaEntrada <> " "
 	'Hace la peticion
 	codigoError = peticionGet( tamUrl, tamRespuesta )
 
-	if ( tamRespuesta > 0 ) then
+	if ( codigoError = 0 ) then
 	
 		' Pone borde verde
 		border 4
@@ -91,12 +91,14 @@ while cadenaEntrada <> " "
 			i = i + 1
 			j = j - 1
 		end while
-		
+
+		' Avanza el fin de linea
 		if ( i < (TAM_BUFER + 1) and i < (tamRespuesta + 1) and bufer( i ) = 13 and bufer( i + 1 ) = 10 ) then
 			i = i + 2
 			j = j - 2
 		end if
 
+		'Imprime mensajes
 		if j > 0 then 
 			imprimirCadenaBuferWrap( cast(uinteger,i), j, 0, y0, x1, y1 )
 			y0 = y1 + 1
@@ -113,7 +115,7 @@ while cadenaEntrada <> " "
 	end if
 
 	finBucle:
-	
+
 end while
 
 

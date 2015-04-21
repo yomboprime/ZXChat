@@ -156,7 +156,7 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 		puertoSerie->write( (uint8_t*)puerto, tamPuerto );
 	}
 	puertoSerie->write( "\r\n" );
-	if ( ! buscarRespuesta( (uint8_t*)"OK", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
 		return 4;
 	}
 
@@ -172,32 +172,32 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 	puertoSerie->write( " HTTP/1.1\r\nHost: " );
 	puertoSerie->write( (uint8_t*)dominio, tamDominio );
 	puertoSerie->write( "\r\nUser-Agent: ZXSpectrum\r\n\r\n" );
-	if ( ! buscarRespuesta( (uint8_t*)"SEND OK", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)"SEND OK", 15000 ) ) {
 		return 6;
 	}
-	if ( ! buscarRespuesta( (uint8_t*)"+IPD", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)"+IPD", 15000 ) ) {
 		return 7;
 	}
-	if ( ! buscarRespuesta( (uint8_t*)" 200 OK", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)" 200 OK", 15000 ) ) {
 		return 8;
 	}
-	if ( ! buscarRespuesta( (uint8_t*)"Content-Length: ", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)"Content-Length: ", 15000 ) ) {
 		return 9;
 	}
 	// Lee tamanyo respuesta
-	if ( leerCadenaConTerminador( (uint8_t)'\r', 25000 ) == -1 ) {
+	if ( leerCadenaConTerminador( (uint8_t)'\r', 15000 ) == -1 ) {
 		return 10;
 	}
 
 	int tamRespuesta = atoi( (char*)bufer );
 
-	if ( ! buscarRespuesta( (uint8_t*)"\r\n\r\n", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)"\r\n\r\n", 15000 ) ) {
 		return 11;
 	}
-	if ( leerCadenaLongitud( tamRespuesta, 25000 ) == -1 ) {
+	if ( leerCadenaLongitud( tamRespuesta, 15000 ) == -1 ) {
 		return 12;
 	}
-	if ( ! buscarRespuesta( (uint8_t*)"OK", 25000 ) ) {
+	if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
 		return 13;
 	}
 	puertoSerie->write( "AT+CIPCLOSE=4\r\n" );
