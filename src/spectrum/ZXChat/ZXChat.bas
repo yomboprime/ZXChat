@@ -1,9 +1,4 @@
 
-
-' TODO:
-' parsear tramas IPD
-' Ver que pasa cuando hay network error
-
 #include "entradaSalidaTexto.bas"
 
 border 2 : paper 0 : ink 7: flash 0 : bright 0 : over 0
@@ -11,19 +6,6 @@ cls
 
 dim i as uinteger
 dim j as uinteger
-
-
-print "Pulse tecla..."
-
-tecla = ""
-while tecla = ""
-	tecla = inkey$
-end while
-while inkey$ <> ""
-end while
-
-cls 
-
 dim strIPServidor as string
 dim strUrl as string
 dim tamUrl as uinteger
@@ -35,6 +17,33 @@ dim cadenaEntrada as string
 dim tamRespuesta as uinteger
 dim timestamp as string
 dim codigoError as ubyte
+
+dim debugactivado as ubyte
+debugactivado = 0
+
+imprimirCadenaWrap( "Pulse tecla...", 0, 0, 0, x1, y1 )
+tecla = "": while tecla = "" : tecla = inkey$ : end while : while inkey$ <> "" : end while
+
+tamRespuesta = obtenerRevisionFirmware()
+
+imprimirCadenaWrap( "Firm:", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaBuferWrap( 0, tamRespuesta, 0, y1 + 1, x1, y1 )
+
+imprimirCadenaWrap( "Pulse tecla2...", 0, y1 + 1, 0, x1, y1 )
+tecla = "": while tecla = "" : tecla = inkey$ : end while : while inkey$ <> "" : end while
+
+i = copiarCadenaABufer( "yombo ninobravo" )
+imprimirCadenaBuferWrap( 0, i, 0, y1 + 1, x1, y1 )
+codigoError = conectarAWiFi( i )
+
+
+
+imprimirCadenaWrap( "Resultado conexion:", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( str( codigoError ), x1, y1, 0, x1, y1 )
+
+imprimirCadenaWrap( "Pulse tecla3...", 0, y1 + 1, 0, x1, y1 )
+tecla = "": while tecla = "" : tecla = inkey$ : end while : while inkey$ <> "" : end while
+cls
 
 strIPServidor = "81.35.6.85"
 timestamp = "0"
@@ -125,18 +134,123 @@ print "FIN"
 function copiarCadenaABufer( cadena as string ) as integer
 	dim tam as integer
 	tam = len( cadena )
-	if tam > TAM_BUFER - 1 then
-		tam = TAM_BUFER - 1
+	if tam > TAM_BUFER then
+		tam = TAM_BUFER
 	end if
 	dim i as integer
 	for i = 0 to tam - 1
 		bufer( i ) = code( cadena( i ) )
 	next i
-	' La cadena ha de estar terminada en 0
-	bufer( tam ) = 0
-	tam = tam + 1
 	return tam
 end function
+
+function leerCodigoError() as ubyte
+	return ( leerRegistroControl() shr 4 ) band $0F
+end function
+
+function obtenerRevisionFirmware() as uinteger
+
+	' Devuelve tam de los bytes recibidos en el bufer
+
+	dim tamRespuesta as uinteger
+	dim b02 as ubyte
+	dim b12 as ubyte
+
+	while ( ( leerRegistroControl() band 1 ) = 0 )
+	end while
+
+	' Escribe instruccion
+	escribirRegistroControl( 00000000b )
+
+	while ( ( leerRegistroControl() band 4 ) = 0 )
+	end while
+
+	b02 = leerRegistroDatos()
+	b12 = leerRegistroDatos()
+	
+	tamRespuesta = ((b12 shl 8 ) band $FF00) bor (b02 band $00FF)
+
+	if ( tamRespuesta > TAM_BUFER ) then
+		tamRespuesta = TAM_BUFER
+	end if
+
+	esperarNOP( 100 )
+
+	if ( tamRespuesta > 0 ) then
+	
+		' No se por que hace falta esta lectura pero si no los bytes se desplazan una posicion.
+		leerRegistroDatos()
+
+		for i = 0 to tamRespuesta - 1
+			bufer( i ) = leerRegistroDatos()
+		next i
+
+	end if
+	
+	return tamRespuesta
+
+end function
+
+function activarDesactivarDebug( activar as ubyte ) as ubyte
+
+	if activar <> 0 then
+		activar = 1
+	end if
+
+	escribirRegistroDatos( activar )
+
+	while ( ( leerRegistroControl() band 1 ) = 0 )
+	end while
+
+	' Escribe instruccion
+	escribirRegistroControl( 00000001b )
+
+	while ( ( leerRegistroControl() band 1 ) = 0 )
+	end while
+
+	return leerCodigoError()
+
+end function
+
+function conectarAWiFi( tamPeticion as uinteger ) as ubyte
+
+	' En el bufer se debe haber escrito SSID PASSWORD
+	' tamPeticion es el tamanyo de esa cadena
+
+	dim b0 as ubyte
+	dim b1 as ubyte
+	dim codigoError as ubyte
+	codigoError = 0
+
+	b0 = cast( ubyte, tamPeticion band $00FF )
+	b1 = cast( ubyte, ( tamPeticion shr 8 ) band $00FF )
+
+	while ( ( leerRegistroControl() band 1 ) = 0 )
+	end while
+
+	' Escribe instruccion
+	escribirRegistroControl( 00000010b )
+
+	while ( ( leerRegistroControl() band 2 ) = 0 )
+	end while
+
+	esperarNOP( 1 )
+	escribirRegistroDatos( b0 )
+	esperarNOP( 1 )
+	escribirRegistroDatos( b1 )
+	esperarNOP( 1 )
+	for i = 0 to tamPeticion - 1
+		escribirRegistroDatos( bufer( i ) )
+	next i
+
+	while ( ( leerRegistroControl() band 1 ) = 0 )
+	end while
+
+	codigoError = leerCodigoError()
+	return codigoError
+
+end function
+
 
 function peticionGet( tamPeticion as uinteger, byref tamRespuesta as uinteger ) as ubyte
 
@@ -156,7 +270,7 @@ function peticionGet( tamPeticion as uinteger, byref tamRespuesta as uinteger ) 
 	end while
 
 	' Escribe instruccion
-	escribirRegistroControl( 36 )
+	escribirRegistroControl( 00000100b )
 
 	while ( ( leerRegistroControl() band 2 ) = 0 )
 	end while
@@ -196,12 +310,14 @@ function peticionGet( tamPeticion as uinteger, byref tamRespuesta as uinteger ) 
 
 	end if
 
-	codigoError = ( leerRegistroControl() shr 4 ) band $0F
-	'codigoError = leerRegistroControl()
+	'codigoError = ( leerRegistroControl() shr 4 ) band $0F
+	codigoError = leerCodigoError()
 	return codigoError
 
 end function
-	
+
+
+' Funciones de bajo nivel
 
 function FASTCALL escribirRegistroControl( byval valor as ubyte )
 	' fastcall functions always receive the 1st parameter

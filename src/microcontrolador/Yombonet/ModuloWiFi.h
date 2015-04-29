@@ -10,7 +10,7 @@ class ModuloWiFi {
 public:
 
 	// Primero hay que llamar a esta funcion
-	void configurar( Stream* puertoSerie, int pinReset, uint8_t* bufer, int tamBufer );
+	void configurar( Stream* puertoSerie, Stream* puertoSerieDebug, int pinReset, uint8_t* bufer, int tamBufer );
 	
 	// Luego a esta
 	bool reiniciar();
@@ -23,12 +23,16 @@ public:
 
 	int peticionHttpGet( uint8_t* url, int* longitudRespuesta );
 
-	
+	void activarDesactivarDebug( bool activar );
 	
 	
 private:
 
 	Stream* puertoSerie;
+	Stream* puertoSerieDebug;
+
+	bool debugActivado;
+
 	int pinReset;
 
 	uint8_t* bufer;

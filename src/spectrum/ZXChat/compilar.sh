@@ -1,5 +1,5 @@
 export PATH=$PATH:/media/datos1/Devel/zxbasic/zxbasic/
-zxb.py interfaz.bas --tap --BASIC --autorun
-echo --debug-memory
+zxb.py ZXChat.bas --tap --BASIC --autorun
+# --debug-memory
 
-tape2wav interfaz.tap interfaz.wav
+tape2wav ZXChat.tap ZXChat.wav

@@ -2,15 +2,20 @@
 #include "ModuloWiFi.h"
 #include "Arduino.h"
 
-void ModuloWiFi::configurar( Stream* puertoSerie, int pinReset, uint8_t* bufer, int tamBufer ) {
+#define SDEBUG if ( debugActivado ) puertoSerieDebug
+
+void ModuloWiFi::configurar( Stream* puertoSerie, Stream* puertoSerieDebug, int pinReset, uint8_t* bufer, int tamBufer ) {
+
+	pinMode( pinReset, OUTPUT );
+	digitalWrite( pinReset, HIGH );
 
 	this->puertoSerie = puertoSerie;
+	this->puertoSerieDebug = puertoSerieDebug;
 	this->pinReset = pinReset;
 	this->bufer = bufer;
 	this->tamBufer = tamBufer;
 
-	pinMode( pinReset, OUTPUT );
-	digitalWrite( pinReset, HIGH );
+	debugActivado = true;
 	
 }
 
@@ -112,20 +117,20 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 		return 2;
 	}
 	
-	Serial.println( "\nPETICION:" );
-	Serial.print( "\ndominio=" );
-	Serial.write( (uint8_t*)dominio, tamDominio );
-	Serial.println();
-	Serial.print( "\npuerto=" );
+	SDEBUG->println( "\nPETICION:" );
+	SDEBUG->print( "\ndominio=" );
+	SDEBUG->write( (uint8_t*)dominio, tamDominio );
+	SDEBUG->println();
+	SDEBUG->print( "\npuerto=" );
 	if ( puerto == NULL ) {
-		Serial.println( "80" );
+		SDEBUG->println( "80" );
 	}
 	else {
-		Serial.write( (uint8_t*)puerto, tamPuerto );
-		Serial.println();
+		SDEBUG->write( (uint8_t*)puerto, tamPuerto );
+		SDEBUG->println();
 	}
-	Serial.print( "\nraiz=" );
-	Serial.println( raiz );
+	SDEBUG->print( "\nraiz=" );
+	SDEBUG->println( raiz );
 
 	int tamRaiz = strlen( raiz );
 	
@@ -230,11 +235,11 @@ void ModuloWiFi::purgarPuertoSerie() {
 bool ModuloWiFi::buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout ) {
 
 	/*
-	Serial.print( "\nbuscarRespuesta: Buscando: " );
-	Serial.print( (char*)cadenaABuscar );
-	Serial.print( ", timeout=" );
-	Serial.println( timeout );
-	Serial.println();
+	SDEBUG->print( "\nbuscarRespuesta: Buscando: " );
+	SDEBUG->print( (char*)cadenaABuscar );
+	SDEBUG->print( ", timeout=" );
+	SDEBUG->println( timeout );
+	SDEBUG->println();
 	*/
 
 	int pos = 0;
@@ -253,8 +258,8 @@ bool ModuloWiFi::buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout 
 			continue;
 		}
 		
-		// Esto es eco para debug (comentarlo)
-		Serial.print( (char)b );
+		// Esto es eco para debug
+		SDEBUG->print( (char)b );
 		
 		if ( ((uint8_t)b) == cadenaABuscar[ pos ] ) {
 			pos++;
@@ -291,8 +296,8 @@ int ModuloWiFi::leerCadenaConTerminador( uint8_t terminador, unsigned long timeo
 			continue;
 		}
 
-		// Esto es eco para debug (comentarlo)
-		Serial.print( (char)b );
+		// Esto es eco para debug
+		SDEBUG->print( (char)b );
 
 		if ( ((uint8_t)b) == terminador ) {
 			bufer[ pos ] = 0;
@@ -331,12 +336,16 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 			continue;
 		}
 
-		// Esto es eco para debug (comentarlo)
-		Serial.print( (char)b );
+		// Esto es eco para debug
+		SDEBUG->print( (char)b );
 
 		bufer[ pos ] = (uint8_t) b;
 		pos++;
 	}
 
 	return pos;
+}
+
+void ModuloWiFi::activarDesactivarDebug( bool activar ) {
+	debugActivado = activar;
 }
