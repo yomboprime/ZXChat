@@ -3,6 +3,7 @@
 Yombonet
 */
 #define REVISION "En pruebas..."
+#define DEBUG 1
 /*
 
 Interfaz Spectrum con módulo Wifi ESP-07
@@ -255,6 +256,16 @@ Descripcion: Escribir todas las salidas B0...B3
 #define mascaraSenyalWr0 4
 
 
+#if ( DEBUG == 1 )
+	// Debug habilitado
+	#define debugPrint( x ) debugPrintInterno( x )
+	#define debugPrintln( x ) debugPrintlnInterno( x )
+#else
+	// Debug deshabilitado, mejor rendimiento
+	#define debugPrint( x )
+	#define debugPrintln( x )
+#endif
+
 
 // Variables globales
 
@@ -286,31 +297,31 @@ void esperar( int segundos ) {
 	delay( segundos * 1000 );
 }
 
-void debugPrint( const char * str ) {
+void debugPrintInterno( const char * str ) {
 	if ( debugActivado ) {
 		SerialDebug.print( str );
 	}
 }
 
-void debugPrintln( const char * str ) {
+void debugPrintlnInterno( const char * str ) {
 	if ( debugActivado ) {
 		SerialDebug.println( str );
 	}
 }
 
-void debugPrint( int i ) {
+void debugPrintInterno( int i ) {
 	if ( debugActivado ) {
 		SerialDebug.print( i );
 	}
 }
 
-void debugPrintln( int i ) {
+void debugPrintlnInterno( int i ) {
 	if ( debugActivado ) {
 		SerialDebug.println( i );
 	}
 }
 
-void debugPrintln() {
+void debugPrintlnInterno() {
 	if ( debugActivado ) {
 		SerialDebug.println();
 	}
@@ -471,18 +482,11 @@ int instruccionConectarAWiFi() {
 	
 	// Asegura que el bufer termina en byte nulo (0)
 	bufer[ numBytes ] = 0;
-
-	debugPrint( "\nRecibida cadena: -" );
-	debugPrint( (char*)bufer );
-	debugPrintln( "-" );
 	
 	// Busca primer espacio
 	int pos = 0;
 	for ( pos = 0; pos < numBytes && bufer[ pos ] != 32; pos++ );
 	
-	debugPrint( "Pos = " );
-	debugPrint( pos );
-
 	if ( pos >= numBytes ) {
 		return 1;
 	}
@@ -514,24 +518,16 @@ int instruccionConectarAWiFi() {
 	}
 
 	// Conecta a la Wifi
-	bool conectadoOk = false;
-	numReintentos = 3;
-	while ( ! conectadoOk ) {
-
-		debugPrintln( "\nConectando a Wifi..." );
-		if ( moduloWiFi.conectarAWifi( (uint8_t*)bufer, (uint8_t*)(bufer + pos + 1) ) ) {
-			debugPrintln( "\nConectado a Wifi Satisfactoriamente." );
-			conectadoOk = true;
+	debugPrintln( "\nConectando a Wifi..." );
+	if ( moduloWiFi.conectarAWifi( (uint8_t*)bufer, (uint8_t*)(bufer + pos + 1) ) ) {
+		debugPrintln( "\nConectado a Wifi Satisfactoriamente." );
+	}
+	else {
+		debugPrintln( "\nError al conectar a la wifi." );
+		if ( numReintentos <= 0 ) {
+			debugPrintln( "\nFin de reintentos de conexion." );
+			return 3;
 		}
-		else {
-			debugPrintln( "\nError al conectar a la wifi." );
-			if ( numReintentos <= 0 ) {
-				debugPrintln( "\nFin de reintentos de conexion." );
-				return 3;
-			}
-		}
-		
-		numReintentos--;
 	}
 
 	return 0;

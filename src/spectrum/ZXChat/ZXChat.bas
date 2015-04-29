@@ -148,27 +148,25 @@ function leerCodigoError() as ubyte
 	return ( leerRegistroControl() shr 4 ) band $0F
 end function
 
-function obtenerRevisionFirmware() as uinteger
-
-	' Devuelve tam de los bytes recibidos en el bufer
-
-	dim tamRespuesta as uinteger
-	dim b02 as ubyte
-	dim b12 as ubyte
-
+function esperarYombonetLista()
 	while ( ( leerRegistroControl() band 1 ) = 0 )
 	end while
+end function
 
-	' Escribe instruccion
-	escribirRegistroControl( 00000000b )
+function recibirCadena() as uinteger
 
+	dim b0 as ubyte
+	dim b1 as ubyte
+	dim tamRespuesta as uinteger
+
+	' Espera Yombonet listo para transmitir
 	while ( ( leerRegistroControl() band 4 ) = 0 )
 	end while
 
-	b02 = leerRegistroDatos()
-	b12 = leerRegistroDatos()
+	b0 = leerRegistroDatos()
+	b1 = leerRegistroDatos()
 	
-	tamRespuesta = ((b12 shl 8 ) band $FF00) bor (b02 band $00FF)
+	tamRespuesta = ((b1 shl 8 ) band $FF00) bor (b0 band $00FF)
 
 	if ( tamRespuesta > TAM_BUFER ) then
 		tamRespuesta = TAM_BUFER
@@ -191,6 +189,45 @@ function obtenerRevisionFirmware() as uinteger
 
 end function
 
+sub transmitirCadena( tamCadena as uinteger )
+
+	dim b0 as ubyte
+	dim b1 as ubyte
+
+	b0 = cast( ubyte, tamCadena band $00FF )
+	b1 = cast( ubyte, ( tamCadena shr 8 ) band $00FF )
+
+	' Espera Yombonet listo para recibir
+	while ( ( leerRegistroControl() band 2 ) = 0 )
+	end while
+
+	esperarNOP( 1 )
+	escribirRegistroDatos( b0 )
+	esperarNOP( 1 )
+	escribirRegistroDatos( b1 )
+	esperarNOP( 1 )
+	for i = 0 to tamCadena - 1
+		escribirRegistroDatos( bufer( i ) )
+	next i
+
+end sub
+
+
+' Funciones de instruccion
+
+function obtenerRevisionFirmware() as uinteger
+
+	' Devuelve tam del mensaje recibido en el bufer
+
+	esperarYombonetLista()
+
+	' Escribe instruccion
+	escribirRegistroControl( 00000000b )
+
+	return recibirCadena()
+
+end function
+
 function activarDesactivarDebug( activar as ubyte ) as ubyte
 
 	if activar <> 0 then
@@ -199,14 +236,12 @@ function activarDesactivarDebug( activar as ubyte ) as ubyte
 
 	escribirRegistroDatos( activar )
 
-	while ( ( leerRegistroControl() band 1 ) = 0 )
-	end while
+	esperarYombonetLista()
 
 	' Escribe instruccion
 	escribirRegistroControl( 00000001b )
 
-	while ( ( leerRegistroControl() band 1 ) = 0 )
-	end while
+	esperarYombonetLista()
 
 	return leerCodigoError()
 
@@ -217,34 +252,14 @@ function conectarAWiFi( tamPeticion as uinteger ) as ubyte
 	' En el bufer se debe haber escrito SSID PASSWORD
 	' tamPeticion es el tamanyo de esa cadena
 
-	dim b0 as ubyte
-	dim b1 as ubyte
-	dim codigoError as ubyte
-	codigoError = 0
-
-	b0 = cast( ubyte, tamPeticion band $00FF )
-	b1 = cast( ubyte, ( tamPeticion shr 8 ) band $00FF )
-
-	while ( ( leerRegistroControl() band 1 ) = 0 )
-	end while
+	esperarYombonetLista()
 
 	' Escribe instruccion
 	escribirRegistroControl( 00000010b )
 
-	while ( ( leerRegistroControl() band 2 ) = 0 )
-	end while
+	transmitirCadena( tamPeticion )
 
-	esperarNOP( 1 )
-	escribirRegistroDatos( b0 )
-	esperarNOP( 1 )
-	escribirRegistroDatos( b1 )
-	esperarNOP( 1 )
-	for i = 0 to tamPeticion - 1
-		escribirRegistroDatos( bufer( i ) )
-	next i
-
-	while ( ( leerRegistroControl() band 1 ) = 0 )
-	end while
+	esperarYombonetLista()
 
 	codigoError = leerCodigoError()
 	return codigoError
@@ -254,68 +269,21 @@ end function
 
 function peticionGet( tamPeticion as uinteger, byref tamRespuesta as uinteger ) as ubyte
 
-	' Devuelve tam de los bytes recibidos en el bufer
+	' Devuelve codigo de error.
+	' en tamRespuesta se devuelve el tam de los bytes recibidos en el bufer
 
-	dim b0 as ubyte
-	dim b1 as ubyte
-	dim b02 as ubyte
-	dim b12 as ubyte
-	dim codigoError as ubyte
-	codigoError = 0
-
-	b0 = cast( ubyte, tamPeticion band $00FF )
-	b1 = cast( ubyte, ( tamPeticion shr 8 ) band $00FF )
-
-	while ( ( leerRegistroControl() band 1 ) = 0 )
-	end while
+	esperarYombonetLista()
 
 	' Escribe instruccion
 	escribirRegistroControl( 00000100b )
 
-	while ( ( leerRegistroControl() band 2 ) = 0 )
-	end while
+	transmitirCadena( tamPeticion )
 
-	esperarNOP( 1 )
-	escribirRegistroDatos( b0 )
-	esperarNOP( 1 )
-	escribirRegistroDatos( b1 )
+	tamRespuesta = recibirCadena()
 
-	esperarNOP( 1 )
-	for i = 0 to tamPeticion - 1
-		escribirRegistroDatos( bufer( i ) )
-	next i
-
-	while ( ( leerRegistroControl() band 4 ) = 0 )
-	end while
-
-	b02 = leerRegistroDatos()
-	b12 = leerRegistroDatos()
-	
-	tamRespuesta = ((b12 shl 8 ) band $FF00) bor (b02 band $00FF)
-
-	if ( tamRespuesta > TAM_BUFER ) then
-		tamRespuesta = TAM_BUFER
-	end if
-
-	esperarNOP( 100 )
-
-	if ( tamRespuesta > 0 ) then
-	
-		' No se por que hace falta esta lectura pero si no los bytes se desplazan una posicion.
-		leerRegistroDatos()
-
-		for i = 0 to tamRespuesta - 1
-			bufer( i ) = leerRegistroDatos()
-		next i
-
-	end if
-
-	'codigoError = ( leerRegistroControl() shr 4 ) band $0F
-	codigoError = leerCodigoError()
-	return codigoError
+	return leerCodigoError()
 
 end function
-
 
 ' Funciones de bajo nivel
 
