@@ -1,8 +1,6 @@
 #include "pixelScroll.bas"
 #include "Putchars.bas"
-
-#define TAM_BUFER 260
-dim bufer( 0 to TAM_BUFER - 1) as ubyte
+#include "bufer.bas"
 
 sub scrollArriba()
 
