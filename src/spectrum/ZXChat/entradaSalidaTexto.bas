@@ -1,3 +1,8 @@
+
+#ifndef __ENTRADA_SALIDA_TEXTO__
+
+#define __ENTRADA_SALIDA_TEXTO__
+
 #include "pixelScroll.bas"
 #include "Putchars.bas"
 #include "bufer.bas"
@@ -14,6 +19,17 @@ sub scrollArriba()
 	PixelScrollUp( 1 )
 
 end sub
+
+function esperarTecla() as string
+	dim tecla as string
+	tecla = ""
+	while tecla = ""
+		tecla = inkey$
+	end while
+	while inkey$ <> ""
+	end while
+	return tecla
+end function
 
 function imprimirCadenaWrap( cad as string, x0 as integer, y0 as integer, imprimirSoloUltimoCaracter as ubyte, byref xf as integer, byref yf as integer ) as integer
 
@@ -99,11 +115,13 @@ function imprimirCadenaBuferWrap( indiceInicio as integer, tamCadena as integer,
 				x = 0
 				y = y + 1
 			else
-				print at y,x; chr( c )
-				x = x + 1
-				if x >= 32 then
-					x = 0
-					y = y + 1
+				if c <> 10 then
+					print at y,x; chr( c )
+					x = x + 1
+					if x >= 32 then
+						x = 0
+						y = y + 1
+					end if
 				end if
 			end if
 			while y >= 24
@@ -157,7 +175,7 @@ sub borrarCadenaWrap( cad as string, x0 as integer, y0 as integer )
 
 end sub
 
-function leerCadenaEntrada( byref posYCadena as integer ) as string
+function leerCadenaEntrada( cadena as string, byref posYCadena as integer ) as string
 
 	' Enter termina la cadena, backspc o shift + 0 para borrar.
 
@@ -174,12 +192,13 @@ function leerCadenaEntrada( byref posYCadena as integer ) as string
 	dim posYCopia as integer
 	dim numScrolls as integer
 
-	dim cadena as string
-	cadena = ""
-
 	posYCopia = posYCadena
 	ultCarX = 0
 	ultCarY = posYCopia
+	if cadena <> "" then
+		numScrolls = imprimirCadenaWrap( cadena, 0, posYCopia, 0, ultCarX, ultCarY )
+		posYCopia = posYCopia - numScrolls
+	end if
 
 	' Pone cursor flash
 	ultCursorX = ultCarX
@@ -281,3 +300,5 @@ function reemplazarCadena( cadena as string, caracterAReemplazar as ubyte, caden
 	return cadenaDevuelta
 
 end function
+
+#endif
