@@ -13,7 +13,7 @@
    height="297mm"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="esquemaCPLD.svg"
    inkscape:export-filename="/media/datos3/Devel/ZXChat/doc/esquemaCPLD/esquemaCPLD.png"
    inkscape:export-xdpi="300"
@@ -671,10 +671,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1003"
-     inkscape:window-x="-3"
-     inkscape:window-y="46"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:snap-global="false">
     <inkscape:grid
@@ -696,7 +696,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1080,7 +1080,7 @@
          id="flowPara7436">RD  WR  REG  rd0signal rd1signal wr1signal</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot7438"
-       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(79.285714,0)"><flowRegion
          id="flowRegion7440"><rect
            id="rect7442"
@@ -1088,7 +1088,7 @@
            height="27.857143"
            x="92.85714"
            y="98.076469" /></flowRegion><flowPara
-         id="flowPara7444">clkLed  LED</flowPara></flowRoot>    <path
+         id="flowPara3577">clkLed  LED actividad</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend-27)"
        d="m 204.28571,113.07647 0,27.14285"
        id="path7446"
@@ -1197,18 +1197,18 @@
          id="flowPara8415">Diagrama de bloques del CPLD</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot8421"
-       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(-112,47.5)"><flowRegion
+       style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.97030803,0,0,1,-417.76908,-2.5)"><flowRegion
          id="flowRegion8423"><rect
            id="rect8425"
-           width="336.42859"
-           height="90.857117"
+           width="447.73346"
+           height="89.857117"
            x="479.28571"
            y="588.79077"
            style="font-size:14px" /></flowRegion><flowPara
-         id="flowPara8427">RD WR IORQ A7A6A0     Registro accedido</flowPara><flowPara
-         id="flowPara8433"> 1    0      0     0  0  1       registro0Spectrum</flowPara><flowPara
-         id="flowPara8462"> 1    0      0     0  1  1       registro1Spectrum</flowPara><flowPara
-         id="flowPara8470"> 0    1      0     0  0  1       registro0Uc</flowPara><flowPara
-         id="flowPara8472"> 0    1      0     0  1  1       registro1Uc</flowPara></flowRoot>  </g>
+         id="flowPara8427">RD WR IORQ A7A6A0     Registro accedido desde ZX Spectrum</flowPara><flowPara
+         id="flowPara8433"> 1    0      0     0  0  1       registro0Spectrum (escritura)</flowPara><flowPara
+         id="flowPara8462"> 1    0      0     0  1  1       registro1Spectrum (escritura)</flowPara><flowPara
+         id="flowPara8470"> 0    1      0     0  0  1       registro0Uc (lectura)</flowPara><flowPara
+         id="flowPara8472"> 0    1      0     0  1  1       registro1Uc (lectura)</flowPara></flowRoot>  </g>
 </svg>
