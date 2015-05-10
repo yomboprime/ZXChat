@@ -9,6 +9,7 @@
 dim i as uinteger
 dim j as uinteger
 dim tamUrl as uinteger
+dim strUrl as string
 dim y0 as integer
 dim x1 as integer
 dim y1 as integer
@@ -30,19 +31,19 @@ cls
 
 imprimirCadenaWrap( "ZXChat " + VERSION, 0, 0, 0, x1, y1 )
 imprimirCadenaWrap( "1) Comenzar", 0, y1 + 2, 0, x1, y1 )
-imprimirCadenaWrap( "2) Cambiar nick", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "2) Cambiar nick (" + strNick + ")", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "3) Configurar WiFi", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "4) Cambiar servidor", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "5) Testear Yombonet", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "6) Salir", 0, y1 + 1, 0, x1, y1 )
 
-imprimirCadenaWrap( "Seleccione opcion...", 0, y1 + 2, 0, x1, y1 )
+imprimirCadenaWrap( "Pulse opcion y enter...", 0, y1 + 2, 0, x1, y1 )
 y1 = y1 + 1
 tecla = leerCadenaEntrada( "", y1 )
 
 if tecla = "1" then
 	if strSSID = "" then
-		imprimirCadenaWrap( "Debe especificar una SSID para conectar a WiFi. Pulse una tecla.", 0, y1 + 1, 0, x1, y1 )
+		imprimirCadenaWrap( "Debe especificar un SSID para conectar a WiFi. Pulse una tecla.", 0, y1 + 1, 0, x1, y1 )
 		esperarTecla()
 		goto Menu
 	end if
@@ -51,10 +52,85 @@ if tecla = "1" then
 	goto ConexionWiFi
 
 end if
+if tecla = "2" then goto CambiarNick : end if
+if tecla = "3" then goto ConfigurarWiFi : end if
+if tecla = "4" then goto CambiarServidor : end if
 if tecla = "5" then goto TestearYombonet : end if
 if tecla = "6" then goto Fin : end if
 
 goto Menu
+
+
+
+
+CambiarNick:
+
+imprimirCadenaWrap( "Escriba su nick y pulse enter: ", 0, y1 + 1, 0, x1, y1 )
+y1 = y1 + 1
+strNick = leerCadenaEntrada( strNick, y1 )
+
+goto Menu
+
+
+
+
+
+ConfigurarWiFi:
+cls
+y1 = 0
+imprimirCadenaWrap( "Escriba el SSID de la WiFi: ", 0, y1 + 1, 0, x1, y1 )
+y1 = y1 + 1
+strSSID = leerCadenaEntrada( strSSID, y1 )
+
+imprimirCadenaWrap( "Escriba la contrasena de la WiFi: ", 0, y1 + 2, 0, x1, y1 )
+y1 = y1 + 1
+strWifiPassword = leerCadenaEntrada( strWifiPassword, y1 )
+
+goto Menu
+
+
+
+
+
+CambiarServidor:
+
+
+cls
+
+imprimirCadenaWrap( "1) Usar YomboServer", 0, 0, 0, x1, y1 )
+imprimirCadenaWrap( "2) Usar servidor manual", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "3) Volver", 0, y1 + 1, 0, x1, y1 )
+
+imprimirCadenaWrap( "Pulse opcion y enter...", 0, y1 + 2, 0, x1, y1 )
+y1 = y1 + 1
+tecla = leerCadenaEntrada( "", y1 )
+
+if tecla = "1" then 
+	ubUsarYomboServer = 1
+	goto Menu
+end if
+
+if tecla = "3" then 
+	goto Menu
+end if
+
+if tecla <> "2" then 
+	goto CambiarServidor
+end if
+
+' Configuracion manual del servidor
+ubUsarYomboServer = 0
+
+imprimirCadenaWrap( "Escriba nombre o IP del servidor: ", 0, y1 + 2, 0, x1, y1 )
+y1 = y1 + 1
+strIPServidor = leerCadenaEntrada( strIPServidor, y1 )
+
+imprimirCadenaWrap( "Escriba URL de ZXChat en el servidor: ", 0, y1 + 2, 0, x1, y1 )
+y1 = y1 + 1
+strUrlServidor = leerCadenaEntrada( strUrlServidor, y1 )
+
+goto Menu
+
 
 
 
@@ -64,9 +140,8 @@ imprimirCadenaWrap( "Accediendo a Yombonet para obtener revision del firmware...
 
 tamRespuesta = obtenerRevisionFirmware()
 
-imprimirCadenaWrap( "Respuesta obtenida.", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "Respuesta obtenida:", 0, y1 + 1, 0, x1, y1 )
 
-imprimirCadenaWrap( "Firmware: ", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaBuferWrap( 0, tamRespuesta, 0, y1 + 1, x1, y1 )
 
 imprimirCadenaWrap( "Pulse una tecla...", 0, y1 + 1, 0, x1, y1 )
@@ -75,27 +150,88 @@ esperarTecla()
 goto Menu
 
 
+
+
 ConexionWiFi:
 
 i = copiarCadenaABufer( strSSID + " " + strWifiPassword )
-imprimirCadenaWrap( "Conectando a Wifi: " + strSSID + "...", 0, y1 + 1, 0, x1, y1 )
+if intentoConexion = 1 then
+	imprimirCadenaWrap( "Conectando a Wifi: " + strSSID + "...", 0, y1 + 1, 0, x1, y1 )
+else
+	imprimirCadenaWrap( "Conectando a Wifi: " + strSSID + ", reintento " + str( intentoConexion ) + " de 3...", 0, y1 + 1, 0, x1, y1 )
+end if
+
 codigoError = conectarAWiFi( i )
 
-if codigoError = 0 then
-	imprimirCadenaWrap( "Conectado a Wifi correctamente.", 0, y1 + 1, 0, x1, y1 )
-	pause 75
-else
-	imprimirCadenaWrap( "Error al conectar a WiFi: " + str( codigoError ), 0, y1 + 1, 0, x1, y1 )
+if codigoError <> 0 then
+	imprimirCadenaWrap( "Error al conectar a WiFi, codigo: " + str( codigoError ), 0, y1 + 1, 0, x1, y1 )
 	intentoConexion = intentoConexion + 1
 	if intentoConexion > 3 then
-		imprimirCadenaWrap( "Fin reintentos conexion " + str( codigoError ), 0, y1 + 1, 0, x1, y1 )
+		imprimirCadenaWrap( "Fin reintentos conexion. Pulse una tecla." + str( codigoError ), 0, y1 + 1, 0, x1, y1 )
 		esperarTecla()
 		goto Menu
 	end if
 	goto ConexionWiFi
 end if
 
-' Bucle de recepcion y envio de mensajes
+imprimirCadenaWrap( "Conectado a Wifi correctamente.", 0, y1 + 1, 0, x1, y1 )
+
+
+' Conexion a Yomboserver
+if ubUsarYomboServer = 1 then
+
+	imprimirCadenaWrap( "Conectando a YomboServer en yombo.org...", 0, y1 + 1, 0, x1, y1 )
+
+	strUrl = "yombo.org/wp-content/datos/yomboserver/yomboServer.html"
+	tamUrl = copiarCadenaABufer( strUrl )
+	codigoError = peticionGet( tamUrl, tamRespuesta )
+
+	if ( codigoError = 0 ) then
+		' Parsea IP
+		' Busca //
+		strIPServidor = ""
+		i = 0
+		while ( i < TAM_BUFER - 1 and i < tamRespuesta - 1 and not ( bufer( i ) = code("/") and bufer( i + 1 ) = code("/") ) )
+			i = i + 1
+		end while
+
+		if i < TAM_BUFER - 1 and i < tamRespuesta - 1 then
+		
+			i = i + 2
+		
+			' Busca dos puntos :
+			j = i
+			while ( j < TAM_BUFER and j < tamRespuesta and bufer( j ) <> code(":") )
+				j = j + 1
+			end while
+			if j < TAM_BUFER and j < tamRespuesta then
+				' Copia IP que esta entre caracter i y j:
+				while i < j
+					strIPServidor = strIPServidor + chr( bufer( i ) )
+					i = i + 1
+				end while
+			end if
+		end if
+		
+		if strIPServidor = "" then
+			imprimirCadenaWrap( "YomboServer esta offline :( Pulse una tecla.", 0, y1 + 1, 0, x1, y1 )
+			esperarTecla()
+			goto Menu
+		else
+			imprimirCadenaWrap( "YomboServer esta online :)", 0, y1 + 1, 0, x1, y1 )
+		end if
+	else
+		imprimirCadenaWrap( "Error al conectar, codigo: " + str( codigoError ) + ". Pulse una tecla.", 0, y1 + 1, 0, x1, y1 )
+		esperarTecla()
+		goto Menu
+	end if
+end if
+
+
+imprimirCadenaWrap( "Pulse una tecla...", 0, y1 + 2, 0, x1, y1 )
+esperarTecla()
+
+' Bucle de recepcion y envio de mensajes (el chat en si):
 cls
 y0 = 0
 timestamp = "0"
@@ -124,7 +260,7 @@ while cadenaEntrada <> " "
 		cadenaEntrada = reemplazarCadena( cadenaEntrada, $3F, "%3F" )'!
 
 		' Envia mensaje
-		strUrl = strIPServidor + strUrlServidor + "?accion=enviar&nick=YomboZXSpectrum&mensaje=" + cadenaEntrada
+		strUrl = strIPServidor + strUrlServidor + "?accion=enviar&nick=" + strNick + "&mensaje=" + cadenaEntrada
 		tamUrl = copiarCadenaABufer( strUrl )
 		codigoError = peticionGet( tamUrl, tamRespuesta )
 		if codigoError <> 0 then

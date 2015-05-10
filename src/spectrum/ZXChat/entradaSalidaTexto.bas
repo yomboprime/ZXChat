@@ -266,6 +266,8 @@ function leerCadenaEntrada( cadena as string, byref posYCadena as integer ) as s
 
 	finBucleLeerCaracter:
 	
+	while inkey$ <> "" : end while
+	
 	' Quita cursor flash
 	paint( ultCursorX, ultCursorY, 1, 1, 00000111b)
 

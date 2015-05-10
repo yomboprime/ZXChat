@@ -2,7 +2,7 @@
 
 Yombonet
 */
-#define REVISION "En pruebas..."
+#define REVISION "Yombonet firmware r1"
 #define DEBUG 1
 /*
 
@@ -524,10 +524,7 @@ int instruccionConectarAWiFi() {
 	}
 	else {
 		debugPrintln( "\nError al conectar a la wifi." );
-		if ( numReintentos <= 0 ) {
-			debugPrintln( "\nFin de reintentos de conexion." );
-			return 3;
-		}
+		return 3;
 	}
 
 	return 0;
@@ -588,36 +585,11 @@ void setup() {
 	SerialWifi.begin( 9600 );
 	moduloWiFi.configurar( &SerialWifi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
 
-	debugPrintln( "Inicio" );
+	// Mensaje de inicio
+	debugPrint( "Yombonet " );
+	debugPrintln( REVISION );
 	debugPrintln();
 
-	// Conecta a la Wifi
-	bool conectadoOk = false;
-
-/*
-	while ( ! conectadoOk ) {
-
-		debugPrintln( "\nReiniciando WiFi..." );
-
-		if ( moduloWiFi.reiniciar() ) {
-			debugPrintln( "\nWiFi reiniciada satisfactoriamente." );
-		}
-		else {
-			debugPrintln( "\nNo se ha recibido respuesta al reiniciar." );
-		}
-
-		esperar( 1 );
-
-		debugPrintln( "\nConectando a Wifi..." );
-		if ( moduloWiFi.conectarAWifi( (uint8_t*)"yombo", (uint8_t*)"ninobravo" ) ) {
-			debugPrintln( "\nConectado a Wifi Satisfactoriamente." );
-			conectadoOk = true;
-		}
-		else {
-			debugPrintln( "\nError al conectar a la wifi." );
-		}
-	}
-*/
 	// Pone en el registro de control que está listo para atender peticiones
 	escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
 
