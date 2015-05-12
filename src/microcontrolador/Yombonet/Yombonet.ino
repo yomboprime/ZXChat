@@ -38,12 +38,14 @@ Funcionamiento de la interfaz Yombonet
 --------------------------------------
 
 Yombonet consta de un modulo WiFi Esp-07, un microcontrolador Atmega32A y un CPLD XC9572XL.
+
 El CPLD provee una memoria de doble puerto accesible por el Spectrum y por el microcontrolador,
 y es el puente para que se comuniquen.
-Esta memoria son cuatro registros de un byte cada uno. Hay visibles dos registros tanto para
-el micro como para el Spectrum: Un registro de control y uno de datos.  El registro de control 
-en el que escribe el Spectrum es el registro de control que lee el microcontrolador, y viceversa.
-Y lo mismo para el registro de datos.
+Esta memoria son cuatro registros de un byte cada uno: dos registros de control y dos de datos.
+El registro de control en el que escribe el Spectrum es el registro de control que lee el
+microcontrolador, y viceversa. Y lo mismo para los dos registros de datos.
+Vea el archivo doc/imagenPlaca.png para una representación gráfica de estos registros.
+
 Los registros de control y datos son accesibles para el Spectrum en los puertos de I/O siguientes:
 
 A7 A6 A0	Registro					Direccion del puerto
