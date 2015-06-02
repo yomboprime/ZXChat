@@ -138,7 +138,13 @@ Descripcion: Hacer peticion HTTP GET
 		4	Error al conectar al host
 		5	Error al transmitir datos al modulo WiFi
 		6	Error al enviar la peticion al host
-		7	Error al procesar la respuesta del host
+		>6	Error al procesar la respuesta del host
+		
+Codigo instruccion: 0b00000101
+Descripcion: Hacer peticion HTTP POST
+	Igual que la instruccion anterior pero se hace una peticion POST, no GET. Los parametros se envian
+	a Yombonet como en una instruccion GET, en la URL. Pero Yombonet quita los parametros de la URL y 
+	los pone en	el cuerpo de la peticion POST.
 
 Instrucciones de E/S
 --------------------
@@ -499,6 +505,8 @@ int instruccionConectarAWiFi() {
 	int numReintentos = 3;
 	while ( ! reiniciadoOk ) {
 
+		numReintentos--;
+
 		debugPrintln( "\nReiniciando WiFi..." );
 
 		if ( moduloWiFi.reiniciar() ) {
@@ -512,8 +520,6 @@ int instruccionConectarAWiFi() {
 				return 2;
 			}
 		}
-
-		numReintentos--;
 
 		esperar( 1 );
 
@@ -532,14 +538,14 @@ int instruccionConectarAWiFi() {
 	return 0;
 }
 
-int instruccionPeticionGet( int* numBytesRespuesta  ) {
+int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
 
 	int numBytes = recibirCadenaBytes();
 
 	// Asegura que el bufer termina en byte nulo (0)
 	bufer[ numBytes ] = 0;
 
-	int codigoError = moduloWiFi.peticionHttpGet( bufer, numBytesRespuesta );
+	int codigoError = moduloWiFi.peticionHttpGetPost( getNoPost, bufer, numBytesRespuesta );
 	
 	if ( codigoError == 0 ) {
 		debugPrint( "\nPeticion HTTP Respondida OK. Longitud datos = " );
@@ -588,7 +594,6 @@ void setup() {
 	moduloWiFi.configurar( &SerialWifi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
 
 	// Mensaje de inicio
-	debugPrint( "Yombonet " );
 	debugPrintln( REVISION );
 	debugPrintln();
 
@@ -630,7 +635,12 @@ void loop() {
 				break;
 			case 0b00000100:
 				// Peticion HTTP GET
-				codigoError = instruccionPeticionGet( &numBytesRespuesta );
+				codigoError = instruccionPeticionGetPost( true, &numBytesRespuesta );
+				transmitirRespuesta = true;
+				break;
+			case 0b00000101:
+				// Peticion HTTP POST
+				codigoError = instruccionPeticionGetPost( false, &numBytesRespuesta );
 				transmitirRespuesta = true;
 				break;
 			default:

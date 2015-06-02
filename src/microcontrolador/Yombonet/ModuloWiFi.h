@@ -21,7 +21,7 @@ public:
 	bool getWifiConectada();
 	bool desconectarWifi();
 
-	int peticionHttpGet( uint8_t* url, int* longitudRespuesta );
+	int peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitudRespuesta );
 
 	void activarDesactivarDebug( bool activar );
 	
@@ -44,6 +44,17 @@ private:
 	bool buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout );
 	int leerCadenaConTerminador( uint8_t terminador, unsigned long timeout );
 	int leerCadenaLongitud( int tam, unsigned long timeout );
+	
+	int numeroDeDigitos( int i ) {
+		// Hasta 999 sin signo
+		if ( i < 10 ) {
+			return 1;
+		}
+		if ( i < 100 ) {
+			return 2;
+		}
+		return 3;
+	}
 
 };
 

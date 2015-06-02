@@ -58,15 +58,21 @@ function conectarAWiFi( tamPeticion as uinteger ) as ubyte
 end function
 
 
-function peticionGet( tamPeticion as uinteger, byref tamRespuesta as uinteger ) as ubyte
+function peticionGetPost( getNoPost as ubyte, tamPeticion as uinteger, byref tamRespuesta as uinteger ) as ubyte
 
 	' Devuelve codigo de error.
 	' en tamRespuesta se devuelve el tam de los bytes recibidos en el bufer
 
+	dim instruccion as ubyte
+	instruccion = 00000100b ' GET
+	if getNoPost = 0 then
+		instruccion = 00000101b ' POST
+	end if
+
 	esperarYombonetLista()
 
 	' Escribe instruccion
-	escribirRegistroControl( 00000100b )
+	escribirRegistroControl( instruccion )
 
 	transmitirCadena( tamPeticion )
 
@@ -101,7 +107,7 @@ function recibirCadena() as uinteger
 	b0 = leerRegistroDatos()
 	b1 = leerRegistroDatos()
 	
-	tamRespuesta = ((b1 shl 8 ) band $FF00) bor (b0 band $00FF)
+	tamRespuesta = ( ( cast( uinteger, b1 ) shl 8 ) band $FF00) bor ( cast( uinteger, b0 ) band $00FF)
 
 	if ( tamRespuesta > TAM_BUFER ) then
 		tamRespuesta = TAM_BUFER

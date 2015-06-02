@@ -2,7 +2,8 @@
 #include "ModuloWiFi.h"
 #include "Arduino.h"
 
-#define SDEBUG if ( debugActivado ) puertoSerieDebug
+// Comando de debug, por ejemplo SDEBUG->println( "Hola mundo" );
+#define SDEBUG if ( debugActivado && puertoSerieDebug ) puertoSerieDebug
 
 void ModuloWiFi::configurar( Stream* puertoSerie, Stream* puertoSerieDebug, int pinReset, uint8_t* bufer, int tamBufer ) {
 
@@ -29,15 +30,29 @@ bool ModuloWiFi::reiniciar() {
 	digitalWrite( pinReset, HIGH );
 	
 	// Busca "ready"
-	return buscarRespuesta( (uint8_t*)"ready", 10000 );
+	int r = buscarRespuesta( (uint8_t*)"ready", 10000 );
+
+	// Pone modo STA + Soft AP
+	purgarPuertoSerie();
+	puertoSerie->write( "AT+CWMODE=3\r\n" );
+	buscarRespuesta( (uint8_t*)"OK", 10000 );
+
+/*
+puertoSerie->write( "AT+CIOBAUD=9600\r\n" );
+buscarRespuesta( (uint8_t*)"OK", 10000 );
+SDEBUG->println( "\nwDEBUG3" );
+*/
+
+	return r;
 }
 
 bool ModuloWiFi::conectarAWifi( uint8_t* ssid, uint8_t* password ) {
 
+	// Desconecta
 	desconectarWifi();
-	
+
 	purgarPuertoSerie();
-	
+
 	puertoSerie->write( "AT+CWJAP=\"" );
 	puertoSerie->write( (char*)ssid );
 	puertoSerie->write( "\",\"" );
@@ -72,16 +87,19 @@ bool ModuloWiFi::desconectarWifi() {
 	return true;
 }
 
-int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
+int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitudRespuesta ) {
 	
+	// Si getNoPost = 0, se hace peticion POST, si no, GET.
 	// El parametro url esta contenido en el bufer y debe estar terminado en el byte nulo (0)
 	// Al retorno, el parametro url es sobreescrito, el bufer contiene la respuesta.
 	// En longitudRespuesta se devuelve el numero de bytes que ocupa la respuesta en el bufer,
 	// incluyendo  0 terminador.
-	// En la url es obligatorio que este la barra / que indica la raiz. El puerto
-	// (:8080 por ejemplo) es opcional (por defecto es el 80)
+	// En la url es obligatorio que este la barra / que indica la raiz. El puerto es opcional
+	// (:8080 por ejemplo) Por defecto es el 80.
+	// Para las peticiones post, los parametros se ponen en la URL igual que en GET, y la
+	// trama http se construye con POST con los parametros en el body.
 	// URLs de ejemplo:
-	// 192.168.1.100:8080/algun/documento.jsp
+	// 192.168.1.100:8080/algun/documento.jsp?param1=valor1&param2=valor2
 	// www.google.com/
 	// yombo.org/blog
 
@@ -97,6 +115,7 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 	char *dominio = (char*)url;
 	char *puerto = NULL;
 	char *raiz = NULL;
+	char *parametros = NULL;
 	int tamDominio = 0;
 	int tamPuerto = 0;
 	for( pos = (char*)url, c = *pos;
@@ -116,6 +135,27 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 	else {
 		return 2;
 	}
+
+	int tamRaiz = strlen( raiz );
+	int tamParametros = tamRaiz;
+
+	// Si es peticion post, parsea parametros
+	if ( getNoPost == 0 ) {
+		for ( pos = (char*)raiz, c = *pos;
+				c != 0 && c != '?';
+				pos++, c = *pos, tamParametros-- ){}
+		if ( c == '?' && tamParametros > 1 ) {
+			parametros = pos + 1;
+			*pos = 0;
+			tamParametros--;
+			tamRaiz -= tamParametros + 1;
+		}
+		else {
+			// No hay parametros
+			parametros = "";
+			tamParametros = 0;
+		}
+	}
 	
 	SDEBUG->println( "\nPETICION:" );
 	SDEBUG->print( "\ndominio=" );
@@ -131,18 +171,42 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 	}
 	SDEBUG->print( "\nraiz=" );
 	SDEBUG->println( raiz );
+	if ( parametros != NULL ) {
+		SDEBUG->print( "\nparametros=" );
+		SDEBUG->println( parametros );
+	}
 
-	int tamRaiz = strlen( raiz );
-	
 	// Calcula tamanyo peticion GET
-	int tamPeticion =	4 + 			// "GET "
+	int tamPeticion =	(getNoPost?4:5)+// "GET " o "POST "
 						tamRaiz +		// resto url
 						11 + 			//" HTTP/1.1\r\n"
 						6 +				// "Host: "
 						tamDominio + 	// el host
 						14 +			// "\r\nUser-Agent: "
 						10 +			// "ZXSpectrum"
-						4;				// "\r\n\r\n"
+						4;				// "\r\n\r\n" Linea en blanco entre cabecera y body
+
+	SDEBUG->print( "\nDEBUG1:" );
+	SDEBUG->print( tamPeticion );
+
+	
+	
+	if ( getNoPost == 0 ) {
+		// Peticion POST, anyade Content-Type y body con los parametros
+		tamPeticion +=  49 + // "\r\nContent-Type: application/x-www-form-urlencoded"
+						18 + // "\r\nContent-Length: "
+						numeroDeDigitos( tamParametros ) + // Numero de digitos del tamanyo del contenido.
+						tamParametros; // Tamanyo del contenido.
+	}
+	
+	SDEBUG->print( "\nDEBUG2:" );
+	SDEBUG->print( tamPeticion );
+	SDEBUG->print( ", " );
+	SDEBUG->print( tamParametros );
+	SDEBUG->print( ", " );
+	SDEBUG->print( numeroDeDigitos( tamParametros ) );
+	SDEBUG->print( ", " );
+	SDEBUG->println();
 
 	purgarPuertoSerie();
 
@@ -167,18 +231,28 @@ int ModuloWiFi::peticionHttpGet( uint8_t* url, int* longitudRespuesta ) {
 		return 4;
 	}
 
-	// Envia peticion get
+	// Envia peticion get o post
 	puertoSerie->write( "AT+CIPSEND=4," );
 	puertoSerie->print( tamPeticion );
 	puertoSerie->write( "\r\n" );
 	if ( ! buscarRespuesta( (uint8_t*)">", 5000 ) ) {
 		return 5;
 	}
-	puertoSerie->write( "GET " );
+	puertoSerie->write( getNoPost ? "GET " : "POST " );
 	puertoSerie->write( (uint8_t*)raiz, tamRaiz );
 	puertoSerie->write( " HTTP/1.1\r\nHost: " );
 	puertoSerie->write( (uint8_t*)dominio, tamDominio );
-	puertoSerie->write( "\r\nUser-Agent: ZXSpectrum\r\n\r\n" );
+	puertoSerie->write( "\r\nUser-Agent: ZXSpectrum" );
+	if ( getNoPost == 0 ) {
+		puertoSerie->write( "\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: " );
+		puertoSerie->print( tamParametros );
+		puertoSerie->write( "\r\n\r\n" );
+		puertoSerie->write( (uint8_t*)parametros, tamParametros );
+	}
+	else {
+		puertoSerie->write( "\r\n\r\n" );
+	}
+
 	if ( ! buscarRespuesta( (uint8_t*)"SEND OK", 15000 ) ) {
 		return 6;
 	}
@@ -233,14 +307,6 @@ void ModuloWiFi::purgarPuertoSerie() {
 }
 
 bool ModuloWiFi::buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout ) {
-
-	/*
-	SDEBUG->print( "\nbuscarRespuesta: Buscando: " );
-	SDEBUG->print( (char*)cadenaABuscar );
-	SDEBUG->print( ", timeout=" );
-	SDEBUG->println( timeout );
-	SDEBUG->println();
-	*/
 
 	int pos = 0;
 	int n = strlen( (char*)cadenaABuscar );

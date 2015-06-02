@@ -15,8 +15,10 @@ public class ZXChat {
 	public static ZXChat getInstance() {
 		if ( zxChatSingleton == null ) {
 			zxChatSingleton = new ZXChat();
+			
+			zxChatSingleton.mensajesDePrueba();
 		}
-		
+
 		return zxChatSingleton;
 	}
 
@@ -88,7 +90,12 @@ public class ZXChat {
 				boolean fechaSobrepasada = false;
 				// Bucle para ver la ventana de mensajes que devolvemos
 				for ( int i = 0; i < mensajes.size(); i++ ) {
-					
+
+					if ( indicePrimerMensaje != -1 && indiceUltimoMensaje != -1 && ( indiceUltimoMensaje - indicePrimerMensaje + 1 ) > 24 ) {
+						// Maximo 24 mensajes, 24 lineas
+						break;
+					}
+
 					Mensaje m = mensajes.get( i ); 
 
 					if ( desdeFecha.compareTo( m.timestamp ) < 0 ) {
@@ -119,14 +126,16 @@ public class ZXChat {
 				os.println( stringTimestamp );
 
 				// Bucle para enviar a la salida los mensajes
+				int longitudTotal = 0;
 				if ( indicePrimerMensaje != -1 && indiceUltimoMensaje != -1 ) {
 					for ( int i = indicePrimerMensaje; i <= indiceUltimoMensaje; i++ ) {
 						Mensaje m = mensajes.get( i );
 						os.println( m.nick + ": " + m.mensaje );
+						longitudTotal += ( m.nick + ": " + m.mensaje ).length() + 2;
 					}
 				}
 				
-				
+				log( "Se devuelven " + longitudTotal + " bytes." );
 				
 				
 				
@@ -155,5 +164,12 @@ public class ZXChat {
 	
 	public static void log( String mensaje ) {
 		System.out.println( "(" + new Date() + ") " + mensaje );
+	}
+	
+	public void mensajesDePrueba() {
+		for ( int i = 0; i < 100; i++ ) {
+			// Cada linea son 20 bytes
+			anyadirMensaje( "Server__", String.format( "%08d", i ) );
+		}
 	}
 }

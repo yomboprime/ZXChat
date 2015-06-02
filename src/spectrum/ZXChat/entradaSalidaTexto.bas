@@ -232,7 +232,7 @@ function leerCadenaEntrada( cadena as string, byref posYCadena as integer ) as s
 		end if
 	else
 		if estado = 1 then
-			if carAnt <> 0 then
+			if carAnt <> 0 and len(cadena) < TAM_BUFER then
 				cadena = cadena + chr( carAnt )
 			end if
 			estado = 0

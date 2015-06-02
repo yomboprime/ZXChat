@@ -4,7 +4,6 @@
 #include "Yombonet.bas"
 #include "entradaSalidaTexto.bas"
 #include "variablesGlobales.bas"
-#include "menuZXChat.bas"
 
 dim i as uinteger
 dim j as uinteger
@@ -27,7 +26,6 @@ Menu:
 
 border 2 : paper 0 : ink 7: flash 0 : bright 0 : over 0
 cls
-
 
 imprimirCadenaWrap( "ZXChat " + VERSION, 0, 0, 0, x1, y1 )
 imprimirCadenaWrap( "1) Comenzar", 0, y1 + 2, 0, x1, y1 )
@@ -184,7 +182,7 @@ if ubUsarYomboServer = 1 then
 
 	strUrl = "yombo.org/wp-content/datos/yomboserver/yomboServer.html"
 	tamUrl = copiarCadenaABufer( strUrl )
-	codigoError = peticionGet( tamUrl, tamRespuesta )
+	codigoError = peticionGetPost( 1, tamUrl, tamRespuesta )
 
 	if ( codigoError = 0 ) then
 		' Parsea IP
@@ -262,7 +260,7 @@ while cadenaEntrada <> " "
 		' Envia mensaje
 		strUrl = strIPServidor + strUrlServidor + "?accion=enviar&nick=" + strNick + "&mensaje=" + cadenaEntrada
 		tamUrl = copiarCadenaABufer( strUrl )
-		codigoError = peticionGet( tamUrl, tamRespuesta )
+		codigoError = peticionGetPost( 1, tamUrl, tamRespuesta )
 		if codigoError <> 0 then
 			imprimirCadenaWrap( "Codigo de error en envio: " + str( codigoError ), 0, y0, 0, x1, y1 )
 			y0 = y1 + 1
@@ -276,7 +274,7 @@ while cadenaEntrada <> " "
 	' Refresca chat
 	strUrl = strIPServidor + strUrlServidor + "?accion=listar&timestamp=" + timestamp
 	tamUrl = copiarCadenaABufer( strUrl )
-	codigoError = peticionGet( tamUrl, tamRespuesta )
+	codigoError = peticionGetPost( 1, tamUrl, tamRespuesta )
 
 	if ( codigoError = 0 ) then
 	
