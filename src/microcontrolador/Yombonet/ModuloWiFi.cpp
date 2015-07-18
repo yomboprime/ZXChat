@@ -28,22 +28,21 @@ bool ModuloWiFi::reiniciar() {
 	digitalWrite( pinReset, LOW );
 	delay( 1000 );
 	digitalWrite( pinReset, HIGH );
-	
+
 	// Busca "ready"
-	int r = buscarRespuesta( (uint8_t*)"ready", 10000 );
+	bool ready = buscarRespuesta( (uint8_t*)"ready", 10000 );
+	
 
-	// Pone modo STA + Soft AP
-	purgarPuertoSerie();
-	puertoSerie->write( "AT+CWMODE=3\r\n" );
-	buscarRespuesta( (uint8_t*)"OK", 10000 );
+	if ( ready ) {
+		buscarRespuesta( (uint8_t*)"OK", 1000 );
 
-/*
-puertoSerie->write( "AT+CIOBAUD=9600\r\n" );
-buscarRespuesta( (uint8_t*)"OK", 10000 );
-SDEBUG->println( "\nwDEBUG3" );
-*/
+		// Pone modo STA + Soft AP
+		purgarPuertoSerie();
+		puertoSerie->write( "AT+CWMODE=3\r\n" );
+		buscarRespuesta( (uint8_t*)"OK", 10000 );
+	}
 
-	return r;
+	return ready;
 }
 
 bool ModuloWiFi::conectarAWifi( uint8_t* ssid, uint8_t* password ) {
@@ -205,16 +204,26 @@ int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitud
 	SDEBUG->print( tamParametros );
 	SDEBUG->print( ", " );
 	SDEBUG->print( numeroDeDigitos( tamParametros ) );
-	SDEBUG->print( ", " );
 	SDEBUG->println();
 
 	purgarPuertoSerie();
 
+	SDEBUG->println( "\nDEBUG3." );
+
 	// Comando de conexion multiple (Aunque solo usamos una, la 4)
-	puertoSerie->write( "AT+CIPMUX=1\r\n" );
+	puertoSerie->write( "AT+CIPMUX=1\r" );
+	
+	SDEBUG->println( "\nDEBUG4." );
+	
+	puertoSerie->write( "\n" );
+	
+	SDEBUG->println( "\nDEBUG4.5." );
+
 	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
 		return 3;
 	}
+	
+	SDEBUG->println( "\nDEBUG5." );
 
 	// Inicio conexion TCP
 	puertoSerie->write( "AT+CIPSTART=4,\"TCP\",\"" );
@@ -278,9 +287,10 @@ int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitud
 	if ( leerCadenaLongitud( tamRespuesta, 15000 ) == -1 ) {
 		return 12;
 	}
-	if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
-		return 13;
-	}
+	// Comentado para los modulos WiFi de la primera tirada de Yombonets 1.0
+	//if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
+	//	return 13;
+	//}
 	puertoSerie->write( "AT+CIPCLOSE=4\r\n" );
 	buscarRespuesta( (uint8_t*)"OK", 2000 );
 

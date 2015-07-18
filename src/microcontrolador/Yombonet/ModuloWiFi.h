@@ -23,9 +23,10 @@ public:
 
 	int peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitudRespuesta );
 
+	bool buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout );
+
 	void activarDesactivarDebug( bool activar );
-	
-	
+
 private:
 
 	Stream* puertoSerie;
@@ -41,7 +42,6 @@ private:
 	bool ssidConectada;
 
 	void purgarPuertoSerie();
-	bool buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout );
 	int leerCadenaConTerminador( uint8_t terminador, unsigned long timeout );
 	int leerCadenaLongitud( int tam, unsigned long timeout );
 	

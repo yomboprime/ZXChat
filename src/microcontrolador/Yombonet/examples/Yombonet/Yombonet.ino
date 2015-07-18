@@ -6,7 +6,7 @@ Yombonet
 #define DEBUG 1
 /*
 
-Interfaz Spectrum con módulo Wifi ESP-07
+Interfaz Spectrum con módulo Wifi Esp8266 ESP-07
 
 Microcontrolador: ATMEGA32A-PU @ 16MHz
 
@@ -224,6 +224,13 @@ Descripcion: Escribir todas las salidas B0...B3
 
 // Definiciones globales
 
+// Solo para cambio de configuracion de baudios del modulo WiFi:
+// Frecuencia en baudios origen
+#define WIFI_BAUDIOS_ORIGEN 115200
+// Frecuencia en baudios final
+#define WIFI_BAUDIOS_FINAL 9600
+
+
 // Registros del CPLD
 #define REGISTRO_CONTROL 0
 #define REGISTRO_DATOS 1
@@ -285,12 +292,12 @@ byte bufer[ TAM_BUFER ];
 ModuloWiFi moduloWiFi;
 
 // Serial del modulo Wifi
-#define SerialWifi Serial1
-//#define SerialWifi Serial
+//#define SerWifi Serial1
+#define SerWifi Serial
 
 // Serial para debug
-SoftwareSerial SerialDebug( 8, 9 ); // 8,9 en ATMEGA1284P
-//SoftwareSerial SerialDebug( 10, 11 ); //10,11 en Atmega32A
+//SoftwareSerial SerialDebug( 8, 9 ); // 8,9 en ATMEGA1284P
+SoftwareSerial SerialDebug( 10, 11 ); //10,11 en Atmega32A
 
 // Indica si esta activado debug por puerto serie
 bool debugActivado = true;
@@ -516,7 +523,10 @@ int instruccionConectarAWiFi() {
 		else {
 			debugPrintln( "\nNo se ha recibido respuesta al reiniciar." );
 			if ( numReintentos <= 0 ) {
-				debugPrintln( "\nFin de reintentos de reset." );
+				debugPrintln( "\nFin de reintentos de reset. Intentando cambiar la config de baudios del WiFi..." );
+				
+				cambiarBaudios();
+				
 				return 2;
 			}
 		}
@@ -559,6 +569,29 @@ int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
 	return codigoError;
 }
 
+void cambiarBaudios() {
+
+	// Usar con cuidado! Llamar despues de reset solo, y tener cuidado con los baudios, no superar 19200 (definidos en este fichero)
+
+	SerWifi.begin( WIFI_BAUDIOS_ORIGEN );
+	
+	delay( 1000 );
+
+	while ( SerWifi.available() > 0 ) {
+		SerWifi.read();
+	}
+	SerWifi.write( "AT+CIOBAUD=" );
+	SerWifi.print( WIFI_BAUDIOS_FINAL );
+	SerWifi.write( "\r\n" );
+	bool ok = moduloWiFi.buscarRespuesta( (uint8_t*)"OK", 10000 );
+	
+	SerWifi.begin( WIFI_BAUDIOS_FINAL );
+	
+	delay( 1000 );
+
+}
+
+
 
 // Setup
 void setup() {
@@ -583,15 +616,16 @@ void setup() {
 	0x07 	 	1024  		30.64
 	*/
 	byte prescalerSetting = 0x07;
-	TCCR2B = ( TCCR2B & 0b11111000 ) | prescalerSetting;
-	//TCCR2 = ( TCCR2 & 0b11111000 ) | prescalerSetting;
+	TCCR2B = ( TCCR2B & 0b11111000 ) | prescalerSetting;     // Descomentar esta linea para Atmega1284p
+	//TCCR2 = ( TCCR2 & 0b11111000 ) | prescalerSetting;	 // Descomentar esta linea para Atmega32A
 
 	// Serial
 	SerialDebug.begin( 9600 );
 
 	// Modulo WiFi
-	SerialWifi.begin( 9600 );
-	moduloWiFi.configurar( &SerialWifi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
+	//SerWifi.begin( WIFI_BAUDIOS_FINAL );
+	SerWifi.begin( 9600 );
+	moduloWiFi.configurar( &SerWifi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
 
 	// Mensaje de inicio
 	debugPrintln( REVISION );
