@@ -8,7 +8,7 @@ Yombonet
 
 Interfaz Spectrum con módulo Wifi Esp8266 ESP-07
 
-Microcontrolador: ATMEGA32A-PU @ 16MHz
+Microcontrolador: ATMEGA1284P-PU @ 16MHz
 
 CPLD Interfaz spectrum:
 
