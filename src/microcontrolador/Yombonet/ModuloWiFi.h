@@ -21,6 +21,10 @@ public:
 	bool getWifiConectada();
 	bool desconectarWifi();
 
+	int abrirConexionTCP( uint8_t*dominio, int tamDominio, uint8_t* puerto, int tamPuerto );
+	int cerrarConexionTCP();
+	bool getConexionTCPAbierta();
+	
 	int peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitudRespuesta );
 
 	bool buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout );
@@ -44,6 +48,9 @@ private:
 	void purgarPuertoSerie();
 	int leerCadenaConTerminador( uint8_t terminador, unsigned long timeout );
 	int leerCadenaLongitud( int tam, unsigned long timeout );
+	
+	// Flag de conexion TCP activa
+	bool conexionTCPActiva;
 	
 	int numeroDeDigitos( int i ) {
 		// Hasta 999 sin signo

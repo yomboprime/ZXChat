@@ -16,6 +16,8 @@ void ModuloWiFi::configurar( Stream* puertoSerie, Stream* puertoSerieDebug, int 
 	this->bufer = bufer;
 	this->tamBufer = tamBufer;
 
+	this->conexionTCPActiva = false;
+
 	debugActivado = true;
 	
 }
@@ -34,12 +36,15 @@ bool ModuloWiFi::reiniciar() {
 	
 
 	if ( ready ) {
-		buscarRespuesta( (uint8_t*)"OK", 1000 );
+                SDEBUG->println( "\nDISPSTIVO READY" );
+                puertoSerie->write( "AT\r\n" );
+		//buscarRespuesta( (uint8_t*)"OK", 1000 );
 
 		// Pone modo STA + Soft AP
 		purgarPuertoSerie();
 		puertoSerie->write( "AT+CWMODE=3\r\n" );
 		buscarRespuesta( (uint8_t*)"OK", 10000 );
+
 	}
 
 	return ready;
@@ -63,6 +68,10 @@ bool ModuloWiFi::conectarAWifi( uint8_t* ssid, uint8_t* password ) {
 	purgarPuertoSerie();
 	puertoSerie->write( "AT+CIFSR\r\n" );
 	buscarRespuesta( (uint8_t*)"OK", 2000 );
+	
+        // Comando de conexion con tramas IPD
+	puertoSerie->write( "AT+CIPMODE=0\r\n" );
+	buscarRespuesta( (uint8_t*)"OK", 2000 );
 
 	return this->ssidConectada;
 }
@@ -84,6 +93,100 @@ bool ModuloWiFi::desconectarWifi() {
 	this->ssidConectada = false;
 
 	return true;
+}
+
+int ModuloWiFi::abrirConexionTCP( uint8_t*dominio, int tamDominio, uint8_t* puerto, int tamPuerto ) {
+
+	cerrarConexionTCP();
+	
+	// Comando de conexion unica
+	puertoSerie->write( "AT+CIPMUX=0\r\n" );
+
+	SDEBUG->println( "\nDEBUG.1" );
+
+	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
+		return 1;
+	}
+	
+	SDEBUG->println( "\nDEBUG.2" );
+
+	// Inicio conexion TCP
+	puertoSerie->write( "AT+CIPSTART=\"TCP\",\"" );
+	puertoSerie->write( dominio, tamDominio );
+	puertoSerie->write( "\"," );
+	if ( puerto == NULL ) {
+		puertoSerie->write( "80" );
+	}
+	else {
+		puertoSerie->write( puerto, tamPuerto );
+	}
+	puertoSerie->write( "\r\n" );
+	
+	SDEBUG->println( "\nDEBUG.3" );
+
+	if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
+		return 2;
+	}
+
+	SDEBUG->println( "\nDEBUG.4" );
+
+        // Comando de conexion directa, sin tramas IPD
+        puertoSerie->write( "AT+CIPMODE=1\r\n" );
+        if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
+                return 2;
+        }
+
+        // Comando de enviar directamente al host remoto lo que escribamos en el puerto serie
+        puertoSerie->write( "AT+CIPSEND\r\n" );
+        buscarRespuesta( (uint8_t*)">", 3000 );
+
+	conexionTCPActiva = true;
+
+	return 0;
+}
+
+int ModuloWiFi::cerrarConexionTCP() {
+
+	// TODO Funcion no testeada
+
+	SDEBUG->println( "\nDEBUG.c1" );
+	
+	if ( ! conexionTCPActiva ) {
+		return 1;
+	}
+	
+	SDEBUG->println( "\nDEBUG.c2" );
+	
+	// TODO
+	delay( 1050 );
+
+	puertoSerie->write( "---" ); // \r\n ?
+	// Tarda 1 segundo
+	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
+		return 2;
+	}
+	
+	SDEBUG->println( "\nDEBUG.c3" );
+	
+	// Comando de cerrar la conexion
+	puertoSerie->write( "AT+CIPCLOSE\r\n" );
+	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
+		return 3;
+	}
+	
+	SDEBUG->println( "\nDEBUG.c4" );
+	
+	// Comando de conexion con tramas IPD
+	puertoSerie->write( "AT+CIPMODE=0\r\n" );
+	buscarRespuesta( (uint8_t*)"OK", 2000 );
+
+	conexionTCPActiva = false;
+
+	return 0;
+}
+
+bool ModuloWiFi::getConexionTCPAbierta() {
+	return conexionTCPActiva;
 }
 
 int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitudRespuesta ) {
@@ -211,13 +314,9 @@ int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitud
 	SDEBUG->println( "\nDEBUG3." );
 
 	// Comando de conexion multiple (Aunque solo usamos una, la 4)
-	puertoSerie->write( "AT+CIPMUX=1\r" );
-	
+	puertoSerie->write( "AT+CIPMUX=1\r\n" );
+
 	SDEBUG->println( "\nDEBUG4." );
-	
-	puertoSerie->write( "\n" );
-	
-	SDEBUG->println( "\nDEBUG4.5." );
 
 	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
 		return 3;
@@ -400,6 +499,8 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 	int pos = 0;
 	unsigned long t0 = millis();
 
+        bool segundaTrama = fale;
+        
 	while ( pos < tam ) {
 		while ( puertoSerie->available() == 0 ) {
 			if ( ( millis() - t0 ) >= timeout ) {
@@ -417,6 +518,20 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 
 		bufer[ pos ] = (uint8_t) b;
 		pos++;
+                
+                /*
+                // Parche para leer segunda trama IPD
+                if ( pos == 4 && ( ! segundaTrama ) &&
+                    bufer[ 0 ] == '+' &&
+                    bufer[ 1 ] == 'I' &&
+                    bufer[ 2 ] == 'P' &&
+                    bufer[ 3 ] == 'D' ) {
+                    
+                    pos = 0;
+                    segundaTrama = true;
+                }
+                */
+                
 	}
 
 	return pos;

@@ -1,14 +1,20 @@
 /*
-
-Yombonet
+	Yombonet
 */
-#define REVISION "Yombonet firmware r1"
+#define REVISION "Yombonet firmware r2"
 #define DEBUG 1
+
+#define PROCESADOR_1284P
+//#define PROCESADOR_32A
+
+// Con esto descomentado, los puertos serie se intercambian (posibilita programar y debuguear en el puerto serie principal)
+//#define PUERTOS_SERIE_PROTOTIPO
+
 /*
 
-Interfaz Spectrum con módulo Wifi Esp8266 ESP-07
+Interfaz para Spectrum con módulo Wifi Esp8266 ESP-07
 
-Microcontrolador: ATMEGA1284P-PU @ 16MHz
+Microcontrolador: Atmega1284P-PU o Atmega32A @ 16MHz
 
 CPLD Interfaz spectrum:
 
@@ -144,7 +150,7 @@ Codigo instruccion: 0b00000101
 Descripcion: Hacer peticion HTTP POST
 	Igual que la instruccion anterior pero se hace una peticion POST, no GET. Los parametros se envian
 	a Yombonet como en una instruccion GET, en la URL. Pero Yombonet quita los parametros de la URL y 
-	los pone en	el cuerpo de la peticion POST.
+	los pone en el cuerpo de la peticion POST.
 
 Instrucciones de E/S
 --------------------
@@ -239,6 +245,7 @@ Descripcion: Escribir todas las salidas B0...B3
 #define UC_LISTO 1
 #define UC_LISTO_RECIBIR 2
 #define UC_LISTO_TRANSMITIR 4
+#define UC_CONEXION_ACTIVA 8
 
 
 // Pines
@@ -272,12 +279,12 @@ Descripcion: Escribir todas las salidas B0...B3
 
 
 #if ( DEBUG == 1 )
-	// Debug habilitado
-	#define debugPrint( x ) debugPrintInterno( x )
-	#define debugPrintln( x ) debugPrintlnInterno( x )
+    // Debug habilitado
+    #define debugPrint( x ) debugPrintInterno( x )
+    #define debugPrintln( x ) debugPrintlnInterno( x )
 #else
-	// Debug deshabilitado, mejor rendimiento
-	#define debugPrint( x )
+    // Debug deshabilitado, mejor rendimiento
+    #define debugPrint( x )
 	#define debugPrintln( x )
 #endif
 
@@ -285,23 +292,34 @@ Descripcion: Escribir todas las salidas B0...B3
 // Variables globales
 
 // Bufer
-#define TAM_BUFER 771
+#define TAM_BUFER 767
 byte bufer[ TAM_BUFER ];
 
 // Modulo WiFi
 ModuloWiFi moduloWiFi;
 
-// Serial del modulo Wifi
-//#define SerWifi Serial1
-#define SerWifi Serial
-
-// Serial para debug
-//SoftwareSerial SerialDebug( 8, 9 ); // 8,9 en ATMEGA1284P
-SoftwareSerial SerialDebug( 10, 11 ); //10,11 en Atmega32A
-
+// Serial del modulo Wifi (SerialWiFi) y Serial para debug (SerialDebug)
+#ifdef PROCESADOR_1284P
+    // Atmega1284P
+    #ifdef PUERTOS_SERIE_PROTOTIPO
+        #define SerialWiFi Serial1
+        #define SerialDebug Serial
+    #else
+        #define SerialWiFi Serial
+        #define SerialDebug Serial1
+    #endif
+#else
+    // Atmega32A
+    #ifdef PUERTOS_SERIE_PROTOTIPO
+        #error "No se puede usar PUERTOS_SERIE_PROTOTIPO con Atmega32A"
+    #else
+        #define SerialWiFi Serial
+        SoftwareSerial SerialDebug( 10, 11 );
+    #endif
+#endif
+        
 // Indica si esta activado debug por puerto serie
 bool debugActivado = true;
-
 
 // Funciones varias
 
@@ -427,7 +445,8 @@ int recibirCadenaBytes() {
 	byte b0 = 0, b1 = 0;
 	
 	// Listo para recibir
-	escribirRegistro( REGISTRO_CONTROL, UC_LISTO_RECIBIR );
+	byte v = UC_LISTO_RECIBIR | ( moduloWiFi.getConexionTCPAbierta() ? UC_CONEXION_ACTIVA : 0 );
+	escribirRegistro( REGISTRO_CONTROL, v );
 
 	// Lee primer byte del entero
 	while ( ! getSenyalWr1() ) {}
@@ -469,7 +488,8 @@ void transmitirCadenaBytes( int numBytes, byte valorRegControl ) {
 	escribirRegistro( REGISTRO_DATOS, b02 );
 	
 	// Listo para transmitir
-	escribirRegistro( REGISTRO_CONTROL, UC_LISTO_TRANSMITIR | valorRegControl );
+	byte v = UC_LISTO_TRANSMITIR | ( moduloWiFi.getConexionTCPAbierta() ? UC_CONEXION_ACTIVA : 0 ) | valorRegControl;
+	escribirRegistro( REGISTRO_CONTROL, v );
 
 	while ( ! getSenyalRd1() ) {}
 	escribirRegistro( REGISTRO_DATOS, b12 );
@@ -492,8 +512,13 @@ int activarDesactivarDebug( bool activar ) {
 int instruccionConectarAWiFi() {
 	
 	int numBytes = recibirCadenaBytes();
+        
+	return conectarAWiFi( numBytes );
+}
 
-	// Se espera SSID PASSWORD en el bufer
+int conectarAWiFi( int numBytes ) {
+
+	// Se espera SSID PASSWORD en el bufer, numBytes es la longitud total
 	
 	// Asegura que el bufer termina en byte nulo (0)
 	bufer[ numBytes ] = 0;
@@ -569,23 +594,184 @@ int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
 	return codigoError;
 }
 
+#define NUM_BYTES_TELNET 6
+int bytesTestTelnet[ NUM_BYTES_TELNET ];
+int bytesTestTelnetClosed[ NUM_BYTES_TELNET ] = {
+    (int)'C',
+    (int)'L',
+    (int)'O',
+    (int)'S',
+    (int)'E',
+    (int)'D'
+//    ,
+//    (int)'\r',
+//    (int)'\n'
+};
+
+int abrirComunicacionTCP( int numBytes ) {
+
+	// Se espera "dominio puerto" en el bufer, numBytes es la longitud total    
+    // Devuelve codigo de error
+
+	// Asegura que el bufer termina en byte nulo (0)
+	bufer[ numBytes ] = 0;
+
+	debugPrint( "\nIniciando conexion TCP..." );
+
+	// TODO parsear numBytes bytes del bufer
+//	uint8_t * dominio = (uint8_t*)"192.168.1.100";
+//	uint8_t * dominio = (uint8_t*)"192.168.1.216";
+	uint8_t * dominio = (uint8_t*)"192.168.1.89";
+//	uint8_t * puerto = (uint8_t*)"23";
+	uint8_t * puerto = (uint8_t*)"8080";
+	
+//	int tamDominio = 13;
+//	int tamPuerto = 2;
+	
+	int tamDominio = 12;
+	int tamPuerto = 4;
+
+    int resultadoConexion = moduloWiFi.abrirConexionTCP( dominio, tamDominio, puerto, tamPuerto );
+
+    if ( resultadoConexion != 0 ) {
+        debugPrint( "\nConexion fallada." );
+        return resultadoConexion;
+    }
+
+    debugPrint( "\nConexion establecida. Entrando en comunicacion directa." );
+
+/*
+	delay( 500 );
+
+	debugPrint( "\nEnviando bytes de opciones telnet" );
+	
+	// Envia negociacion SGA (Suppress Go Ahead, elimina la opcion por defecto de control de flujo por comandos GO AHEAD):
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 251 ); // WILL
+	SerialWiFi.write(   3 ); // SGA
+
+	// Envia negociacion LINEMODE
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 252 ); // WONT
+	SerialWiFi.write(  34 ); // LINEMODE
+	
+	// Envia negociacion TTYPE
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 252 ); // WONT
+	SerialWiFi.write(  24 ); // TTYPE
+	
+	// Envia negociacion NAWS (Negotiation About Window Size):
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 251 ); // WILL
+	SerialWiFi.write(  31 ); // NAWS
+
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 250 ); // SB (Subnegotiation Begins)
+	SerialWiFi.write(  31 ); // NAWS
+	SerialWiFi.write(   0 ); // Byte alto caracteres X
+	SerialWiFi.write(  32 ); // Byte bajo caracteres X
+	SerialWiFi.write(   0 ); // Byte alto caracteres Y
+	SerialWiFi.write(  24 ); // Byte bajo caracteres Y
+
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 240 ); // SE (Subnegotiation Ends)
+
+	// Envia negociacion ECHO:
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 251 ); // WILL
+	SerialWiFi.write(   1 ); // ECHO
+	
+	// Envia negociacion TERMINAL-SPEED:
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 251 ); // WILL
+	SerialWiFi.write(  32 ); // TSPEED
+
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 250 ); // SB (Subnegotiation Begins)
+	SerialWiFi.write(  32 ); // TSPEED
+	SerialWiFi.write(  0 );  // IS
+	SerialWiFi.print( "9600,9600" ); // Velocidad de transmision y recepcion separadas por coma
+
+	SerialWiFi.write( 255 ); // IAC
+	SerialWiFi.write( 240 ); // SE (Subnegotiation Ends)
+*/	
+	
+    for ( int i = 0; i < NUM_BYTES_TELNET; i++ ) {
+        bytesTestTelnet[ i ] = 0;
+    }
+
+    int indiceTest = 0;
+    bool terminado = false;
+    while ( ! terminado ) {
+
+        // Reenvio de bytes WiFi -> Spectrum
+        if ( SerialWiFi.available() > 0 ) {
+            int b = SerialWiFi.read();
+            if ( b != -1 ) {
+
+				SerialDebug.write( b );
+				//SerialDebug.println( b );
+
+/*				
+				// Comprobacion de cadena de terminacion de conexion
+				if ( indiceTest < NUM_BYTES_TELNET - 1 ) {
+					bytesTestTelnet[ indiceTest ] = b;
+					indiceTest++;
+				}
+				if ( indiceTest >= NUM_BYTES_TELNET ) {
+					bool encontrado = true;
+					for ( int i = 0; i < NUM_BYTES_TELNET; i++ ) {
+						if ( bytesTestTelnet[ i ] != bytesTestTelnetClosed[ i ] ) {
+							encontrado = false;
+							break;
+						}
+					}
+					if ( encontrado ) {
+						terminado = true;
+					}
+				}
+*/
+			}
+        }
+
+        // Reenvio de bytes Spectrum -> WiFi
+        if ( SerialDebug.available() > 0 ) {
+            int b = SerialDebug.read();
+            if ( b != -1 ) {
+				
+				if ( b == 10 ) {
+					b = 128;
+				}
+				if ( b == 13 ) {
+					b = 129;
+				}
+				
+                SerialWiFi.write( b );
+            }
+        }
+
+    }
+    
+    debugPrint( "\n-----------Fin de conexion.-------------" );
+}
+
 void cambiarBaudios() {
 
 	// Usar con cuidado! Llamar despues de reset solo, y tener cuidado con los baudios, no superar 19200 (definidos en este fichero)
 
-	SerWifi.begin( WIFI_BAUDIOS_ORIGEN );
+	SerialWiFi.begin( WIFI_BAUDIOS_ORIGEN );
 	
 	delay( 1000 );
 
-	while ( SerWifi.available() > 0 ) {
-		SerWifi.read();
+	while ( SerialWiFi.available() > 0 ) {
+		SerialWiFi.read();
 	}
-	SerWifi.write( "AT+CIOBAUD=" );
-	SerWifi.print( WIFI_BAUDIOS_FINAL );
-	SerWifi.write( "\r\n" );
+	SerialWiFi.write( "AT+CIOBAUD=" );
+	SerialWiFi.print( WIFI_BAUDIOS_FINAL );
+	SerialWiFi.write( "\r\n" );
 	bool ok = moduloWiFi.buscarRespuesta( (uint8_t*)"OK", 10000 );
 	
-	SerWifi.begin( WIFI_BAUDIOS_FINAL );
+	SerialWiFi.begin( WIFI_BAUDIOS_FINAL );
 	
 	delay( 1000 );
 
@@ -616,16 +802,20 @@ void setup() {
 	0x07 	 	1024  		30.64
 	*/
 	byte prescalerSetting = 0x07;
-	TCCR2B = ( TCCR2B & 0b11111000 ) | prescalerSetting;     // Descomentar esta linea para Atmega1284p
-	//TCCR2 = ( TCCR2 & 0b11111000 ) | prescalerSetting;	 // Descomentar esta linea para Atmega32A
-
+#ifdef PROCESADOR_1284P
+	// Atmega1284P
+	TCCR2B = ( TCCR2B & 0b11111000 ) | prescalerSetting;
+#else
+	// Atmega32A
+	TCCR2 = ( TCCR2 & 0b11111000 ) | prescalerSetting;
+#endif
 	// Serial
 	SerialDebug.begin( 9600 );
 
 	// Modulo WiFi
-	//SerWifi.begin( WIFI_BAUDIOS_FINAL );
-	SerWifi.begin( 9600 );
-	moduloWiFi.configurar( &SerWifi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
+	//SerialWiFi.begin( WIFI_BAUDIOS_FINAL );
+	SerialWiFi.begin( 9600 );
+	moduloWiFi.configurar( &SerialWiFi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
 
 	// Mensaje de inicio
 	debugPrintln( REVISION );
@@ -636,11 +826,45 @@ void setup() {
 
 }
 
+void loop1() {
+  
+	// Pruebas conexion TCP
+
+	debugPrint( "Esperando 5 segundos..." );
+	delay( 5000 );
+	
+	//int numBytes = sprintf( (char*)bufer, "yombo ninobravo" ) + 1;
+	int numBytes = sprintf( (char*)bufer, "MOVISTAR_16 elcorraldelapacheca" ) + 1;
+	if ( conectarAWiFi( numBytes ) == 0 ) {
+		
+		delay( 5000 );
+		debugPrint( "Conectado. Comenzando comunicacion." );
+		
+		numBytes = sprintf( (char*)bufer, "192.168.1.100 23" ) + 1;
+		int error = abrirComunicacionTCP( numBytes );
+		if ( error == 0 ) {
+			debugPrint( "Comunicacion abierta" );
+		}
+		else {
+			debugPrint( "Comunicacion NO abierta. Error = " );
+			debugPrint( error );
+		}
+	}
+	
+	debugPrint( "Entrando en el nirvana." );
+	while ( 1 ) {}
+
+}
+
+
 // Loop
 void loop() {
 	
 	// Si el Spectrum ha escrito en el registro de control...
 	if ( getSenyalWr0() ) {
+
+		// No listo
+		escribirRegistro( REGISTRO_CONTROL, 0 );
 
 		// Lee la instruccion del registro de control
 		byte instruccion = leerRegistro( REGISTRO_CONTROL );
