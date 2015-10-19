@@ -1,7 +1,7 @@
 /*
 	Yombonet
 */
-#define REVISION "Yombonet firmware r2"
+#define REVISION "Yombonet firmware r3"
 #define DEBUG 1
 
 #define PROCESADOR_1284P

@@ -499,7 +499,11 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 	int pos = 0;
 	unsigned long t0 = millis();
 
-        bool segundaTrama = false;
+        int segundaTrama = 0;
+        int buscarDosPuntos = 0;
+        
+        SDEBUG->print( "\nDEBUG1_tam=" );
+        SDEBUG->println( tam );
         
 	while ( pos < tam ) {
 		while ( puertoSerie->available() == 0 ) {
@@ -516,22 +520,34 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 		// Esto es eco para debug
 		SDEBUG->print( (char)b );
 
+                if ( buscarDosPuntos ) {
+                    if ( ((uint8_t) b) == ':' ) {
+                        buscarDosPuntos = 0;
+                    }
+                    continue;
+                }
+                
 		bufer[ pos ] = (uint8_t) b;
 		pos++;
-                
-                /*
+
                 // Parche para leer segunda trama IPD
-                if ( pos == 4 && ( ! segundaTrama ) &&
-                    bufer[ 0 ] == '+' &&
-                    bufer[ 1 ] == 'I' &&
-                    bufer[ 2 ] == 'P' &&
-                    bufer[ 3 ] == 'D' ) {
+                if ( segundaTrama == 0 && pos == 8 && 
+                    bufer[ 0 ] == '\r' &&
+                    bufer[ 1 ] == '\n' &&
+                    bufer[ 2 ] == 'O' &&
+                    bufer[ 3 ] == 'K' &&
+                    bufer[ 4 ] == '\r' &&
+                    bufer[ 5 ] == '\n' &&
+                    bufer[ 6 ] == '\r' &&
+                    bufer[ 7 ] == '\n' ) {
                     
                     pos = 0;
                     segundaTrama = true;
-                }
-                */
+                    buscarDosPuntos = true;
                 
+                    SDEBUG->println( "\nDEBUG2" );
+                }
+
 	}
 
 	return pos;
