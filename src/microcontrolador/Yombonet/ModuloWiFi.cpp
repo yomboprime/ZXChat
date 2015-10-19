@@ -499,7 +499,7 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 	int pos = 0;
 	unsigned long t0 = millis();
 
-        bool segundaTrama = fale;
+        bool segundaTrama = false;
         
 	while ( pos < tam ) {
 		while ( puertoSerie->available() == 0 ) {
