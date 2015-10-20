@@ -810,11 +810,10 @@ void setup() {
 	TCCR2 = ( TCCR2 & 0b11111000 ) | prescalerSetting;
 #endif
 	// Serial
-	SerialDebug.begin( 9600 );
+	SerialDebug.begin( WIFI_BAUDIOS_FINAL );
 
 	// Modulo WiFi
-	//SerialWiFi.begin( WIFI_BAUDIOS_FINAL );
-	SerialWiFi.begin( 9600 );
+	SerialWiFi.begin( WIFI_BAUDIOS_FINAL );
 	moduloWiFi.configurar( &SerialWiFi, &SerialDebug, pinResetModuloWiFi, bufer, TAM_BUFER );
 
 	// Mensaje de inicio

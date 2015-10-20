@@ -36,7 +36,7 @@ bool ModuloWiFi::reiniciar() {
 	
 
 	if ( ready ) {
-                SDEBUG->println( "\nDISPSTIVO READY" );
+                SDEBUG->println( "\nDISPOSITIVO READY" );
                 puertoSerie->write( "AT\r\n" );
 		//buscarRespuesta( (uint8_t*)"OK", 1000 );
 
@@ -102,13 +102,9 @@ int ModuloWiFi::abrirConexionTCP( uint8_t*dominio, int tamDominio, uint8_t* puer
 	// Comando de conexion unica
 	puertoSerie->write( "AT+CIPMUX=0\r\n" );
 
-	SDEBUG->println( "\nDEBUG.1" );
-
 	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
 		return 1;
 	}
-	
-	SDEBUG->println( "\nDEBUG.2" );
 
 	// Inicio conexion TCP
 	puertoSerie->write( "AT+CIPSTART=\"TCP\",\"" );
@@ -122,23 +118,19 @@ int ModuloWiFi::abrirConexionTCP( uint8_t*dominio, int tamDominio, uint8_t* puer
 	}
 	puertoSerie->write( "\r\n" );
 	
-	SDEBUG->println( "\nDEBUG.3" );
-
 	if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
 		return 2;
 	}
 
-	SDEBUG->println( "\nDEBUG.4" );
+    // Comando de conexion directa, sin tramas IPD
+    puertoSerie->write( "AT+CIPMODE=1\r\n" );
+    if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
+            return 2;
+    }
 
-        // Comando de conexion directa, sin tramas IPD
-        puertoSerie->write( "AT+CIPMODE=1\r\n" );
-        if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
-                return 2;
-        }
-
-        // Comando de enviar directamente al host remoto lo que escribamos en el puerto serie
-        puertoSerie->write( "AT+CIPSEND\r\n" );
-        buscarRespuesta( (uint8_t*)">", 3000 );
+    // Comando de enviar directamente al host remoto lo que escribamos en el puerto serie
+    puertoSerie->write( "AT+CIPSEND\r\n" );
+    buscarRespuesta( (uint8_t*)">", 3000 );
 
 	conexionTCPActiva = true;
 
@@ -149,13 +141,9 @@ int ModuloWiFi::cerrarConexionTCP() {
 
 	// TODO Funcion no testeada
 
-	SDEBUG->println( "\nDEBUG.c1" );
-	
 	if ( ! conexionTCPActiva ) {
 		return 1;
 	}
-	
-	SDEBUG->println( "\nDEBUG.c2" );
 	
 	// TODO
 	delay( 1050 );
@@ -166,15 +154,11 @@ int ModuloWiFi::cerrarConexionTCP() {
 		return 2;
 	}
 	
-	SDEBUG->println( "\nDEBUG.c3" );
-	
 	// Comando de cerrar la conexion
 	puertoSerie->write( "AT+CIPCLOSE\r\n" );
 	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
 		return 3;
 	}
-	
-	SDEBUG->println( "\nDEBUG.c4" );
 	
 	// Comando de conexion con tramas IPD
 	puertoSerie->write( "AT+CIPMODE=0\r\n" );
@@ -288,9 +272,6 @@ int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitud
 						10 +			// "ZXSpectrum"
 						4;				// "\r\n\r\n" Linea en blanco entre cabecera y body
 
-	SDEBUG->print( "\nDEBUG1:" );
-	SDEBUG->print( tamPeticion );
-
 	
 	
 	if ( getNoPost == 0 ) {
@@ -301,29 +282,15 @@ int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitud
 						tamParametros; // Tamanyo del contenido.
 	}
 	
-	SDEBUG->print( "\nDEBUG2:" );
-	SDEBUG->print( tamPeticion );
-	SDEBUG->print( ", " );
-	SDEBUG->print( tamParametros );
-	SDEBUG->print( ", " );
-	SDEBUG->print( numeroDeDigitos( tamParametros ) );
-	SDEBUG->println();
-
 	purgarPuertoSerie();
-
-	SDEBUG->println( "\nDEBUG3." );
 
 	// Comando de conexion multiple (Aunque solo usamos una, la 4)
 	puertoSerie->write( "AT+CIPMUX=1\r\n" );
-
-	SDEBUG->println( "\nDEBUG4." );
 
 	if ( ! buscarRespuesta( (uint8_t*)"OK", 2000 ) ) {
 		return 3;
 	}
 	
-	SDEBUG->println( "\nDEBUG5." );
-
 	// Inicio conexion TCP
 	puertoSerie->write( "AT+CIPSTART=4,\"TCP\",\"" );
 	puertoSerie->write( (uint8_t*)dominio, tamDominio );
@@ -499,11 +466,8 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 	int pos = 0;
 	unsigned long t0 = millis();
 
-        int segundaTrama = 0;
-        int buscarDosPuntos = 0;
-        
-        SDEBUG->print( "\nDEBUG1_tam=" );
-        SDEBUG->println( tam );
+    int segundaTrama = 0;
+    int buscarDosPuntos = 0;
         
 	while ( pos < tam ) {
 		while ( puertoSerie->available() == 0 ) {
@@ -520,33 +484,32 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
 		// Esto es eco para debug
 		SDEBUG->print( (char)b );
 
-                if ( buscarDosPuntos ) {
-                    if ( ((uint8_t) b) == ':' ) {
-                        buscarDosPuntos = 0;
-                    }
-                    continue;
-                }
+        if ( buscarDosPuntos ) {
+            if ( ((uint8_t) b) == ':' ) {
+                buscarDosPuntos = 0;
+            }
+            continue;
+        }
                 
 		bufer[ pos ] = (uint8_t) b;
 		pos++;
 
-                // Parche para leer segunda trama IPD
-                if ( segundaTrama == 0 && pos == 8 && 
-                    bufer[ 0 ] == '\r' &&
-                    bufer[ 1 ] == '\n' &&
-                    bufer[ 2 ] == 'O' &&
-                    bufer[ 3 ] == 'K' &&
-                    bufer[ 4 ] == '\r' &&
-                    bufer[ 5 ] == '\n' &&
-                    bufer[ 6 ] == '\r' &&
-                    bufer[ 7 ] == '\n' ) {
-                    
-                    pos = 0;
-                    segundaTrama = true;
-                    buscarDosPuntos = true;
-                
-                    SDEBUG->println( "\nDEBUG2" );
-                }
+        // Parche para leer segunda trama IPD
+        if ( segundaTrama == 0 && pos == 8 && 
+            bufer[ 0 ] == '\r' &&
+            bufer[ 1 ] == '\n' &&
+            bufer[ 2 ] == 'O' &&
+            bufer[ 3 ] == 'K' &&
+            bufer[ 4 ] == '\r' &&
+            bufer[ 5 ] == '\n' &&
+            bufer[ 6 ] == '\r' &&
+            bufer[ 7 ] == '\n' ) {
+            
+            pos = 0;
+            segundaTrama = true;
+            buscarDosPuntos = true;
+        
+        }
 
 	}
 
