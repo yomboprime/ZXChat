@@ -1,6 +1,7 @@
 package org.yombo.apps.zxchat;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,13 +9,15 @@ import javax.servlet.ServletOutputStream;
 
 public class ZXChat {
 	
-	public static final int MAX_LONGITUD_MENSAJE = 767; 
-	
+	public static final int MAX_LONGITUD_MENSAJE = 767;
+
 	private static ZXChat zxChatSingleton;
 
 	public static ZXChat getInstance() {
 		if ( zxChatSingleton == null ) {
 			zxChatSingleton = new ZXChat();
+			
+			zxChatSingleton.anyadirMensaje( "Server", "Bienvenidos a ZXChat" );
 			
 			//zxChatSingleton.mensajesDePrueba();
 		}
@@ -35,6 +38,9 @@ public class ZXChat {
 	}
 	
 	public ArrayList<Mensaje> mensajes;
+	
+	public static int longitudFecha = 12;
+	public SimpleDateFormat dateFormat = new SimpleDateFormat( "dd MM HH:mm " );
 
 	public ZXChat() {
 		mensajes = new ArrayList<Mensaje>();
@@ -86,7 +92,8 @@ public class ZXChat {
 			int indicePrimerMensaje = -1;
 			int indiceUltimoMensaje = -1;
 			// Obtiene el timestamp del ultimo mensaje
-			String stringTimestamp = "" + mensajes.get( mensajes.size() - 1 ).timestamp.getTime();
+			Date timestampSeleccionado = mensajes.get( mensajes.size() - 1 ).timestamp;
+			String stringTimestamp = "" + timestampSeleccionado.getTime();
 
 			if ( desdeFecha.getTime() == 0 ) {
 
@@ -109,7 +116,7 @@ public class ZXChat {
 						break;
 					}
 						
-					int longitudMensaje = m.nick.length() + 2 + m.mensaje.length() + 2; // 2 bytes del ": " y 2 bytes de fin de linea
+					int longitudMensaje = longitudFecha + m.nick.length() + 2 + m.mensaje.length() + 2; // 2 bytes del ": " y 2 bytes de fin de linea
 					int longitudMensajesCabecera = longitudMensajes + longitudMensaje + longitudCabecera;
 					if ( longitudMensajesCabecera > MAX_LONGITUD_MENSAJE ) {
 						// Hemos terminado de procesar mensajes porque excederian la capacidad de visualizacion del Spectrum.
@@ -136,9 +143,10 @@ public class ZXChat {
 
 					if ( desdeFecha.compareTo( m.timestamp ) < 0 ) {
 						
-						String stringTimestampTemp = "" + m.timestamp.getTime();
+						Date timestampTemp = m.timestamp;
+						String stringTimestampTemp = "" + timestampTemp.getTime();
 						int longitudCabecera = stringTimestampTemp.length() + 2; // 2 bytes de fin de linea
-						int longitudMensaje = m.nick.length() + 2 + m.mensaje.length() + 2; // 2 bytes del ": " y 2 bytes de fin de linea
+						int longitudMensaje = longitudFecha + m.nick.length() + 2 + m.mensaje.length() + 2; // 2 bytes del ": " y 2 bytes de fin de linea
 						int longitudMensajesCabecera = longitudMensajes + longitudMensaje + longitudCabecera;
 						if ( longitudMensajesCabecera > MAX_LONGITUD_MENSAJE ) {
 							// Hemos terminado de procesar mensajes porque excederian la capacidad de visualizacion del Spectrum.
@@ -153,21 +161,28 @@ public class ZXChat {
 						longitudMensajes += longitudMensaje;
 						indiceUltimoMensaje = i;
 						// El timestamp pasa a ser el del ultimo mensaje aceptado (que se va a devolver en la salida)
+						timestampSeleccionado = timestampTemp; 
 						stringTimestamp = stringTimestampTemp;
 					}
 				}
 			}
 
 			// Envia a la salida la cabecera con timestamp del ultimo mensaje
+			//os.println( "\r\n\r\n" );
 			os.println( stringTimestamp );
 
 			// Bucle para enviar a la salida los mensajes
 			int longitudTotal = 0;
 			if ( indicePrimerMensaje != -1 && indiceUltimoMensaje != -1 ) {
 				for ( int i = indicePrimerMensaje; i <= indiceUltimoMensaje; i++ ) {
+					
 					Mensaje m = mensajes.get( i );
-					os.println( m.nick + ": " + m.mensaje );
-					longitudTotal += ( m.nick + ": " + m.mensaje ).length() + 2;
+					
+					String strMensaje = dateFormat.format( m.timestamp ) + m.nick + ": " + m.mensaje;
+							
+					os.println( strMensaje );
+
+					longitudTotal += strMensaje.length() + 2;
 				}
 			}
 			
