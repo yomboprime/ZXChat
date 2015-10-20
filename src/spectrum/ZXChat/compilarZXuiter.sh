@@ -1,4 +1,4 @@
-export PATH=$PATH:/media/datos1/Devel/zxbasic/zxbasic/
+export PATH=$PATH:/media/datos/Devel/zxbasic/zxbasic/
 zxb.py ZXuiter.bas --tap --BASIC --autorun
 # --debug-memory
 

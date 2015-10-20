@@ -1,6 +1,7 @@
 
-#define VERSION "r1"
+#define VERSION "r2"
 
+#include <print64.bas>
 #include "Yombonet.bas"
 #include "entradaSalidaTexto.bas"
 #include "variablesGlobales.bas"
@@ -19,8 +20,9 @@ dim timestamp as string
 dim codigoError as ubyte
 dim tecla as string
 dim intentoConexion as ubyte
+dim continuarConexion as ubyte
 
-
+continuarConexion = 0
 
 Menu:
 
@@ -33,7 +35,15 @@ imprimirCadenaWrap( "2) Cambiar nick (" + strNick + ")", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "3) Configurar WiFi", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "4) Cambiar servidor", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "5) Testear Yombonet", 0, y1 + 1, 0, x1, y1 )
-imprimirCadenaWrap( "6) Salir", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "6) Continuar conexion", 0, y1 + 1, 0, x1, y1 )
+dim strAvisoSonoro as string
+if avisoSonoroActivado = 1 then
+    strAvisoSonoro = "Activado)"
+else
+    strAvisoSonoro = "Desactivado)"
+end if
+imprimirCadenaWrap( "7) Cambiar aviso sonoro: (" + strAvisoSonoro, 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "8) Salir", 0, y1 + 1, 0, x1, y1 )
 
 imprimirCadenaWrap( "Pulse opcion y enter...", 0, y1 + 2, 0, x1, y1 )
 y1 = y1 + 1
@@ -54,7 +64,9 @@ if tecla = "2" then goto CambiarNick : end if
 if tecla = "3" then goto ConfigurarWiFi : end if
 if tecla = "4" then goto CambiarServidor : end if
 if tecla = "5" then goto TestearYombonet : end if
-if tecla = "6" then goto Fin : end if
+if tecla = "6" then goto ContinuarConexion : end if
+if tecla = "7" then goto CambiarAvisoSonoro : end if
+if tecla = "8" then goto Fin : end if
 
 goto Menu
 
@@ -71,6 +83,15 @@ goto Menu
 
 
 
+CambiarAvisoSonoro:
+
+if avisoSonoroActivado = 1 then
+    avisoSonoroActivado = 0
+else
+    avisoSonoroActivado = 1  
+end if
+
+goto Menu
 
 
 ConfigurarWiFi:
@@ -134,6 +155,7 @@ goto Menu
 
 TestearYombonet:
 
+
 imprimirCadenaWrap( "Accediendo a Yombonet para obtener revision del firmware...", 0, y1 + 1, 0, x1, y1 )
 
 tamRespuesta = obtenerRevisionFirmware()
@@ -151,6 +173,7 @@ goto Menu
 
 
 ConexionWiFi:
+
 
 i = copiarCadenaABufer( strSSID + " " + strWifiPassword )
 if intentoConexion = 1 then
@@ -225,14 +248,36 @@ if ubUsarYomboServer = 1 then
 	end if
 end if
 
+continuarConexion = 1
+
+timestamp = "0"
 
 imprimirCadenaWrap( "Pulse una tecla...", 0, y1 + 2, 0, x1, y1 )
 esperarTecla()
 
+goto InicioChat
+
+
+
+ContinuarConexion:
+
+
+if continuarConexion = 0 then
+    imprimirCadenaWrap( "No hay ninguna conexion anterior que continuar. Pulse una tecla.", 0, y1 + 2 , 0, x1, y0 )
+    esperarTecla()
+    goto Menu
+end if
+
+goto InicioChat
+
+
+
+InicioChat:
+
+
 ' Bucle de recepcion y envio de mensajes (el chat en si):
 cls
 y0 = 0
-timestamp = "0"
 cadenaEntrada = ""
 
 imprimirCadenaWrap( "Escriba un mensaje para enviar o pulse solo enter para recibir. Escriba un solo espacio para volver al menu.", 0, y0, 0, x1, y0 )
@@ -240,7 +285,13 @@ y0 = y0 + 1
 
 while cadenaEntrada <> " "
 
-	cadenaEntrada = leerCadenaEntrada( "", y0 )
+        ' Espera 5 segundos ( 250 frames ) a recargar
+        if not esperarTeclaConTimeout( 250 ) then
+            ' Recarga automatica
+            cadenaEntrada = ""
+        else
+            cadenaEntrada = leerCadenaEntrada( "", y0 )
+        end if
 
 	border 0
 
@@ -301,6 +352,11 @@ while cadenaEntrada <> " "
 		if j > 0 then 
 			imprimirCadenaBuferWrap( cast(uinteger,i), j, 0, y0, x1, y1 )
 			y0 = y1 + 1
+			
+			if avisoSonoroActivado = 1 then
+                beep 0.1,15
+            end if
+			
 		end if
 
 	else
@@ -317,4 +373,4 @@ end while
 goto Menu
 
 Fin:
-print "FIN"
+imprimirCadenaWrap( "FIN", 0, y1 + 2 , 0, x1, y0 )

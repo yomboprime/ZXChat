@@ -2,7 +2,8 @@
 
 #define __BUFER__
 
-#define TAM_BUFER 771
+#define TAM_BUFER 767
+'#define TAM_BUFER 450
 dim bufer( 0 to TAM_BUFER - 1) as ubyte
 
 function copiarCadenaABufer( cadena as string ) as integer

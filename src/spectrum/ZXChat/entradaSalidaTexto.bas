@@ -7,6 +7,9 @@
 #include "Putchars.bas"
 #include "bufer.bas"
 
+#define NUM_CARS_POR_LINEA_IMPRESION 64
+#define NUM_LINEAS_IMPRESION 24
+
 sub scrollArriba()
 
 	PixelScrollUp( 1 )
@@ -21,20 +24,61 @@ sub scrollArriba()
 end sub
 
 function esperarTecla() as string
-	dim tecla as string
-	tecla = ""
-	while tecla = ""
-		tecla = inkey$
-	end while
-	while inkey$ <> ""
-	end while
-	return tecla
+    dim tecla as string
+    tecla = ""
+    while tecla = ""
+            tecla = inkey$
+    end while
+    while inkey$ <> ""
+    end while
+    return tecla
 end function
+
+function getTiempo AS ULONG
+    ' Devuelve FRAMES (1/50 s)
+    return INT( 65536 * PEEK( 23674 ) + 256 * PEEK( 23673 ) + PEEK ( 23672 ) )
+end function
+
+function esperarTeclaConTimeout( timeout as ulong ) as integer
+
+    ' El parametro es en frames (1/50 s)
+    ' Devuelve 1 si se ha pulsado una tecla en el tiempo, o 0 si no
+
+    dim t0 as ulong
+    dim t1 as ulong
+    t0 = getTiempo()
+    t1 = t0
+
+    dim tecla as string
+    tecla = ""
+    while tecla = ""
+            t1 = getTiempo()
+            if t1 - t0 > timeout then
+                return 0
+            end if
+            tecla = inkey$
+    end while
+    return 1
+end function
+
+sub imprimirEn( y as integer, x as integer, cad as string )
+
+    'print at y,x; cad( i )
+    
+    if x < 0 or x >= NUM_CARS_POR_LINEA_IMPRESION or y < 0 or y >= NUM_LINEAS_IMPRESION then
+        border 7
+    end if
+        
+    printat64( y, x )
+    print64( cad )
+    
+    
+end sub
 
 function imprimirCadenaWrap( cad as string, x0 as integer, y0 as integer, imprimirSoloUltimoCaracter as ubyte, byref xf as integer, byref yf as integer ) as integer
 
 	' x0 e y0 son caracteres desde esquina sup-izq
-	' xf e yf tambien. Se devuelve la posicion del ultimo caracter escrito (normalmente un espacio)
+	' xf e yf tambien. Se devuelve la posicion del ultimo caracter escrito
 	' devuelve numero de scrolls hechos (lineas)
 
 	dim x as integer
@@ -47,7 +91,7 @@ function imprimirCadenaWrap( cad as string, x0 as integer, y0 as integer, imprim
 	x = x0
 	y = y0
 	
-	while y >= 24
+	while y >= NUM_LINEAS_IMPRESION
 		scrollArriba()
 		y = y - 1
 		numScrolls = numScrolls + 1
@@ -57,16 +101,16 @@ function imprimirCadenaWrap( cad as string, x0 as integer, y0 as integer, imprim
 	if numCars > 0 then
 		for i = 0 to numCars - 1
 			if imprimirSoloUltimoCaracter = 0 or i = numCars - 1 then
-				print at y,x; cad( i )
+				imprimirEn( y, x, cad( i ) )
 			end if
 			x = x + 1
-			if x >= 32 then
+			if x >= NUM_CARS_POR_LINEA_IMPRESION then
 				x = 0
 				y = y + 1
-				'if y >= 24 then
+				'if y >= NUM_LINEAS_IMPRESION then
 				'	i = numCars + 1
 				'end if
-				while y >= 24
+				while y >= NUM_LINEAS_IMPRESION
 					scrollArriba()
 					y = y - 1
 					numScrolls = numScrolls + 1
@@ -76,7 +120,7 @@ function imprimirCadenaWrap( cad as string, x0 as integer, y0 as integer, imprim
 	end if
 
 	if i <= numCars then
-		print at y, x; " "
+		imprimirEn( y, x, " " )
 	end if
 
 	xf = x
@@ -102,7 +146,7 @@ function imprimirCadenaBuferWrap( indiceInicio as integer, tamCadena as integer,
 	x = x0
 	y = y0
 	
-	while y >= 24
+	while y >= NUM_LINEAS_IMPRESION
 		scrollArriba()
 		y = y - 1
 		numScrolls = numScrolls + 1
@@ -116,15 +160,15 @@ function imprimirCadenaBuferWrap( indiceInicio as integer, tamCadena as integer,
 				y = y + 1
 			else
 				if c <> 10 then
-					print at y,x; chr( c )
+					imprimirEn( y, x, chr( c ) )
 					x = x + 1
-					if x >= 32 then
+					if x >= NUM_CARS_POR_LINEA_IMPRESION then
 						x = 0
 						y = y + 1
 					end if
 				end if
 			end if
-			while y >= 24
+			while y >= NUM_LINEAS_IMPRESION
 				scrollArriba()
 				y = y - 1
 				numScrolls = numScrolls + 1
@@ -158,15 +202,15 @@ sub borrarCadenaWrap( cad as string, x0 as integer, y0 as integer )
 	numCars = len( cad )
 	if numCars > 0 then
 		for i = 0 to numCars - 1
-			print at y,x; " "
+			imprimirEn( y, x, " " )
 			x = x + 1
-			if x >= 32 then
+			if x >= NUM_CARS_POR_LINEA_IMPRESION then
 				x = 0
 				y = y + 1
-				'if y >= 24 then
+				'if y >= NUM_LINEAS_IMPRESION then
 				'	i = numCars + 1
 				'end if
-				if y >= 24 then
+				if y >= NUM_LINEAS_IMPRESION then
 					i = numCars
 				end if
 			end if
@@ -201,9 +245,9 @@ function leerCadenaEntrada( cadena as string, byref posYCadena as integer ) as s
 	end if
 
 	' Pone cursor flash
-	ultCursorX = ultCarX
+	ultCursorX = ultCarX / 2
 	ultCursorY = ultCarY
-	paint( ultCarX, ultCarY, 1, 1, 10111000b)
+	paint( ultCursorX, ultCursorY, 1, 1, 10111000b)
 
 	' Estado: 0 nada, 1 escribir letra, 2 borrar letra
 	estado = 0
@@ -256,9 +300,9 @@ function leerCadenaEntrada( cadena as string, byref posYCadena as integer ) as s
 
 		' Pone cursor con flash
 		paint( ultCursorX, ultCursorY, 1, 1, 00000111b)
-		paint( ultCarX, ultCarY, 1, 1, 10000111b)
-		ultCursorX = ultCarX
-		ultCursorY = ultCarY
+		ultCursorX = ultCarX / 2
+                ultCursorY = ultCarY
+		paint( ultCursorX, ultCursorY, 1, 1, 10000111b)
 
 	end if
 	
