@@ -28,6 +28,8 @@ public:
 	int peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitudRespuesta );
 
 	bool buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout );
+    
+    bool buscarRespuestaRMinuscula( uint8_t* cadenaABuscar, unsigned long timeout );
 
 	void activarDesactivarDebug( bool activar );
 

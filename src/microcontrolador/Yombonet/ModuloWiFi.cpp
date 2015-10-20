@@ -32,7 +32,7 @@ bool ModuloWiFi::reiniciar() {
 	digitalWrite( pinReset, HIGH );
 
 	// Busca "ready"
-	bool ready = buscarRespuesta( (uint8_t*)"ready", 10000 );
+	bool ready = buscarRespuestaRMinuscula( (uint8_t*)"ready", 10000 );
 	
 
 	if ( ready ) {
@@ -417,6 +417,46 @@ bool ModuloWiFi::buscarRespuesta( uint8_t* cadenaABuscar, unsigned long timeout 
 	return true;
 }
 
+bool ModuloWiFi::buscarRespuestaRMinuscula( uint8_t* cadenaABuscar, unsigned long timeout ) {
+
+    int pos = 0;
+    int n = strlen( (char*)cadenaABuscar );
+    unsigned long t0 = millis();
+    
+    while ( pos < n ) {
+        while ( puertoSerie->available() == 0 ) {
+            if ( ( millis() - t0 ) >= timeout ) {
+                return false;
+            }
+        }
+
+        int b = puertoSerie->read();
+        if ( b == -1 ) {
+            continue;
+        }
+        
+        // Esto es eco para debug
+        SDEBUG->print( (char)b );
+        
+        uint8_t bp = ((uint8_t)b);
+        
+        if ( bp == 'R' ) {
+            bp = 'r';
+        }
+        
+        if ( bp == cadenaABuscar[ pos ] ) {
+            pos++;
+        }
+        else {
+            pos = 0;
+            if ( ((uint8_t)b) == cadenaABuscar[ pos ] ) {
+                pos++;
+            }
+        }
+    }
+
+    return true;
+}
 
 int ModuloWiFi::leerCadenaConTerminador( uint8_t terminador, unsigned long timeout ) {
 

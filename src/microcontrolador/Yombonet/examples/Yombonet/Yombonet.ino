@@ -1,14 +1,14 @@
 /*
 	Yombonet
 */
-#define REVISION "Yombonet firmware r3"
+#define REVISION "Yombonet firmware r4"
 #define DEBUG 1
 
 #define PROCESADOR_1284P
 //#define PROCESADOR_32A
 
 // Con esto descomentado, los puertos serie se intercambian (posibilita programar y debuguear en el puerto serie principal)
-//#define PUERTOS_SERIE_PROTOTIPO
+#define PUERTOS_SERIE_PROTOTIPO
 
 /*
 
