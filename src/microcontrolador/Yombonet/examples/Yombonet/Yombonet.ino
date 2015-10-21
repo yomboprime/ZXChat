@@ -8,7 +8,7 @@
 //#define PROCESADOR_32A
 
 // Con esto descomentado, los puertos serie se intercambian (posibilita programar y debuguear en el puerto serie principal)
-//#define PUERTOS_SERIE_PROTOTIPO
+#define PUERTOS_SERIE_PROTOTIPO
 
 /*
 
@@ -282,10 +282,12 @@ Descripcion: Escribir todas las salidas B0...B3
     // Debug habilitado
     #define debugPrint( x ) debugPrintInterno( x )
     #define debugPrintln( x ) debugPrintlnInterno( x )
+    #define debugWriteBuf( x, n ) debugWriteBufInterno( x, n )
 #else
     // Debug deshabilitado, mejor rendimiento
     #define debugPrint( x )
 	#define debugPrintln( x )
+	#define debugWriteBuf( x, n )
 #endif
 
 
@@ -358,6 +360,12 @@ void debugPrintlnInterno() {
 	if ( debugActivado ) {
 		SerialDebug.println();
 	}
+}
+
+void debugWriteBufInterno( const uint8_t * str, int n ) {
+    if ( debugActivado ) {
+        SerialDebug.write( str, n );
+    }
 }
 
 // Funciones de la interfaz con Spectrum
@@ -585,6 +593,13 @@ int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
 	if ( codigoError == 0 ) {
 		debugPrint( "\nPeticion HTTP Respondida OK. Longitud datos = " );
 		debugPrintln( *numBytesRespuesta );
+
+        if ( *numBytesRespuesta >= 10 ) {
+            debugPrint( "Primeros 10 bytes de la salida:" );
+            debugWriteBuf( bufer, 10 );
+            debugPrintln();
+        }
+
 	}
 	else {
 		debugPrint( "\nPeticion HTTP FALLADA. Error=" );
@@ -833,7 +848,7 @@ void loop1() {
 	delay( 5000 );
 	
 	//int numBytes = sprintf( (char*)bufer, "yombo ninobravo" ) + 1;
-	int numBytes = sprintf( (char*)bufer, "MOVISTAR_16 elcorraldelapacheca" ) + 1;
+	int numBytes = sprintf( (char*)bufer, "MOVISTAR_16 password" ) + 1;
 	if ( conectarAWiFi( numBytes ) == 0 ) {
 		
 		delay( 5000 );

@@ -36,8 +36,8 @@ bool ModuloWiFi::reiniciar() {
 	
 
 	if ( ready ) {
-                SDEBUG->println( "\nDISPOSITIVO READY" );
-                puertoSerie->write( "AT\r\n" );
+        SDEBUG->println( "\nDISPOSITIVO READY" );
+        puertoSerie->write( "AT\r\n" );
 		//buscarRespuesta( (uint8_t*)"OK", 1000 );
 
 		// Pone modo STA + Soft AP
@@ -546,8 +546,8 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
             bufer[ 7 ] == '\n' ) {
             
             pos = 0;
-            segundaTrama = true;
-            buscarDosPuntos = true;
+            segundaTrama = 1;
+            buscarDosPuntos = 1;
         
         }
 
