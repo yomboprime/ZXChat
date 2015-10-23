@@ -586,6 +586,21 @@ int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
 		debugPrint( "\nPeticion HTTP Respondida OK. Longitud datos = " );
 		debugPrintln( *numBytesRespuesta );
 
+        if ( *numBytesRespuesta >= 10 ) {
+            debugPrint( "Primeros 10 bytes de la salida:" );
+            SerialDebug.write( bufer, 1 );
+            SerialDebug.write( bufer + 1, 1 );
+            SerialDebug.write( bufer + 2, 1 );
+            SerialDebug.write( bufer + 3, 1 );
+            SerialDebug.write( bufer + 4, 1 );
+            SerialDebug.write( bufer + 5, 1 );
+            SerialDebug.write( bufer + 6, 1 );
+            SerialDebug.write( bufer + 7, 1 );
+            SerialDebug.write( bufer + 8, 1 );
+            SerialDebug.write( bufer + 9, 1 );
+            SerialDebug.println();
+        }
+
 	}
 	else {
 		debugPrint( "\nPeticion HTTP FALLADA. Error=" );
