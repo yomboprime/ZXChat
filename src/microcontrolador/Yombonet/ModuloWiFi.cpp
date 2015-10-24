@@ -36,17 +36,24 @@ bool ModuloWiFi::reiniciar() {
 	
 
 	if ( ready ) {
+
         SDEBUG->println( "\nDISPOSITIVO READY" );
+
+        delay( 1000 );
+
         puertoSerie->write( "AT\r\n" );
-		buscarRespuesta( (uint8_t*)"OK", 1000 );
+		
+        /*
+        buscarRespuesta( (uint8_t*)"OK", 1000 );
         
-        delay( 2000 );
+        delay( 1000 );
 
         puertoSerie->write( "AT+CWQAP\r\n" );
 
         if ( ! buscarRespuesta( (uint8_t*)"OK", 4000 ) ) {
             return false;
         }
+        */
         
         delay( 2000 );
 
