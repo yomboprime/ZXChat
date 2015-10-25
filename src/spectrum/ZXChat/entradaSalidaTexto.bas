@@ -347,4 +347,21 @@ function reemplazarCadena( cadena as string, caracterAReemplazar as ubyte, caden
 
 end function
 
+function concatenarBuferACadena( cadena as string, indiceInicio as integer, numCarsCopiar as integer ) as string
+
+    dim i as integer
+    dim c as ubyte
+
+    for i = 0 to numCarsCopiar - 1
+
+        c = bufer( i + indiceInicio )
+        
+        cadena = cadena + str( c )
+
+    next i
+    
+    return cadena
+
+end function
+
 #endif

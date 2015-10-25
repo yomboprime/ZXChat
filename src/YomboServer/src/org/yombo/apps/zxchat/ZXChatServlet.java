@@ -55,7 +55,7 @@ public class ZXChatServlet extends HttpServlet {
 			String timestamp = request.getParameter( "timestamp" );
 			Date fecha = null; 
 			try {
-				fecha = new Date( Long.parseLong( timestamp ) );
+				fecha = new Date( Long.parseLong( timestamp.trim() ) );
 			}
 			catch ( NumberFormatException e ) {
 				fecha = new Date( 0 );

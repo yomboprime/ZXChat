@@ -62,8 +62,8 @@ public class ZXChat {
 			log( "Mensaje anyadido. Nick: " + nick );
 			
 			// Purga mensajes antiguos si se llega a cierto limite
-			if ( mensajes.size() > 500 ) {
-				for ( int i = 0; i < 250; i++ ) {
+			if ( mensajes.size() > 50 ) {
+				for ( int i = 0; i < 25; i++ ) {
 					mensajes.remove( 0 );
 				}
 			}

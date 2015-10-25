@@ -5,6 +5,7 @@
 #include "Yombonet.bas"
 #include "entradaSalidaTexto.bas"
 #include "variablesGlobales.bas"
+#include "pantalla.bas"
 
 dim i as uinteger
 dim j as uinteger
@@ -36,14 +37,20 @@ imprimirCadenaWrap( "3) Configurar WiFi", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "4) Cambiar servidor", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "5) Testear Yombonet", 0, y1 + 1, 0, x1, y1 )
 imprimirCadenaWrap( "6) Continuar conexion", 0, y1 + 1, 0, x1, y1 )
-dim strAvisoSonoro as string
+dim strTemp1 as string
 if avisoSonoroActivado = 1 then
-    strAvisoSonoro = "Activado)"
+    strTemp1 = "Activado)"
 else
-    strAvisoSonoro = "Desactivado)"
+    strTemp1 = "Desactivado)"
 end if
-imprimirCadenaWrap( "7) Cambiar aviso sonoro: (" + strAvisoSonoro, 0, y1 + 1, 0, x1, y1 )
-imprimirCadenaWrap( "8) Salir", 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "7) Cambiar aviso sonoro: (" + strTemp1, 0, y1 + 1, 0, x1, y1 )
+if guardadoACintaActivado = 1 then
+    strTemp1 = "Activado)"
+else
+    strTemp1 = "Desactivado)"
+end if
+imprimirCadenaWrap( "8) Pruebas desarrollo: (" + strTemp1, 0, y1 + 1, 0, x1, y1 )
+imprimirCadenaWrap( "9) Salir", 0, y1 + 1, 0, x1, y1 )
 
 imprimirCadenaWrap( "Pulse opcion y enter...", 0, y1 + 2, 0, x1, y1 )
 y1 = y1 + 1
@@ -66,7 +73,8 @@ if tecla = "4" then goto CambiarServidor : end if
 if tecla = "5" then goto TestearYombonet : end if
 if tecla = "6" then goto ContinuarConexion : end if
 if tecla = "7" then goto CambiarAvisoSonoro : end if
-if tecla = "8" then goto Fin : end if
+if tecla = "8" then goto CambiarGuardadoACinta : end if
+if tecla = "9" then goto Fin : end if
 
 goto Menu
 
@@ -107,6 +115,21 @@ strWifiPassword = leerCadenaEntrada( strWifiPassword, y1 )
 
 goto Menu
 
+
+
+CambiarGuardadoACinta:
+
+if guardadoACintaActivado = 1 then
+    guardadoACintaActivado = 0
+else
+    guardadoACintaActivado = 1
+
+    ' Pruebas
+    'copiarPantalla()
+    
+end if
+
+goto Menu
 
 
 
@@ -332,7 +355,7 @@ while cadenaEntrada <> " "
 		' Pone borde verde
 		border 4
 
-		timestamp = ""
+		timestamp = "%20"
 		i = 0
 		j = tamRespuesta
 		' Parsea timestamp
@@ -341,7 +364,7 @@ while cadenaEntrada <> " "
 			i = i + 1
 			j = j - 1
 		end while
-
+		
 		' Avanza el fin de linea
 		if ( i < (TAM_BUFER + 1) and i < (tamRespuesta + 1) and bufer( i ) = 13 and bufer( i + 1 ) = 10 ) then
 			i = i + 2
@@ -358,6 +381,10 @@ while cadenaEntrada <> " "
             end if
 			
 		end if
+		
+        'Debug del timestamp
+        imprimirCadenaWrap( "t: " + timestamp, 0, y0, 0, x1, y1 )
+        y0 = y1 + 1
 
 	else
 		' Pone borde amarillo (error)

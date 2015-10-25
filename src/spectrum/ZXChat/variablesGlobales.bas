@@ -11,6 +11,7 @@ dim strUrlServidor as string
 dim strNick as string
 dim strServerPassword as string
 dim avisoSonoroActivado as ubyte
+dim guardadoACintaActivado as ubyte
 
 dim debugactivado as ubyte
 
@@ -24,6 +25,7 @@ strIPServidor = "83.43.85.77"
 strUrlServidor = ":8080/YomboServer/ZXChat/chat"
 
 avisoSonoroActivado = 0
+guardadoACintaActivado = 0
 
 debugactivado = 0
 
