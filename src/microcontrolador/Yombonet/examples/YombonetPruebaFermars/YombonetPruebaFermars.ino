@@ -8,7 +8,7 @@
 //#define PROCESADOR_32A
 
 // Con esto descomentado, los puertos serie se intercambian (posibilita programar y debuguear en el puerto serie principal)
-//#define PUERTOS_SERIE_PROTOTIPO
+// #define PUERTOS_SERIE_PROTOTIPO
 
 /*
 
@@ -586,6 +586,7 @@ int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
 		debugPrint( "\nPeticion HTTP Respondida OK. Longitud datos = " );
 		debugPrintln( *numBytesRespuesta );
 
+        /*
         if ( *numBytesRespuesta >= 10 ) {
             debugPrint( "Primeros 10 bytes de la salida:" );
             SerialDebug.write( bufer, 1 );
@@ -600,6 +601,7 @@ int instruccionPeticionGetPost( bool getNoPost, int* numBytesRespuesta  ) {
             SerialDebug.write( bufer + 9, 1 );
             SerialDebug.println();
         }
+        */
 
 	}
 	else {
@@ -836,6 +838,10 @@ void setup() {
 	debugPrintln( REVISION );
 	debugPrintln();
 
+    // TODO Terminar de comprobar esto
+    // Borra el flag de escritura en el registro de control
+    //leerRegistro( REGISTRO_CONTROL );
+    
 	// Pone en el registro de control que está listo para atender peticiones
 	escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
 
