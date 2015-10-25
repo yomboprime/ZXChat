@@ -8,7 +8,7 @@
 //#define PROCESADOR_32A
 
 // Con esto descomentado, los puertos serie se intercambian (posibilita programar y debuguear en el puerto serie principal)
-#define PUERTOS_SERIE_PROTOTIPO
+// #define PUERTOS_SERIE_PROTOTIPO
 
 /*
 
