@@ -355,12 +355,14 @@ while cadenaEntrada <> " "
 		' Pone borde verde
 		border 4
 
-		timestamp = "%20"
+		timestamp = ""
 		i = 0
 		j = tamRespuesta
 		' Parsea timestamp
 		while ( i < TAM_BUFER and i < tamRespuesta and bufer( i ) <> 13 )
-			timestamp = timestamp + chr( bufer( i ) )
+            if bufer( i ) <> 32 then
+                timestamp = timestamp + chr( bufer( i ) )
+            end if
 			i = i + 1
 			j = j - 1
 		end while
@@ -383,8 +385,8 @@ while cadenaEntrada <> " "
 		end if
 		
         'Debug del timestamp
-        imprimirCadenaWrap( "t: " + timestamp, 0, y0, 0, x1, y1 )
-        y0 = y1 + 1
+        'imprimirCadenaWrap( "t: " + timestamp, 0, y0, 0, x1, y1 )
+        'y0 = y1 + 1
 
 	else
 		' Pone borde amarillo (error)

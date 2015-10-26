@@ -49,7 +49,7 @@ private:
 
 	void purgarPuertoSerie();
 	int leerCadenaConTerminador( uint8_t terminador, unsigned long timeout );
-	int leerCadenaLongitud( int tam, unsigned long timeout );
+	int leerCadenaLongitud( uint8_t* buferAEscribir, int tam, unsigned long timeout );
 	
 	// Flag de conexion TCP activa
 	bool conexionTCPActiva;

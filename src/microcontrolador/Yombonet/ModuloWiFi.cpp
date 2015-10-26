@@ -367,13 +367,20 @@ int ModuloWiFi::peticionHttpGetPost( bool getNoPost, uint8_t* url, int* longitud
 	if ( ! buscarRespuesta( (uint8_t*)"\r\n\r\n", 15000 ) ) {
 		return 11;
 	}
-	if ( leerCadenaLongitud( tamRespuesta, 15000 ) == -1 ) {
+
+	// Lee los bytes de contenido
+	// Parche: anyade un espacio al principio del bufer
+	bufer[ 0 ] = ' ';
+    tamRespuesta++;
+	if ( leerCadenaLongitud( bufer + 1, tamRespuesta - 1, 15000 ) == -1 ) {
 		return 12;
 	}
+	
 	// Comentado para los modulos WiFi de la primera tirada de Yombonets 1.0
 	//if ( ! buscarRespuesta( (uint8_t*)"OK", 15000 ) ) {
 	//	return 13;
 	//}
+
 	puertoSerie->write( "AT+CIPCLOSE=4\r\n" );
 	buscarRespuesta( (uint8_t*)"OK", 2000 );
 
@@ -513,7 +520,7 @@ int ModuloWiFi::leerCadenaConTerminador( uint8_t terminador, unsigned long timeo
 }
 
 
-int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
+int ModuloWiFi::leerCadenaLongitud( uint8_t* buferAEscribir, int tam, unsigned long timeout ) {
 
 	// Escribe en el bufer la cadena leida. No pone 0 terminador
 	// Devuelve numero de bytes escritos o -1 si timeout
@@ -548,19 +555,19 @@ int ModuloWiFi::leerCadenaLongitud( int tam, unsigned long timeout ) {
             continue;
         }
                 
-		bufer[ pos ] = (uint8_t) b;
+		buferAEscribir[ pos ] = (uint8_t) b;
 		pos++;
 
         // Parche para leer segunda trama IPD
         if ( segundaTrama == 0 && pos == 8 && 
-            bufer[ 0 ] == '\r' &&
-            bufer[ 1 ] == '\n' &&
-            bufer[ 2 ] == 'O' &&
-            bufer[ 3 ] == 'K' &&
-            bufer[ 4 ] == '\r' &&
-            bufer[ 5 ] == '\n' &&
-            bufer[ 6 ] == '\r' &&
-            bufer[ 7 ] == '\n' ) {
+            buferAEscribir[ 0 ] == '\r' &&
+            buferAEscribir[ 1 ] == '\n' &&
+            buferAEscribir[ 2 ] == 'O' &&
+            buferAEscribir[ 3 ] == 'K' &&
+            buferAEscribir[ 4 ] == '\r' &&
+            buferAEscribir[ 5 ] == '\n' &&
+            buferAEscribir[ 6 ] == '\r' &&
+            buferAEscribir[ 7 ] == '\n' ) {
             
             pos = 0;
             segundaTrama = 1;

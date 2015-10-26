@@ -4,6 +4,8 @@ A live chat for ZX Spectrum computers
 
 Revisiones del firmware
 
+r5 Parche para evitar que el spectrum pierda el primer byte esporadicamente
+
 r4 Soporta firmware mas reciente del modulo WiFi
 
 r3 Permite usar versiones recientes de Tomcat 8
