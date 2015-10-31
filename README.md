@@ -4,6 +4,8 @@ A live chat for ZX Spectrum computers
 
 Revisiones del firmware
 
+r6 Parche para modulos WiFi que no responden OK entre tramas IPD
+
 r5 Parche para evitar que el spectrum pierda el primer byte esporadicamente
 
 r4 Soporta firmware mas reciente del modulo WiFi

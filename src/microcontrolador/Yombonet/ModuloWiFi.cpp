@@ -545,8 +545,18 @@ int ModuloWiFi::leerCadenaLongitud( uint8_t* buferAEscribir, int tam, unsigned l
 			continue;
 		}
 
-		// Esto es eco para debug
-		SDEBUG->print( (char)b );
+        // Esto es eco para debug
+		char bEco = (char)b;
+        //SDEBUG->print( bEco );
+        if ( bEco == '\n' ) {
+            SDEBUG->print( "\\n" );
+        }
+        if ( bEco == '\r' ) {
+            SDEBUG->print( "\\r" );
+        }
+        else {
+            SDEBUG->print( bEco );
+        }
 
         if ( buscarDosPuntos ) {
             if ( ((uint8_t) b) == ':' ) {
@@ -559,16 +569,25 @@ int ModuloWiFi::leerCadenaLongitud( uint8_t* buferAEscribir, int tam, unsigned l
 		pos++;
 
         // Parche para leer segunda trama IPD
-        if ( segundaTrama == 0 && pos == 8 && 
-            buferAEscribir[ 0 ] == '\r' &&
-            buferAEscribir[ 1 ] == '\n' &&
-            buferAEscribir[ 2 ] == 'O' &&
-            buferAEscribir[ 3 ] == 'K' &&
-            buferAEscribir[ 4 ] == '\r' &&
-            buferAEscribir[ 5 ] == '\n' &&
-            buferAEscribir[ 6 ] == '\r' &&
-            buferAEscribir[ 7 ] == '\n' ) {
-            
+        if ( segundaTrama == 0 && (
+            ( pos == 8 &&
+                buferAEscribir[ 0 ] == '\r' &&
+                buferAEscribir[ 1 ] == '\n' &&
+                buferAEscribir[ 2 ] == 'O' &&
+                buferAEscribir[ 3 ] == 'K' &&
+                buferAEscribir[ 4 ] == '\r' &&
+                buferAEscribir[ 5 ] == '\n' &&
+                buferAEscribir[ 6 ] == '\r' &&
+                buferAEscribir[ 7 ] == '\n' ) ||
+            ( pos == 7 &&
+                buferAEscribir[ 0 ] == '\r' &&
+                buferAEscribir[ 1 ] == '\n' &&
+                buferAEscribir[ 2 ] == '+' &&
+                buferAEscribir[ 3 ] == 'I' &&
+                buferAEscribir[ 4 ] == 'P' &&
+                buferAEscribir[ 5 ] == 'D' &&
+                buferAEscribir[ 6 ] == ',' ) ) ) {
+
             pos = 0;
             segundaTrama = 1;
             buscarDosPuntos = 1;
