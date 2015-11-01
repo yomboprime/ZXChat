@@ -124,14 +124,25 @@ end sub
 
 function obtenerRevisionFirmware() as uinteger
 
-	' Devuelve tam del mensaje recibido en el bufer
+	' Devuelve tam del mensaje recibido en el bufer, o 0 si no hubo respuesta
 
 	esperarYombonetLista()
 
 	' Escribe instruccion
 	escribirRegistroControl( 00000000b )
 
-	return recibirCadena()
+    ' Cuenta el numero de intentos mientras espera respuesta
+    dim numIntentosLectura as ubyte
+    numIntentosLectura = 100
+	while ( ( leerRegistroControl() band 4 ) = 0 and numIntentosLectura > 0 )
+        numIntentosLectura = numIntentosLectura - 1
+    end while
+    
+    if numIntentosLectura > 0 then
+        return recibirCadena()
+    else
+        return 0
+    end if
 
 end function
 

@@ -1,5 +1,5 @@
 
-#define VERSION "r2"
+#define VERSION "r3"
 
 #include <print64.bas>
 #include "Yombonet.bas"
@@ -54,6 +54,7 @@ imprimirCadenaWrap( "9) Salir", 0, y1 + 1, 0, x1, y1 )
 
 imprimirCadenaWrap( "Pulse opcion y enter...", 0, y1 + 2, 0, x1, y1 )
 y1 = y1 + 1
+
 tecla = leerCadenaEntrada( "", y1 )
 
 if tecla = "1" then
@@ -183,9 +184,17 @@ imprimirCadenaWrap( "Accediendo a Yombonet para obtener revision del firmware...
 
 tamRespuesta = obtenerRevisionFirmware()
 
-imprimirCadenaWrap( "Respuesta obtenida:", 0, y1 + 1, 0, x1, y1 )
+if tamRespuesta = 0 then
 
-imprimirCadenaBuferWrap( 0, tamRespuesta, 0, y1 + 1, x1, y1 )
+    imprimirCadenaWrap( "No se ha obtenido respuesta.", 0, y1 + 1, 0, x1, y1 )
+
+else
+
+    imprimirCadenaWrap( "Respuesta obtenida:", 0, y1 + 1, 0, x1, y1 )
+
+    imprimirCadenaBuferWrap( 0, tamRespuesta, 0, y1 + 1, x1, y1 )
+
+end if
 
 imprimirCadenaWrap( "Pulse una tecla...", 0, y1 + 1, 0, x1, y1 )
 esperarTecla()
@@ -335,10 +344,10 @@ while cadenaEntrada <> " "
 		strUrl = strIPServidor + strUrlServidor + "?accion=enviar&nick=" + strNick + "&mensaje=" + cadenaEntrada
 		tamUrl = copiarCadenaABufer( strUrl )
 		codigoError = peticionGetPost( 1, tamUrl, tamRespuesta )
-		if codigoError <> 0 then
-			imprimirCadenaWrap( "Codigo de error en envio: " + str( codigoError ), 0, y0, 0, x1, y1 )
-			y0 = y1 + 1
-		end if
+		'if codigoError <> 0 then
+		'	imprimirCadenaWrap( "Codigo de error en envio: " + str( codigoError ), 0, y0, 0, x1, y1 )
+		'	y0 = y1 + 1
+		'end if
 	end if
 
 	if y0 < 0 then
@@ -391,8 +400,8 @@ while cadenaEntrada <> " "
 	else
 		' Pone borde amarillo (error)
 		border 6
-		imprimirCadenaWrap( "Codigo de error: " + str( codigoError ), 0, y0, 0, x1, y1 )
-		y0 = y1 + 1
+		'imprimirCadenaWrap( "Codigo de error: " + str( codigoError ), 0, y0, 0, x1, y1 )
+		'y0 = y1 + 1
 	end if
 
 	finBucle:

@@ -8,7 +8,7 @@
 //#define PROCESADOR_32A
 
 // Con esto descomentado, los puertos serie se intercambian (posibilita programar y debuguear en el puerto serie principal)
-//#define PUERTOS_SERIE_PROTOTIPO
+#define PUERTOS_SERIE_PROTOTIPO
 
 /*
 
@@ -820,6 +820,10 @@ void setup() {
 	// Mensaje de inicio
 	debugPrintln( REVISION );
 	debugPrintln();
+    
+    // TODO Terminar de comprobar esto
+    // Borra el flag de escritura en el registro de control
+    leerRegistro( REGISTRO_CONTROL );
 
 	// Pone en el registro de control que está listo para atender peticiones
 	escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
