@@ -821,7 +821,6 @@ void setup() {
 	debugPrintln( REVISION );
 	debugPrintln();
     
-    // TODO Terminar de comprobar esto
     // Borra el flag de escritura en el registro de control
     leerRegistro( REGISTRO_CONTROL );
 

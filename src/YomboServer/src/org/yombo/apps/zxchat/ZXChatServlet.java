@@ -64,7 +64,12 @@ public class ZXChatServlet extends HttpServlet {
 			ServletOutputStream os = response.getOutputStream();
 			ZXChat.getInstance().listarMensajes( fecha, os );
 			os.close();
-			//ZXChat.log( "Mensajes listados." );
+		}
+		else if ( "historial".equals( accion ) ) {
+			response.setContentType( "text/plain" );
+			ServletOutputStream os = response.getOutputStream();
+			ZXChat.getInstance().listarMensajesHistorial( os );
+			os.close();
 		}
 	}
 

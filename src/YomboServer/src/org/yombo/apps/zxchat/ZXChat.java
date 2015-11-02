@@ -38,12 +38,14 @@ public class ZXChat {
 	}
 	
 	public ArrayList<Mensaje> mensajes;
+	public ArrayList<Mensaje> mensajesHistorial;
 	
 	public static int longitudFecha = 12;
 	public SimpleDateFormat dateFormat = new SimpleDateFormat( "dd MM HH:mm " );
 
 	public ZXChat() {
 		mensajes = new ArrayList<Mensaje>();
+		mensajesHistorial = new ArrayList<Mensaje>();
 	}
 	
 	public boolean chequearNick( String nick ) {
@@ -58,6 +60,7 @@ public class ZXChat {
 		if ( chequearNick( nick ) && mensaje != null && mensaje.length() <= MAX_LONGITUD_MENSAJE ) {  
 		
 			mensajes.add( new Mensaje( nick, mensaje, new Date() ) );
+			mensajesHistorial.add( new Mensaje( nick, mensaje, new Date() ) );
 			
 			log( "Mensaje anyadido. Nick: " + nick );
 			
@@ -194,7 +197,34 @@ public class ZXChat {
 			log( "listarMensajes: Error de IO: " + e );
 		}
 	}
-	
+
+	public synchronized void listarMensajesHistorial( ServletOutputStream os ) {
+
+		// Lista todos los mensajes desde el inicio del servidor
+
+		try {
+
+			// Bucle para enviar a la salida los mensajes
+			int longitudTotal = 0;
+			int n = mensajesHistorial.size();
+			for ( int i = 0; i <= n; i++ ) {
+
+				Mensaje m = mensajesHistorial.get( i );
+
+				String strMensaje = dateFormat.format( m.timestamp ) + m.nick + ": " + m.mensaje;
+
+				os.println( strMensaje );
+
+				longitudTotal += strMensaje.length() + 2;
+			}
+
+			log( "Se devuelve historial de " + longitudTotal + " bytes." );
+
+		} catch ( IOException e ) {
+			log( "listarMensajesHistorial: Error de IO: " + e );
+		}
+	}
+
 	public static void log( String mensaje ) {
 		System.out.println( "(" + new Date() + ") " + mensaje );
 	}
