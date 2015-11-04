@@ -820,9 +820,11 @@ void setup() {
 	// Mensaje de inicio
 	debugPrintln( REVISION );
 	debugPrintln();
-    
+
+
+    // TODO Verificar esto:
     // Borra el flag de escritura en el registro de control
-    leerRegistro( REGISTRO_CONTROL );
+    //leerRegistro( REGISTRO_CONTROL );
 
 	// Pone en el registro de control que está listo para atender peticiones
 	escribirRegistro( REGISTRO_CONTROL, UC_LISTO );
